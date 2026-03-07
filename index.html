@@ -15,7 +15,7 @@
         --leaf: #6b8c4e;
         --sage: #a8b89a;
         --cream: #f5f0e8;
-        --warm-white: #fdfaf4;
+        --warm: #fdfaf4;
         --gold: #c8a84b;
         --rust: #b5541e;
       }
@@ -29,12 +29,12 @@
       }
       body {
         font-family: "Lato", sans-serif;
-        background: var(--warm-white);
+        background: var(--warm);
         color: var(--soil);
         overflow-x: hidden;
       }
 
-      /* NAV */
+      /* ── NAV ── */
       nav {
         position: fixed;
         top: 0;
@@ -43,20 +43,21 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 22px 56px;
-        transition: all 0.35s;
+        padding: 20px 56px;
+        transition: all 0.3s;
       }
       nav.scrolled {
         background: rgba(253, 250, 244, 0.96);
-        backdrop-filter: blur(12px);
-        padding: 14px 56px;
-        box-shadow: 0 2px 24px rgba(59, 42, 26, 0.08);
+        backdrop-filter: blur(10px);
+        padding: 13px 56px;
+        box-shadow: 0 2px 20px rgba(59, 42, 26, 0.08);
       }
       .nav-logo {
         font-family: "Playfair Display", serif;
-        font-size: 1.3rem;
+        font-size: 1.25rem;
         color: #fff;
         transition: color 0.3s;
+        text-decoration: none;
       }
       nav.scrolled .nav-logo {
         color: var(--moss);
@@ -67,12 +68,12 @@
       }
       .nav-links {
         display: flex;
-        gap: 36px;
+        gap: 32px;
         list-style: none;
       }
       .nav-links a {
         text-decoration: none;
-        font-size: 0.78rem;
+        font-size: 0.76rem;
         letter-spacing: 2px;
         text-transform: uppercase;
         color: rgba(255, 255, 255, 0.8);
@@ -84,8 +85,27 @@
       .nav-links a:hover {
         color: var(--gold) !important;
       }
+      .nav-hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 4px;
+      }
+      .nav-hamburger span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: #fff;
+        transition: background 0.3s;
+      }
+      nav.scrolled .nav-hamburger span {
+        background: var(--soil);
+      }
 
-      /* HERO */
+      /* ── HERO ── */
       #hero {
         height: 100vh;
         position: relative;
@@ -97,7 +117,6 @@
       .hero-bg {
         position: absolute;
         inset: 0;
-        /* 🌅 REPLACE: swap this div for <img src="farm.jpg" style="width:100%;height:100%;object-fit:cover"> */
         background: linear-gradient(
           160deg,
           #1c3010 0%,
@@ -108,78 +127,59 @@
           #e8c870 100%
         );
       }
-      /* Warm sun glow */
-      .hero-bg::before {
+      .hero-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .hero-bg::after {
         content: "";
         position: absolute;
         inset: 0;
         background: radial-gradient(
           ellipse 55% 55% at 72% 38%,
-          rgba(240, 195, 60, 0.42) 0%,
-          rgba(200, 150, 30, 0.2) 45%,
+          rgba(240, 195, 60, 0.38) 0%,
           transparent 70%
         );
       }
-      /* Overlay for text readability */
       .hero-overlay {
         position: absolute;
         inset: 0;
         background: linear-gradient(
           to right,
-          rgba(18, 30, 8, 0.78) 0%,
-          rgba(18, 30, 8, 0.42) 58%,
+          rgba(15, 28, 8, 0.82) 0%,
+          rgba(15, 28, 8, 0.45) 55%,
           transparent 100%
         );
-      }
-      .hero-photo-hint {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        gap: 6px;
-        pointer-events: none;
-      }
-      .hero-photo-hint span {
-        font-size: 4rem;
-        opacity: 0.1;
-      }
-      .hero-photo-hint p {
-        color: rgba(255, 255, 255, 0.14);
-        font-size: 0.72rem;
-        letter-spacing: 2px;
-        text-transform: uppercase;
       }
       .hero-content {
         position: relative;
         z-index: 2;
-        max-width: 620px;
+        max-width: 600px;
       }
       .hero-eyebrow {
         display: inline-flex;
         align-items: center;
         gap: 12px;
         font-size: 0.68rem;
-        letter-spacing: 3.5px;
+        letter-spacing: 3px;
         text-transform: uppercase;
         color: var(--gold);
-        margin-bottom: 22px;
-        animation: fadeUp 0.9s ease both;
+        margin-bottom: 20px;
       }
       .hero-eyebrow::before {
         content: "";
         display: block;
-        width: 30px;
+        width: 28px;
         height: 1px;
         background: var(--gold);
       }
       .hero-title {
         font-family: "Playfair Display", serif;
-        font-size: clamp(3rem, 5.5vw, 5.2rem);
-        line-height: 1.06;
+        font-size: clamp(2.8rem, 5vw, 5rem);
+        line-height: 1.08;
         color: #fff;
-        animation: fadeUp 0.9s 0.15s ease both;
       }
       .hero-title em {
         color: var(--gold);
@@ -187,125 +187,123 @@
         display: block;
       }
       .hero-sub {
-        font-size: 1.02rem;
+        font-size: 1rem;
         color: rgba(255, 255, 255, 0.7);
         line-height: 1.8;
-        margin: 22px 0 36px;
-        max-width: 430px;
-        animation: fadeUp 0.9s 0.3s ease both;
+        margin: 20px 0 34px;
+        max-width: 420px;
       }
       .hero-cta {
         display: flex;
-        gap: 16px;
-        animation: fadeUp 0.9s 0.45s ease both;
+        gap: 14px;
+        flex-wrap: wrap;
       }
-      .btn-primary {
-        padding: 15px 36px;
+      .btn-gold {
+        padding: 14px 32px;
         background: var(--gold);
         color: var(--soil);
         text-decoration: none;
-        font-size: 0.76rem;
+        font-size: 0.74rem;
         letter-spacing: 2px;
         text-transform: uppercase;
         font-weight: 700;
         border-radius: 2px;
-        transition: all 0.22s;
+        transition: all 0.2s;
+        border: none;
+        cursor: pointer;
       }
-      .btn-primary:hover {
+      .btn-gold:hover {
         background: #d4b55a;
         transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(200, 168, 75, 0.38);
       }
-      .btn-ghost {
-        padding: 15px 36px;
-        border: 1px solid rgba(255, 255, 255, 0.4);
+      .btn-outline {
+        padding: 14px 32px;
+        border: 1px solid rgba(255, 255, 255, 0.45);
         color: #fff;
         text-decoration: none;
-        font-size: 0.76rem;
+        font-size: 0.74rem;
         letter-spacing: 2px;
         text-transform: uppercase;
         border-radius: 2px;
-        transition: all 0.22s;
+        transition: all 0.2s;
       }
-      .btn-ghost:hover {
+      .btn-outline:hover {
         border-color: #fff;
         background: rgba(255, 255, 255, 0.1);
       }
       .scroll-cue {
         position: absolute;
-        bottom: 36px;
+        bottom: 32px;
         left: 50%;
         transform: translateX(-50%);
         z-index: 2;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 8px;
-        color: rgba(255, 255, 255, 0.38);
-        font-size: 0.64rem;
-        letter-spacing: 2.5px;
+        gap: 7px;
+        color: rgba(255, 255, 255, 0.35);
+        font-size: 0.62rem;
+        letter-spacing: 2px;
         text-transform: uppercase;
-        animation: fadeIn 2s 1.2s ease both;
       }
       .scroll-line {
         width: 1px;
-        height: 46px;
+        height: 44px;
         background: linear-gradient(
           to bottom,
           rgba(255, 255, 255, 0.5),
           transparent
         );
-        animation: dropLine 2.2s 1.5s infinite;
+        animation: drop 2s infinite;
       }
-      @keyframes dropLine {
+      @keyframes drop {
         0%,
         100% {
-          transform: scaleY(1);
           opacity: 0.5;
+          transform: scaleY(1);
         }
         50% {
-          transform: scaleY(1.45);
           opacity: 1;
+          transform: scaleY(1.4);
         }
       }
 
-      /* SEASONAL TICKER */
-      .ticker-wrap {
+      /* ── TICKER ── */
+      .ticker {
         background: var(--moss);
-        padding: 13px 0;
+        padding: 12px 0;
         overflow: hidden;
         white-space: nowrap;
       }
       .ticker-inner {
         display: inline-flex;
-        animation: ticker 32s linear infinite;
+        animation: ticker 30s linear infinite;
       }
       .ticker-inner:hover {
         animation-play-state: paused;
       }
-      .ticker-item {
+      .t-item {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
-        padding: 0 30px;
-        font-size: 0.77rem;
+        gap: 9px;
+        padding: 0 28px;
+        font-size: 0.76rem;
         color: rgba(255, 255, 255, 0.82);
-        letter-spacing: 0.3px;
       }
-      .ticker-dot {
+      .t-dot {
         width: 5px;
         height: 5px;
         background: var(--gold);
         border-radius: 50%;
         flex-shrink: 0;
       }
-      .ticker-label {
-        font-size: 0.66rem;
+      .t-label {
+        font-size: 0.65rem;
         letter-spacing: 3px;
         text-transform: uppercase;
         color: var(--gold);
         font-weight: 700;
-        padding: 0 24px;
+        padding: 0 20px;
       }
       @keyframes ticker {
         from {
@@ -316,133 +314,134 @@
         }
       }
 
-      /* SECTION SHARED */
-      .section-label {
-        font-size: 0.67rem;
+      /* ── SHARED ── */
+      .sec-label {
+        font-size: 0.66rem;
         letter-spacing: 3.5px;
         text-transform: uppercase;
         color: var(--gold);
-        margin-bottom: 10px;
         display: block;
+        margin-bottom: 10px;
       }
-      .section-title {
+      .sec-title {
         font-family: "Playfair Display", serif;
-        font-size: clamp(1.9rem, 3.2vw, 2.9rem);
+        font-size: clamp(1.8rem, 3vw, 2.8rem);
         color: var(--soil);
         line-height: 1.2;
       }
-      .section-title em {
+      .sec-title em {
         color: var(--moss);
         font-style: italic;
       }
-      .section-divider {
-        width: 54px;
+      .sec-div {
+        width: 52px;
         height: 2px;
         background: var(--gold);
         border: none;
-        margin: 20px 0;
+        margin: 18px 0;
       }
 
-      /* WHY ORGANIC */
+      /* ── WHY ORGANIC ── */
       #why {
         background: var(--cream);
-        padding: 100px 0;
-        overflow: hidden;
+        padding: 90px 0;
       }
-      .why-container {
+      .why-wrap {
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 56px;
       }
-      .why-header {
+      .why-head {
         text-align: center;
-        margin-bottom: 64px;
+        margin-bottom: 56px;
       }
-      .why-header .section-divider {
-        margin: 20px auto;
+      .why-head .sec-div {
+        margin: 18px auto;
       }
-
-      /* Flip cards */
+      .why-head p {
+        font-size: 0.88rem;
+        color: rgba(59, 42, 26, 0.55);
+        max-width: 420px;
+        margin: 0 auto;
+      }
       .why-cards {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 26px;
-        margin-bottom: 64px;
+        gap: 24px;
+        margin-bottom: 56px;
       }
-      .why-card-wrap {
-        height: 290px;
+      .flip-wrap {
+        height: 280px;
         perspective: 1000px;
         cursor: pointer;
       }
-      .why-card-inner {
+      .flip-inner {
         position: relative;
         width: 100%;
         height: 100%;
         transform-style: preserve-3d;
-        transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
       }
-      .why-card-wrap:hover .why-card-inner,
-      .why-card-wrap.flipped .why-card-inner {
+      .flip-wrap:hover .flip-inner,
+      .flip-wrap.flipped .flip-inner {
         transform: rotateY(180deg);
       }
-      .why-front,
-      .why-back {
+      .flip-front,
+      .flip-back {
         position: absolute;
         inset: 0;
         backface-visibility: hidden;
         border-radius: 6px;
-        padding: 34px 26px;
+        padding: 32px 24px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
         text-align: center;
       }
-      .why-front {
-        background: var(--warm-white);
-        box-shadow: 0 4px 20px rgba(59, 42, 26, 0.07);
+      .flip-front {
+        background: var(--warm);
+        box-shadow: 0 4px 18px rgba(59, 42, 26, 0.07);
         border: 1px solid rgba(59, 42, 26, 0.05);
       }
-      .why-back {
+      .flip-back {
         background: var(--moss);
         transform: rotateY(180deg);
       }
-      .why-icon {
+      .flip-icon {
         font-size: 2.8rem;
-        margin-bottom: 16px;
+        margin-bottom: 14px;
       }
-      .why-front h3 {
+      .flip-front h3 {
         font-family: "Playfair Display", serif;
-        font-size: 1.15rem;
+        font-size: 1.1rem;
         color: var(--soil);
         margin-bottom: 8px;
       }
-      .why-front .why-preview {
-        font-size: 0.8rem;
+      .flip-front p {
+        font-size: 0.79rem;
         color: rgba(59, 42, 26, 0.52);
         line-height: 1.5;
       }
-      .why-front .flip-hint {
-        margin-top: 14px;
-        font-size: 0.62rem;
+      .flip-hint {
+        margin-top: 12px;
+        font-size: 0.6rem;
         letter-spacing: 2px;
         text-transform: uppercase;
         color: var(--gold);
         opacity: 0.7;
       }
-      .why-back p {
-        font-size: 0.88rem;
-        line-height: 1.8;
-        color: rgba(255, 255, 255, 0.86);
-      }
-      .why-back h3 {
+      .flip-back h3 {
         font-family: "Playfair Display", serif;
         font-size: 1.05rem;
         color: var(--gold);
         margin-bottom: 12px;
       }
-
-      /* Stats counter bar */
+      .flip-back p {
+        font-size: 0.86rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.85);
+      }
       .why-stats {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -451,70 +450,73 @@
         border-radius: 4px;
         overflow: hidden;
       }
-      .stat-block {
-        background: var(--warm-white);
-        padding: 34px 20px;
+      .stat-b {
+        background: var(--warm);
+        padding: 32px 20px;
         text-align: center;
-        transition: background 0.25s;
+        transition: background 0.2s;
       }
-      .stat-block:hover {
-        background: #f0ead8;
+      .stat-b:hover {
+        background: #ede7d8;
       }
-      .stat-num {
+      .stat-n {
         font-family: "Playfair Display", serif;
-        font-size: 2.7rem;
+        font-size: 2.6rem;
         color: var(--moss);
         display: block;
         line-height: 1;
       }
-      .stat-suffix {
-        font-family: "Playfair Display", serif;
-        font-size: 1.6rem;
-        color: var(--gold);
-      }
-      .stat-label {
-        font-size: 0.68rem;
+      .stat-l {
+        font-size: 0.67rem;
         letter-spacing: 2px;
         text-transform: uppercase;
-        color: rgba(59, 42, 26, 0.48);
-        margin-top: 8px;
+        color: rgba(59, 42, 26, 0.45);
+        margin-top: 7px;
         display: block;
       }
 
-      /* FARM STORY */
+      /* ── FARM STORY ── */
       #story {
-        background: var(--warm-white);
-        padding: 100px 0;
+        background: var(--warm);
+        padding: 90px 0;
       }
-      .story-grid {
+      .story-wrap {
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 56px;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 72px;
+        gap: 70px;
         align-items: center;
       }
-      .story-carousel {
+      .carousel {
         position: relative;
         border-radius: 6px;
         overflow: hidden;
-        height: 540px;
-        box-shadow: 0 16px 56px rgba(59, 42, 26, 0.16);
+        height: 520px;
+        box-shadow: 0 14px 50px rgba(59, 42, 26, 0.16);
       }
-      .carousel-slides {
+      .c-slides {
         display: flex;
         height: 100%;
-        transition: transform 0.62s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
       }
-      .carousel-slide {
+      .c-slide {
         min-width: 100%;
         height: 100%;
         position: relative;
         flex-shrink: 0;
         overflow: hidden;
       }
-      .slide-img {
+      .c-slide img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .c-slide .c-emoji {
         width: 100%;
         height: 100%;
         display: flex;
@@ -522,136 +524,136 @@
         justify-content: center;
         font-size: 7rem;
       }
-      .carousel-caption {
+      .c-caption {
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
-        padding: 24px 28px;
+        padding: 22px 26px;
         background: linear-gradient(to top, rgba(15, 28, 8, 0.82), transparent);
         color: #fff;
-        font-size: 0.8rem;
-        letter-spacing: 0.2px;
+        font-size: 0.79rem;
         line-height: 1.5;
       }
-      .carousel-controls {
+      .c-dots {
         position: absolute;
-        bottom: 18px;
-        right: 18px;
+        bottom: 16px;
+        right: 16px;
         display: flex;
-        gap: 7px;
+        gap: 6px;
         z-index: 10;
       }
-      .carousel-dot {
+      .c-dot {
         width: 7px;
         height: 7px;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.38);
-        cursor: pointer;
-        transition: all 0.22s;
+        background: rgba(255, 255, 255, 0.35);
         border: none;
+        cursor: pointer;
         padding: 0;
+        transition: all 0.2s;
       }
-      .carousel-dot.active {
+      .c-dot.on {
         background: #fff;
         transform: scale(1.35);
       }
-      .carousel-arrow {
+      .c-arr {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
         z-index: 10;
         background: rgba(0, 0, 0, 0.22);
-        backdrop-filter: blur(4px);
         border: 1px solid rgba(255, 255, 255, 0.25);
         color: #fff;
-        width: 40px;
-        height: 40px;
+        width: 38px;
+        height: 38px;
         border-radius: 50%;
         cursor: pointer;
-        font-size: 1.1rem;
+        font-size: 1rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: all 0.2s;
+        transition: background 0.2s;
       }
-      .carousel-arrow:hover {
+      .c-arr:hover {
         background: rgba(0, 0, 0, 0.4);
       }
-      .carousel-prev {
-        left: 14px;
+      .c-prev {
+        left: 12px;
       }
-      .carousel-next {
-        right: 14px;
+      .c-next {
+        right: 12px;
       }
-      .carousel-progress {
+      .c-progress {
         position: absolute;
         bottom: 0;
         left: 0;
         height: 3px;
         background: var(--gold);
         z-index: 10;
-        transition: width 4s linear;
+        width: 0;
       }
-
       .story-text p {
-        font-size: 0.98rem;
+        font-size: 0.97rem;
         line-height: 1.85;
         color: rgba(59, 42, 26, 0.7);
-        margin-bottom: 15px;
+        margin-bottom: 14px;
       }
-      .story-text .section-divider {
-        margin: 18px 0;
-      }
-      .story-values {
+      .story-vals {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 14px;
-        margin-top: 28px;
+        gap: 13px;
+        margin-top: 26px;
       }
-      .story-value {
-        padding: 16px 18px;
+      .sval {
+        padding: 15px 17px;
         background: var(--cream);
         border-left: 3px solid var(--leaf);
         border-radius: 2px;
       }
-      .story-value h4 {
-        font-size: 0.82rem;
+      .sval h4 {
+        font-size: 0.81rem;
         font-weight: 700;
         color: var(--moss);
         margin-bottom: 3px;
       }
-      .story-value p {
-        font-size: 0.76rem;
-        color: rgba(59, 42, 26, 0.56);
+      .sval p {
+        font-size: 0.75rem;
+        color: rgba(59, 42, 26, 0.55);
         margin: 0;
         line-height: 1.4;
       }
 
-      /* PRODUCTS */
+      /* ── PRODUCTS ── */
       #products {
         background: var(--cream);
-        padding: 100px 0;
+        padding: 90px 0;
       }
-      .products-container {
+      .prod-wrap {
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 56px;
       }
-      .products-header {
+      .prod-head {
         text-align: center;
-        margin-bottom: 52px;
+        margin-bottom: 48px;
       }
-      .products-header .section-divider {
-        margin: 18px auto;
+      .prod-head .sec-div {
+        margin: 16px auto;
       }
-      .products-grid {
+      .prod-head p {
+        font-size: 0.9rem;
+        color: rgba(59, 42, 26, 0.56);
+        max-width: 440px;
+        margin: 0 auto;
+      }
+      .prod-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(238px, 1fr));
+        grid-template-columns: repeat(4, 1fr);
         gap: 22px;
       }
-      .product-card {
-        background: var(--warm-white);
+      .prod-card {
+        background: var(--warm);
         border-radius: 4px;
         overflow: hidden;
         box-shadow: 0 2px 10px rgba(59, 42, 26, 0.06);
@@ -660,56 +662,64 @@
           box-shadow 0.25s;
         cursor: pointer;
       }
-      .product-card:hover {
-        transform: translateY(-7px);
-        box-shadow: 0 14px 36px rgba(59, 42, 26, 0.13);
+      .prod-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 32px rgba(59, 42, 26, 0.13);
       }
-      .product-img {
-        height: 192px;
+      .prod-img {
+        height: 190px;
         overflow: hidden;
         position: relative;
       }
-      .pi {
+      .prod-img .emoji {
         width: 100%;
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 4rem;
-        transition: transform 0.4s;
+        transition: transform 0.35s;
       }
-      .product-card:hover .pi {
+      .prod-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.35s;
+      }
+      .prod-card:hover .emoji,
+      .prod-card:hover .prod-img img {
         transform: scale(1.07);
       }
-      .product-badge {
+      .prod-badge {
         position: absolute;
-        top: 11px;
-        right: 11px;
+        top: 10px;
+        right: 10px;
         background: var(--rust);
         color: #fff;
-        font-size: 0.6rem;
+        font-size: 0.59rem;
         letter-spacing: 1px;
         text-transform: uppercase;
-        padding: 4px 9px;
+        padding: 3px 8px;
         border-radius: 2px;
         font-weight: 700;
       }
-      .product-info {
-        padding: 18px 20px;
+      .prod-info {
+        padding: 17px 18px;
       }
-      .product-info h3 {
+      .prod-info h3 {
         font-family: "Playfair Display", serif;
-        font-size: 1.08rem;
+        font-size: 1.06rem;
         margin-bottom: 5px;
       }
-      .product-info p {
-        font-size: 0.77rem;
-        color: rgba(59, 42, 26, 0.56);
+      .prod-info p {
+        font-size: 0.76rem;
+        color: rgba(59, 42, 26, 0.55);
         line-height: 1.5;
       }
-      .product-tag {
+      .prod-tag {
         display: inline-block;
-        margin-top: 9px;
+        margin-top: 8px;
         font-size: 0.62rem;
         letter-spacing: 1px;
         text-transform: uppercase;
@@ -717,454 +727,705 @@
         font-weight: 700;
       }
 
-      /* RECIPES */
+      /* ── RECIPES ── */
       #recipes {
         background: var(--soil);
-        padding: 100px 0;
+        padding: 90px 0;
       }
-      .recipes-container {
+      .rec-wrap {
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 56px;
       }
-      .recipes-header {
-        margin-bottom: 44px;
+      .rec-head {
+        margin-bottom: 40px;
       }
-      .recipe-tabs {
+      .rec-head .sec-title {
+        color: var(--cream);
+      }
+      .rec-tabs {
         display: flex;
-        gap: 10px;
-        margin-bottom: 36px;
+        gap: 9px;
+        margin-bottom: 34px;
         flex-wrap: wrap;
       }
-      .recipe-tab {
-        padding: 9px 22px;
+      .rec-tab {
+        padding: 8px 20px;
         border: 1px solid rgba(255, 255, 255, 0.14);
         border-radius: 2px;
-        font-size: 0.74rem;
+        font-size: 0.73rem;
         letter-spacing: 1px;
         text-transform: uppercase;
-        color: rgba(253, 250, 244, 0.48);
+        color: rgba(253, 250, 244, 0.46);
         cursor: pointer;
         transition: all 0.2s;
         background: transparent;
       }
-      .recipe-tab.active,
-      .recipe-tab:hover {
+      .rec-tab.on,
+      .rec-tab:hover {
         background: var(--leaf);
         border-color: var(--leaf);
         color: #fff;
       }
-      .recipe-feature {
+      .rec-feat {
         display: grid;
         grid-template-columns: 1.2fr 1fr;
-        gap: 56px;
+        gap: 52px;
         align-items: center;
       }
-      .recipe-img {
+      .rec-img {
         border-radius: 4px;
         overflow: hidden;
-        height: 460px;
+        height: 450px;
       }
-      .ri {
+      .rec-img .emoji {
         width: 100%;
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 7.5rem;
+        font-size: 8rem;
       }
-      .veg-highlight {
+      .rec-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .veg-pill {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
+        gap: 9px;
         background: rgba(255, 255, 255, 0.06);
-        padding: 9px 16px;
+        padding: 8px 15px;
         border-radius: 2px;
-        margin-bottom: 22px;
+        margin-bottom: 20px;
       }
-      .veg-dot {
-        width: 7px;
-        height: 7px;
+      .veg-pip {
+        width: 6px;
+        height: 6px;
         background: var(--leaf);
         border-radius: 50%;
       }
-      .veg-name {
-        font-size: 0.7rem;
+      .veg-lbl {
+        font-size: 0.69rem;
         letter-spacing: 2px;
         text-transform: uppercase;
         color: var(--sage);
       }
-      .recipe-info h2 {
+      .rec-body h2 {
         font-family: "Playfair Display", serif;
-        font-size: 2.1rem;
+        font-size: 2rem;
         color: var(--cream);
         line-height: 1.2;
-        margin-bottom: 16px;
+        margin-bottom: 14px;
       }
-      .recipe-info > p {
-        font-size: 0.9rem;
+      .rec-body > p {
+        font-size: 0.88rem;
         line-height: 1.8;
         color: rgba(253, 250, 244, 0.62);
-        margin-bottom: 22px;
+        margin-bottom: 20px;
       }
-      .recipe-meta {
+      .rec-meta {
         display: flex;
-        gap: 26px;
-        margin-bottom: 26px;
+        gap: 24px;
+        margin-bottom: 24px;
       }
-      .rmi .val {
+      .rm .val {
         font-family: "Playfair Display", serif;
-        font-size: 1.35rem;
+        font-size: 1.3rem;
         color: var(--gold);
       }
-      .rmi .key {
-        font-size: 0.62rem;
+      .rm .key {
+        font-size: 0.61rem;
         letter-spacing: 1.5px;
         text-transform: uppercase;
         color: rgba(253, 250, 244, 0.38);
       }
-      .recipe-steps {
+      .rec-steps {
         list-style: none;
       }
-      .recipe-steps li {
+      .rec-steps li {
         display: flex;
-        gap: 13px;
-        margin-bottom: 11px;
-        font-size: 0.84rem;
+        gap: 12px;
+        margin-bottom: 10px;
+        font-size: 0.83rem;
         line-height: 1.6;
-        color: rgba(253, 250, 244, 0.66);
+        color: rgba(253, 250, 244, 0.65);
       }
-      .step-num {
-        min-width: 21px;
-        height: 21px;
+      .sn {
+        min-width: 20px;
+        height: 20px;
         background: var(--leaf);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 0.66rem;
+        font-size: 0.64rem;
         font-weight: 700;
         color: #fff;
         margin-top: 2px;
         flex-shrink: 0;
       }
 
-      /* STORES */
+      /* ── STORES ── */
       #stores {
-        background: var(--warm-white);
-        padding: 100px 0;
+        background: var(--warm);
+        padding: 90px 0;
       }
-      .stores-container {
+      .stores-wrap {
         max-width: 1280px;
         margin: 0 auto;
         padding: 0 56px;
       }
-      .stores-header {
-        margin-bottom: 48px;
+      .stores-head {
+        margin-bottom: 44px;
       }
       .stores-layout {
         display: grid;
-        grid-template-columns: 400px 1fr;
+        grid-template-columns: 390px 1fr;
         border-radius: 8px;
         overflow: hidden;
-        box-shadow: 0 16px 56px rgba(59, 42, 26, 0.13);
+        box-shadow: 0 14px 50px rgba(59, 42, 26, 0.13);
       }
-
-      .stores-panel {
+      .s-panel {
         background: var(--cream);
         display: flex;
         flex-direction: column;
         height: 580px;
       }
-      .stores-panel-head {
-        padding: 22px 22px 14px;
+      .s-panel-top {
+        padding: 20px 20px 14px;
         border-bottom: 1px solid rgba(59, 42, 26, 0.08);
       }
-      .stores-panel-head p {
-        font-size: 0.78rem;
+      .s-panel-top p {
+        font-size: 0.77rem;
         color: rgba(59, 42, 26, 0.52);
         line-height: 1.5;
-        margin-bottom: 12px;
+        margin-bottom: 11px;
       }
-      .store-filter-tabs {
+      .s-filters {
         display: flex;
         flex-wrap: wrap;
         gap: 5px;
       }
-      .filter-btn {
-        padding: 5px 12px;
+      .s-f {
+        padding: 4px 11px;
         border: 1px solid rgba(59, 42, 26, 0.16);
         border-radius: 20px;
-        font-size: 0.7rem;
+        font-size: 0.68rem;
         cursor: pointer;
         background: transparent;
         transition: all 0.18s;
         color: var(--soil);
       }
-      .filter-btn.active,
-      .filter-btn:hover {
+      .s-f.on,
+      .s-f:hover {
         background: var(--moss);
         border-color: var(--moss);
         color: #fff;
       }
-
-      .store-list {
+      .s-list {
         flex: 1;
         overflow-y: auto;
-        padding: 8px 0;
+        padding: 6px 0;
       }
-      .store-list::-webkit-scrollbar {
+      .s-list::-webkit-scrollbar {
         width: 3px;
       }
-      .store-list::-webkit-scrollbar-thumb {
+      .s-list::-webkit-scrollbar-thumb {
         background: var(--sage);
         border-radius: 2px;
       }
-      .store-item {
+      .s-item {
         display: flex;
         align-items: center;
-        gap: 12px;
-        padding: 11px 18px;
+        gap: 11px;
+        padding: 10px 16px;
         cursor: pointer;
-        transition: all 0.16s;
+        transition: all 0.15s;
         border-left: 3px solid transparent;
       }
-      .store-item:hover {
+      .s-item:hover {
         background: rgba(74, 94, 58, 0.06);
       }
-      .store-item.active {
+      .s-item.on {
         background: rgba(74, 94, 58, 0.11);
         border-left-color: var(--moss);
       }
-      .store-icon-c {
-        width: 34px;
-        height: 34px;
+      .s-ico {
+        width: 33px;
+        height: 33px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         flex-shrink: 0;
       }
-      .store-text h4 {
-        font-size: 0.83rem;
+      .s-txt h4 {
+        font-size: 0.82rem;
         font-weight: 700;
         color: var(--soil);
       }
-      .store-text p {
-        font-size: 0.7rem;
-        color: rgba(59, 42, 26, 0.48);
+      .s-txt p {
+        font-size: 0.69rem;
+        color: rgba(59, 42, 26, 0.47);
         margin-top: 1px;
       }
-      .store-brand-tag {
+      .s-tag {
         margin-left: auto;
-        font-size: 0.58rem;
-        letter-spacing: 0.8px;
+        font-size: 0.57rem;
+        letter-spacing: 0.7px;
         text-transform: uppercase;
-        padding: 3px 7px;
+        padding: 2px 6px;
         border-radius: 2px;
         font-weight: 700;
         white-space: nowrap;
         flex-shrink: 0;
       }
-
-      .map-frame-wrap {
+      .map-wrap {
         position: relative;
         height: 580px;
         background: #e8e0d4;
       }
-      .map-frame-wrap iframe {
+      .map-wrap iframe {
         width: 100%;
         height: 100%;
         border: none;
         display: block;
       }
-      .map-info-card {
+      .map-card {
         position: absolute;
-        top: 14px;
-        left: 14px;
+        top: 13px;
+        left: 13px;
         background: rgba(253, 250, 244, 0.97);
-        padding: 14px 18px;
+        padding: 13px 16px;
         border-radius: 6px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.13);
-        max-width: 230px;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.13);
+        max-width: 220px;
         z-index: 10;
-        transition: all 0.3s;
       }
-      .map-info-card h4 {
+      .map-card h4 {
         font-family: "Playfair Display", serif;
-        font-size: 0.96rem;
+        font-size: 0.93rem;
         color: var(--soil);
-        margin-bottom: 4px;
+        margin-bottom: 3px;
       }
-      .map-info-card p {
-        font-size: 0.72rem;
-        color: rgba(59, 42, 26, 0.58);
+      .map-card p {
+        font-size: 0.7rem;
+        color: rgba(59, 42, 26, 0.56);
         line-height: 1.5;
       }
-      .map-info-card .brand-pill {
+      .map-card .mpill {
         display: inline-block;
-        margin-top: 7px;
-        font-size: 0.6rem;
+        margin-top: 6px;
+        font-size: 0.58rem;
         letter-spacing: 1px;
         text-transform: uppercase;
-        padding: 3px 7px;
+        padding: 2px 6px;
         border-radius: 2px;
         font-weight: 700;
       }
-      .map-info-card a.gmaps-link {
+      .map-card a {
         display: block;
-        margin-top: 9px;
-        font-size: 0.7rem;
+        margin-top: 8px;
+        font-size: 0.69rem;
         color: var(--moss);
         text-decoration: none;
         font-weight: 700;
-        letter-spacing: 0.3px;
       }
-      .map-info-card a.gmaps-link:hover {
+      .map-card a:hover {
         text-decoration: underline;
       }
 
-      /* FOOTER */
+      /* ── FOOTER ── */
       footer {
         background: var(--soil);
-        padding: 60px 56px 30px;
+        padding: 56px 56px 28px;
       }
-      .footer-grid {
+      .foot-grid {
         max-width: 1200px;
         margin: 0 auto;
         display: grid;
         grid-template-columns: 2fr 1fr 1fr 1fr;
-        gap: 44px;
-        padding-bottom: 36px;
+        gap: 40px;
+        padding-bottom: 32px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.07);
       }
-      .footer-brand .brand-name {
+      .foot-brand .fn {
         font-family: "Playfair Display", serif;
-        font-size: 1.35rem;
+        font-size: 1.3rem;
         color: var(--cream);
         margin-bottom: 10px;
       }
-      .footer-brand .brand-name span {
+      .foot-brand .fn span {
         color: var(--gold);
       }
-      .footer-brand p {
-        font-size: 0.8rem;
+      .foot-brand p {
+        font-size: 0.79rem;
         line-height: 1.7;
         color: rgba(253, 250, 244, 0.42);
-        max-width: 240px;
+        max-width: 230px;
       }
-      .footer-col h4 {
-        font-size: 0.66rem;
+      .foot-col h4 {
+        font-size: 0.64rem;
         letter-spacing: 2.5px;
         text-transform: uppercase;
         color: var(--gold);
-        margin-bottom: 16px;
+        margin-bottom: 15px;
       }
-      .footer-col ul {
+      .foot-col ul {
         list-style: none;
       }
-      .footer-col ul li {
+      .foot-col ul li {
         margin-bottom: 8px;
       }
-      .footer-col ul li a {
+      .foot-col ul li a {
         text-decoration: none;
-        font-size: 0.8rem;
-        color: rgba(253, 250, 244, 0.47);
+        font-size: 0.79rem;
+        color: rgba(253, 250, 244, 0.45);
         transition: color 0.2s;
       }
-      .footer-col ul li a:hover {
+      .foot-col ul li a:hover {
         color: var(--cream);
       }
-      .footer-bottom {
+      .foot-bottom {
         max-width: 1200px;
-        margin: 22px auto 0;
+        margin: 20px auto 0;
         display: flex;
         justify-content: space-between;
       }
-      .footer-bottom p {
-        font-size: 0.7rem;
-        color: rgba(253, 250, 244, 0.26);
+      .foot-bottom p {
+        font-size: 0.69rem;
+        color: rgba(253, 250, 244, 0.25);
       }
 
-      /* ANIMATIONS */
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(24px);
+      /* ══════════════════════════
+   TABLET ≤ 900px
+══════════════════════════ */
+      @media (max-width: 900px) {
+        nav {
+          padding: 16px 28px;
         }
-        to {
-          opacity: 1;
-          transform: translateY(0);
+        nav.scrolled {
+          padding: 12px 28px;
+        }
+        .nav-links {
+          gap: 18px;
+        }
+        #hero {
+          padding: 0 7%;
+        }
+        .why-wrap,
+        .story-wrap,
+        .prod-wrap,
+        .rec-wrap,
+        .stores-wrap {
+          padding: 0 32px;
+        }
+        .why-cards {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+        .flip-wrap {
+          height: auto;
+        }
+        .flip-front,
+        .flip-back {
+          position: relative;
+          backface-visibility: visible;
+          transform: none !important;
+        }
+        .flip-inner {
+          transform-style: flat !important;
+          transition: none !important;
+        }
+        .flip-wrap:hover .flip-inner,
+        .flip-wrap.flipped .flip-inner {
+          transform: none !important;
+        }
+        .flip-back {
+          margin-top: 2px;
+          border-radius: 0 0 6px 6px;
+        }
+        .flip-front {
+          border-radius: 6px 6px 0 0;
+        }
+        .flip-hint {
+          display: none;
+        }
+        .why-stats {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .story-wrap {
+          grid-template-columns: 1fr;
+          gap: 36px;
+        }
+        .carousel {
+          height: 360px;
+        }
+        .prod-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .rec-feat {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+        .rec-img {
+          height: 280px;
+        }
+        .stores-layout {
+          grid-template-columns: 1fr;
+          flex-direction: column;
+        }
+        .s-panel {
+          height: auto;
+          max-height: 360px;
+        }
+        .map-wrap {
+          height: 360px;
+        }
+        .foot-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 28px;
         }
       }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
+
+      /* ══════════════════════════
+   MOBILE ≤ 600px
+══════════════════════════ */
+      @media (max-width: 600px) {
+        nav {
+          padding: 13px 18px;
         }
-        to {
-          opacity: 1;
+        nav.scrolled {
+          padding: 11px 18px;
         }
-      }
-      .reveal {
-        opacity: 0;
-        transform: translateY(30px);
-        transition:
-          opacity 0.72s ease,
-          transform 0.72s ease;
-      }
-      .reveal.visible {
-        opacity: 1;
-        transform: translateY(0);
+        .nav-links {
+          display: none;
+        }
+        .nav-links.open {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: rgba(253, 250, 244, 0.98);
+          padding: 16px 24px;
+          gap: 14px;
+          box-shadow: 0 8px 24px rgba(59, 42, 26, 0.1);
+        }
+        .nav-links.open a {
+          color: var(--soil) !important;
+          font-size: 0.8rem;
+        }
+        .nav-hamburger {
+          display: flex;
+        }
+
+        #hero {
+          padding: 0 6%;
+          align-items: flex-end;
+          padding-bottom: 72px;
+          height: 100svh;
+        }
+        .hero-eyebrow {
+          font-size: 0.59rem;
+          letter-spacing: 2px;
+          margin-bottom: 12px;
+        }
+        .hero-title {
+          font-size: 2.3rem;
+        }
+        .hero-sub {
+          font-size: 0.86rem;
+          margin: 14px 0 24px;
+        }
+        .hero-cta {
+          flex-direction: column;
+          gap: 9px;
+        }
+        .btn-gold,
+        .btn-outline {
+          padding: 12px 24px;
+          font-size: 0.7rem;
+          text-align: center;
+        }
+        .scroll-cue {
+          display: none;
+        }
+
+        #why {
+          padding: 60px 0;
+        }
+        .why-wrap {
+          padding: 0 18px;
+        }
+        .why-head {
+          margin-bottom: 36px;
+        }
+        .why-cards {
+          gap: 10px;
+        }
+        .stat-n {
+          font-size: 2rem;
+        }
+
+        #story {
+          padding: 60px 0;
+        }
+        .story-wrap {
+          padding: 0 18px;
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+        .carousel {
+          height: 260px;
+        }
+        .story-vals {
+          grid-template-columns: 1fr;
+          gap: 9px;
+        }
+
+        #products {
+          padding: 60px 0;
+        }
+        .prod-wrap {
+          padding: 0 18px;
+        }
+        .prod-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 13px;
+        }
+        .prod-img {
+          height: 140px;
+        }
+        .emoji {
+          font-size: 3rem !important;
+        }
+        .prod-info {
+          padding: 13px 14px;
+        }
+        .prod-info h3 {
+          font-size: 0.95rem;
+        }
+        .prod-info p {
+          font-size: 0.73rem;
+        }
+
+        #recipes {
+          padding: 60px 0;
+        }
+        .rec-wrap {
+          padding: 0 18px;
+        }
+        .rec-tab {
+          padding: 7px 13px;
+          font-size: 0.67rem;
+        }
+        .rec-feat {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+        .rec-img {
+          height: 200px;
+        }
+        .rec-body h2 {
+          font-size: 1.55rem;
+        }
+        .rec-body > p {
+          font-size: 0.83rem;
+        }
+
+        #stores {
+          padding: 60px 0;
+        }
+        .stores-wrap {
+          padding: 0 18px;
+        }
+        .stores-layout {
+          grid-template-columns: 1fr;
+        }
+        .s-panel {
+          max-height: 300px;
+        }
+        .s-tag {
+          display: none;
+        }
+        .map-wrap {
+          height: 300px;
+        }
+        .map-card {
+          max-width: 170px;
+          padding: 9px 11px;
+        }
+        .map-card h4 {
+          font-size: 0.85rem;
+        }
+
+        footer {
+          padding: 44px 18px 22px;
+        }
+        .foot-grid {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+        .foot-brand p {
+          max-width: 100%;
+        }
+        .foot-bottom {
+          flex-direction: column;
+          gap: 5px;
+          text-align: center;
+        }
+
+        .sec-title {
+          font-size: 1.75rem;
+        }
       }
     </style>
   </head>
   <body>
     <!-- NAV -->
-    <nav id="navbar">
-      <div class="nav-logo">Suan Mokkh <span>Garden</span></div>
-      <ul class="nav-links">
+    <nav id="nav">
+      <a class="nav-logo" href="#">Suan Mokkh <span>Garden</span></a>
+      <ul class="nav-links" id="navLinks">
         <li><a href="#story">Our Farm</a></li>
         <li><a href="#products">Produce</a></li>
         <li><a href="#recipes">Recipes</a></li>
         <li><a href="#stores">Find Us</a></li>
       </ul>
+      <button
+        class="nav-hamburger"
+        onclick="document.getElementById('navLinks').classList.toggle('open')"
+        aria-label="Menu"
+      >
+        <span></span><span></span><span></span>
+      </button>
     </nav>
 
-    <!-- ═══════════════════════════════════════════════════
-     HERO
-     To use your own farm photo, replace the .hero-bg div
-     with: <img class="hero-bg" src="farm.jpg" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;">
-     For a video: <video class="hero-bg" autoplay muted loop playsinline src="farm.mp4" style="...same styles...">
-═══════════════════════════════════════════════════ -->
+    <!-- ═══ HERO ═══
+  To add your farm photo, replace the line:
+    <div class="hero-bg">
+  with:
+    <div class="hero-bg"><img src="your-photo.jpg" alt="Farm">
+-->
     <section id="hero">
-      <div class="hero-bg">
-        <img
-          src="farm.jpg"
-          style="
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            inset: 0;
-          "
-        />
-      </div>
+      <div class="hero-bg"><img src="farm.jpg" alt="Farm" /></div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <div class="hero-eyebrow">Certified Organic · Cameron Highlands</div>
-        <h1 class="hero-title">
-          Grown with care.<br />
-          <em>Eaten with joy.</em>
-        </h1>
+        <h1 class="hero-title">Grown with care.<em>Eaten with joy.</em></h1>
         <p class="hero-sub">
           From our sun-drenched highland fields to your family table —
           vegetables grown without chemicals, harvested at peak freshness, every
           single day.
         </p>
         <div class="hero-cta">
-          <a href="#products" class="btn-primary">Explore Produce</a>
-          <a href="#story" class="btn-ghost">Our Story</a>
+          <a href="#products" class="btn-gold">Explore Produce</a>
+          <a href="#story" class="btn-outline">Our Story</a>
         </div>
       </div>
       <div class="scroll-cue">
@@ -1174,164 +1435,122 @@
     </section>
 
     <!-- TICKER -->
-    <div class="ticker-wrap">
+    <div class="ticker">
       <div class="ticker-inner">
-        <span class="ticker-label">🌱 In Season Now</span>
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>Baby Spinach</span
+        <span class="t-label">🌱 In Season Now</span>
+        <span class="t-item"><span class="t-dot"></span>Baby Spinach</span>
+        <span class="t-item"><span class="t-dot"></span>Red Capsicum</span>
+        <span class="t-item"><span class="t-dot"></span>Cherry Tomatoes</span>
+        <span class="t-item"><span class="t-dot"></span>French Beans</span>
+        <span class="t-item"
+          ><span class="t-dot"></span>Butterhead Lettuce</span
         >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>Red Capsicum</span
+        <span class="t-item"><span class="t-dot"></span>Purple Eggplant</span>
+        <span class="t-item"><span class="t-dot"></span>Kale</span>
+        <span class="t-item"><span class="t-dot"></span>Sweet Corn</span>
+        <span class="t-item"><span class="t-dot"></span>Okra</span>
+        <span class="t-item"><span class="t-dot"></span>Lemongrass</span>
+        <span class="t-label">🌱 In Season Now</span>
+        <span class="t-item"><span class="t-dot"></span>Baby Spinach</span>
+        <span class="t-item"><span class="t-dot"></span>Red Capsicum</span>
+        <span class="t-item"><span class="t-dot"></span>Cherry Tomatoes</span>
+        <span class="t-item"><span class="t-dot"></span>French Beans</span>
+        <span class="t-item"
+          ><span class="t-dot"></span>Butterhead Lettuce</span
         >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>Cherry Tomatoes</span
-        >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>French Beans</span
-        >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>Butterhead Lettuce</span
-        >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>Purple Eggplant</span
-        >
-        <span class="ticker-item"><span class="ticker-dot"></span>Kale</span>
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>Sweet Corn</span
-        >
-        <span class="ticker-item"><span class="ticker-dot"></span>Okra</span>
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>Lemongrass</span
-        >
-        <span class="ticker-label">🌱 In Season Now</span>
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>Baby Spinach</span
-        >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>Red Capsicum</span
-        >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>Cherry Tomatoes</span
-        >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>French Beans</span
-        >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>Butterhead Lettuce</span
-        >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>Purple Eggplant</span
-        >
-        <span class="ticker-item"><span class="ticker-dot"></span>Kale</span>
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>Sweet Corn</span
-        >
-        <span class="ticker-item"><span class="ticker-dot"></span>Okra</span>
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>Lemongrass</span
-        >
+        <span class="t-item"><span class="t-dot"></span>Purple Eggplant</span>
+        <span class="t-item"><span class="t-dot"></span>Kale</span>
+        <span class="t-item"><span class="t-dot"></span>Sweet Corn</span>
+        <span class="t-item"><span class="t-dot"></span>Okra</span>
+        <span class="t-item"><span class="t-dot"></span>Lemongrass</span>
       </div>
     </div>
 
     <!-- WHY ORGANIC -->
     <section id="why">
-      <div class="why-container">
-        <div class="why-header reveal">
-          <span class="section-label">Why It Matters</span>
-          <h2 class="section-title">The organic <em>difference</em></h2>
-          <hr class="section-divider" />
-          <p
-            style="
-              font-size: 0.9rem;
-              color: rgba(59, 42, 26, 0.55);
-              max-width: 460px;
-              margin: 0 auto;
-            "
-          >
+      <div class="why-wrap">
+        <div class="why-head">
+          <span class="sec-label">Why It Matters</span>
+          <h2 class="sec-title">The organic <em>difference</em></h2>
+          <hr class="sec-div" />
+          <p>
             Hover or tap each card to discover what makes our produce different.
           </p>
         </div>
-        <div class="why-cards reveal">
-          <div class="why-card-wrap" onclick="this.classList.toggle('flipped')">
-            <div class="why-card-inner">
-              <div class="why-front">
-                <div class="why-icon">🌍</div>
+        <div class="why-cards">
+          <div class="flip-wrap" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-icon">🌍</div>
                 <h3>No Pesticides</h3>
-                <p class="why-preview">
-                  100% natural growing methods — nothing synthetic, ever.
-                </p>
+                <p>100% natural growing — nothing synthetic, ever.</p>
                 <span class="flip-hint">↻ Tap to learn more</span>
               </div>
-              <div class="why-back">
+              <div class="flip-back">
                 <h3>No Pesticides</h3>
                 <p>
-                  Every plant is grown using only natural composts and
-                  biological pest control. What you eat is exactly what nature
-                  intended — nothing added, nothing hidden. Safer for your
+                  Every plant grown using only natural composts and biological
+                  pest control. Nothing added, nothing hidden. Safer for your
                   family and kinder to the Earth.
                 </p>
               </div>
             </div>
           </div>
-          <div class="why-card-wrap" onclick="this.classList.toggle('flipped')">
-            <div class="why-card-inner">
-              <div class="why-front">
-                <div class="why-icon">💧</div>
+          <div class="flip-wrap" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-icon">💧</div>
                 <h3>Sustainable Water</h3>
-                <p class="why-preview">
-                  Smart drip irrigation using 60% less water.
+                <p>
+                  Drip irrigation using 60% less water than conventional farms.
                 </p>
                 <span class="flip-hint">↻ Tap to learn more</span>
               </div>
-              <div class="why-back">
+              <div class="flip-back">
                 <h3>Sustainable Water</h3>
                 <p>
                   Our drip irrigation uses 60% less water than conventional
                   farming. Healthy organic soil retains moisture naturally,
-                  reducing dependence on external sources and protecting Cameron
-                  Highlands' watersheds.
+                  protecting Cameron Highlands' precious watersheds.
                 </p>
               </div>
             </div>
           </div>
-          <div class="why-card-wrap" onclick="this.classList.toggle('flipped')">
-            <div class="why-card-inner">
-              <div class="why-front">
-                <div class="why-icon">🫀</div>
+          <div class="flip-wrap" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-icon">🫀</div>
                 <h3>More Nutrients</h3>
-                <p class="why-preview">
-                  Richer in vitamins C, E & natural antioxidants.
-                </p>
+                <p>Richer in vitamins C, E and natural antioxidants.</p>
                 <span class="flip-hint">↻ Tap to learn more</span>
               </div>
-              <div class="why-back">
+              <div class="flip-back">
                 <h3>More Nutrients</h3>
                 <p>
                   Organically farmed vegetables contain measurably higher levels
                   of antioxidants, vitamins C and E, and essential minerals.
-                  Slower, natural growth allows nutrients to fully develop
-                  before harvest.
+                  Slower natural growth lets nutrients fully develop.
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <div class="why-stats reveal">
-          <div class="stat-block">
-            <span class="stat-num" data-target="14">0</span
-            ><span class="stat-label">Acres of Farm</span>
+        <div class="why-stats">
+          <div class="stat-b">
+            <span class="stat-n" data-target="14">0</span
+            ><span class="stat-l">Acres of Farm</span>
           </div>
-          <div class="stat-block">
-            <span class="stat-num" data-target="12">0</span
-            ><span class="stat-label">Years Growing</span>
+          <div class="stat-b">
+            <span class="stat-n" data-target="12">0</span
+            ><span class="stat-l">Years Growing</span>
           </div>
-          <div class="stat-block">
-            <span class="stat-num" data-target="18">0</span
-            ><span class="stat-label">Retail Partners</span>
+          <div class="stat-b">
+            <span class="stat-n" data-target="18">0</span
+            ><span class="stat-l">Retail Partners</span>
           </div>
-          <div class="stat-block">
-            <span class="stat-num" data-target="24">0</span
-            ><span class="stat-label">Hrs Farm-to-Shelf</span>
+          <div class="stat-b">
+            <span class="stat-n" data-target="24">0</span
+            ><span class="stat-l">Hrs Farm-to-Shelf</span>
           </div>
         </div>
       </div>
@@ -1339,114 +1558,57 @@
 
     <!-- FARM STORY -->
     <section id="story">
-      <div class="story-grid reveal">
-        <div class="story-carousel" id="storyCarousel">
-          <div class="carousel-slides" id="carouselSlides">
-            <div class="carousel-slide">
-              <div
-                class="slide-img"
-                style="
-                  background: linear-gradient(
-                    160deg,
-                    #2d4a1a,
-                    #5a7a35,
-                    #c8b060
-                  );
-                "
-              >
-                🏡
-              </div>
-              <div class="carousel-caption">
+      <div class="story-wrap">
+        <!-- CAROUSEL
+      Replace each .c-emoji div with <img src="farmX.jpg" alt="...">
+      to show your real farm photos. Add or remove .c-slide blocks freely.
+    -->
+        <div class="carousel" id="carousel">
+          <div class="c-slides" id="cSlides">
+            <div class="c-slide">
+              <img src="farm1.jpg" alt="Farm" />
+              <div class="c-caption">
                 The Lim family homestead — our farm's heart since 2013
               </div>
             </div>
-            <div class="carousel-slide">
-              <img
-                src="farm1.jpg"
-                style="
-                  width: 100%;
-                  height: 100%;
-                  object-fit: cover;
-                  position: absolute;
-                  inset: 0;
-                "
-              />
-              <div class="carousel-caption">Your caption here</div>
-              <div class="carousel-caption">
+
+            <div class="c-slide">
+              <img src="farm2.jpg" alt="Farm" />
+              <div class="c-caption">
                 Seedling nursery — every plant starts here under careful watch
               </div>
             </div>
-            <div class="carousel-slide">
-              <img
-                src="farm2.jpg"
-                style="
-                  width: 100%;
-                  height: 100%;
-                  object-fit: cover;
-                  position: absolute;
-                  inset: 0;
-                "
-              />
-              <div class="carousel-caption">Your caption here</div>
-              <div class="carousel-caption">
+
+            <div class="c-slide">
+              <img src="farm3.jpg" alt="Farm" />
+              <div class="c-caption">
                 Row after row of baby spinach, ready within 21 days
               </div>
             </div>
-            <div class="carousel-slide">
-              <img
-                src="farm3.jpg"
-                style="
-                  width: 100%;
-                  height: 100%;
-                  object-fit: cover;
-                  position: absolute;
-                  inset: 0;
-                "
-              />
-              <div class="carousel-caption">Your caption here</div>
-              <div class="carousel-caption">
+
+            <div class="c-slide">
+              <img src="farm4.jpg" alt="Farm" />
+              <div class="c-caption">
                 Harvest morning — our team hand-picks before 7am daily
               </div>
             </div>
-            <div class="carousel-slide">
-              <img
-                src="farm4.jpg"
-                style="
-                  width: 100%;
-                  height: 100%;
-                  object-fit: cover;
-                  position: absolute;
-                  inset: 0;
-                "
-              />
-              <div class="carousel-caption">Your caption here</div>
-              <div class="carousel-caption">
+
+            <div class="c-slide">
+              <img src="farm5.jpg" alt="Farm" />
+              <div class="c-caption">
                 From our farm gate to KL shelves — within 24 hours
               </div>
             </div>
           </div>
-          <button
-            class="carousel-arrow carousel-prev"
-            onclick="carouselMove(-1)"
-          >
-            ‹
-          </button>
-          <button
-            class="carousel-arrow carousel-next"
-            onclick="carouselMove(1)"
-          >
-            ›
-          </button>
-          <div class="carousel-controls" id="carouselDots"></div>
-          <div class="carousel-progress" id="carouselProgress"></div>
+          <button class="c-arr c-prev" onclick="cMove(-1)">&#8249;</button>
+          <button class="c-arr c-next" onclick="cMove(1)">&#8250;</button>
+          <div class="c-dots" id="cDots"></div>
+          <div class="c-progress" id="cProg"></div>
         </div>
-
         <div class="story-text">
-          <span class="section-label">Our Farm Story</span>
-          <h2 class="section-title">
-            Rooted in the <em>Cameron Highlands</em>
-          </h2>
-          <hr class="section-divider" />
+          <span class="sec-label">Our Farm Story</span>
+          <h2 class="sec-title">Rooted in the <em>Cameron Highlands</em></h2>
+          <hr class="sec-div" />
           <p>
             Suan Mokkh Garden — meaning "Garden of Liberation" in Thai — was
             founded in 2013 by the Lim family on 14 acres of rich highland soil.
@@ -1454,30 +1616,30 @@
             of Peninsular Malaysia's most trusted certified organic farms.
           </p>
           <p>
-            Every seed we plant carries our commitment: no synthetic
-            fertilisers, no pesticides, no shortcuts. We rotate our crops
-            seasonally, enrich our soil with organic compost, and harvest by
-            hand to ensure each vegetable reaches you at its absolute peak.
+            Every seed carries our commitment: no synthetic fertilisers, no
+            pesticides, no shortcuts. We rotate crops seasonally, enrich soil
+            with organic compost, and harvest by hand so each vegetable reaches
+            you at its absolute peak.
           </p>
           <p>
             Certified by <strong>MyOrganic Malaysia</strong> and audited
             annually. We believe food grown with care should be accessible to
             everyday Malaysian families.
           </p>
-          <div class="story-values">
-            <div class="story-value">
+          <div class="story-vals">
+            <div class="sval">
               <h4>🌿 Certified Organic</h4>
               <p>MyOrganic Malaysia certified since 2016</p>
             </div>
-            <div class="story-value">
+            <div class="sval">
               <h4>🤝 Family Owned</h4>
               <p>Three generations on the same land</p>
             </div>
-            <div class="story-value">
+            <div class="sval">
               <h4>🚜 24hr Farm-to-Shelf</h4>
               <p>Harvested today, in store tomorrow</p>
             </div>
-            <div class="story-value">
+            <div class="sval">
               <h4>♻️ Zero Waste</h4>
               <p>All trimmings composted back into soil</p>
             </div>
@@ -1488,164 +1650,141 @@
 
     <!-- PRODUCTS -->
     <section id="products">
-      <div class="products-container">
-        <div class="products-header reveal">
-          <span class="section-label">What We Grow</span>
-          <h2 class="section-title">Our Fresh <em>Produce</em></h2>
-          <hr class="section-divider" />
-          <p
-            style="
-              color: rgba(59, 42, 26, 0.58);
-              font-size: 0.93rem;
-              max-width: 460px;
-              margin: 0 auto;
-            "
-          >
-            Hand-picked at peak ripeness, packed with care, delivered fresh to
-            supermarkets across Kuala Lumpur.
+      <div class="prod-wrap">
+        <div class="prod-head">
+          <span class="sec-label">What We Grow</span>
+          <h2 class="sec-title">Our Fresh <em>Produce</em></h2>
+          <hr class="sec-div" />
+          <p>
+            Hand-picked at peak ripeness, packed with care, delivered fresh
+            across Kuala Lumpur.
           </p>
         </div>
-        <div class="products-grid reveal">
-          <div class="product-card">
-            <div class="product-img">
+        <div class="prod-grid">
+          <div class="prod-card">
+            <div class="prod-img">
               <div
-                class="pi"
+                class="emoji"
                 style="background: linear-gradient(135deg, #3d7a3a, #5aac55)"
               >
                 🥬
               </div>
-              <span class="product-badge">In Season</span>
+              <span class="prod-badge">In Season</span>
             </div>
-            <div class="product-info">
+            <div class="prod-info">
               <h3>Baby Spinach</h3>
-              <p>
-                Tender young leaves harvested before 21 days for maximum
-                sweetness and iron.
-              </p>
-              <span class="product-tag">Leafy Greens</span>
+              <p>Tender young leaves for maximum sweetness and iron.</p>
+              <span class="prod-tag">Leafy Greens</span>
             </div>
           </div>
-          <div class="product-card">
-            <div class="product-img">
+          <div class="prod-card">
+            <div class="prod-img">
               <div
-                class="pi"
+                class="emoji"
                 style="background: linear-gradient(135deg, #c8501e, #e07a40)"
               >
                 🍅
               </div>
-              <span class="product-badge">In Season</span>
+              <span class="prod-badge">In Season</span>
             </div>
-            <div class="product-info">
+            <div class="prod-info">
               <h3>Cherry Tomatoes</h3>
-              <p>
-                Vine-ripened, bursting with natural sweetness. Red and yellow
-                varieties.
-              </p>
-              <span class="product-tag">Fruiting Veg</span>
+              <p>Vine-ripened, bursting with natural sweetness.</p>
+              <span class="prod-tag">Fruiting Veg</span>
             </div>
           </div>
-          <div class="product-card">
-            <div class="product-img">
+          <div class="prod-card">
+            <div class="prod-img">
               <div
-                class="pi"
+                class="emoji"
                 style="background: linear-gradient(135deg, #8b4ab0, #c080e0)"
               >
                 🍆
               </div>
             </div>
-            <div class="product-info">
+            <div class="prod-info">
               <h3>Purple Eggplant</h3>
               <p>
-                Silky texture, low bitterness — ideal for curries, grilling,
-                stir-fries.
+                Silky texture, low bitterness — ideal for curries and grills.
               </p>
-              <span class="product-tag">Fruiting Veg</span>
+              <span class="prod-tag">Fruiting Veg</span>
             </div>
           </div>
-          <div class="product-card">
-            <div class="product-img">
+          <div class="prod-card">
+            <div class="prod-img">
               <div
-                class="pi"
+                class="emoji"
                 style="background: linear-gradient(135deg, #d4a200, #f0c840)"
               >
                 🌽
               </div>
             </div>
-            <div class="product-info">
+            <div class="prod-info">
               <h3>Sweet Corn</h3>
-              <p>
-                Non-GMO heritage variety, harvested within 24hrs for peak
-                sweetness.
-              </p>
-              <span class="product-tag">Seasonal</span>
+              <p>Non-GMO heritage variety harvested within 24hrs.</p>
+              <span class="prod-tag">Seasonal</span>
             </div>
           </div>
-          <div class="product-card">
-            <div class="product-img">
+          <div class="prod-card">
+            <div class="prod-img">
               <div
-                class="pi"
+                class="emoji"
                 style="background: linear-gradient(135deg, #2a7a4a, #4aac7a)"
               >
                 🥦
               </div>
-              <span class="product-badge">In Season</span>
+              <span class="prod-badge">In Season</span>
             </div>
-            <div class="product-info">
+            <div class="prod-info">
               <h3>Butterhead Lettuce</h3>
-              <p>
-                Soft, pale green with mild buttery flavour. Perfect for wraps
-                and salads.
-              </p>
-              <span class="product-tag">Leafy Greens</span>
+              <p>Soft, pale green with mild buttery flavour.</p>
+              <span class="prod-tag">Leafy Greens</span>
             </div>
           </div>
-          <div class="product-card">
-            <div class="product-img">
+          <div class="prod-card">
+            <div class="prod-img">
               <div
-                class="pi"
+                class="emoji"
                 style="background: linear-gradient(135deg, #b03a2a, #e06050)"
               >
                 🌶️
               </div>
             </div>
-            <div class="product-info">
+            <div class="prod-info">
               <h3>Red Capsicum</h3>
-              <p>
-                Fully vine-ripened for natural sweetness and rich vitamin C
-                content.
-              </p>
-              <span class="product-tag">Fruiting Veg</span>
+              <p>Fully vine-ripened for natural sweetness and vitamin C.</p>
+              <span class="prod-tag">Fruiting Veg</span>
             </div>
           </div>
-          <div class="product-card">
-            <div class="product-img">
+          <div class="prod-card">
+            <div class="prod-img">
               <div
-                class="pi"
+                class="emoji"
                 style="background: linear-gradient(135deg, #4a7a2a, #80c050)"
               >
                 🫛
               </div>
-              <span class="product-badge">In Season</span>
+              <span class="prod-badge">In Season</span>
             </div>
-            <div class="product-info">
+            <div class="prod-info">
               <h3>French Beans</h3>
-              <p>Slim, crisp, vibrant green — blanch, sauté, or enjoy raw.</p>
-              <span class="product-tag">Legumes</span>
+              <p>Slim, crisp, vibrant green — blanch, sauté or eat raw.</p>
+              <span class="prod-tag">Legumes</span>
             </div>
           </div>
-          <div class="product-card">
-            <div class="product-img">
+          <div class="prod-card">
+            <div class="prod-img">
               <div
-                class="pi"
+                class="emoji"
                 style="background: linear-gradient(135deg, #2a5a3a, #4a9a6a)"
               >
                 🌿
               </div>
             </div>
-            <div class="product-info">
+            <div class="prod-info">
               <h3>Kale</h3>
               <p>Curly-leaf variety packed with antioxidants and fibre.</p>
-              <span class="product-tag">Leafy Greens</span>
+              <span class="prod-tag">Leafy Greens</span>
             </div>
           </div>
         </div>
@@ -1654,37 +1793,36 @@
 
     <!-- RECIPES -->
     <section id="recipes">
-      <div class="recipes-container">
-        <div class="recipes-header reveal">
-          <span class="section-label">Weekly Recipe</span>
-          <h2 class="section-title" style="color: var(--cream)">
+      <div class="rec-wrap">
+        <div class="rec-head">
+          <span class="sec-label">Weekly Recipe</span>
+          <h2 class="sec-title">
             Cook with what's <em style="color: var(--gold)">in season</em>
           </h2>
         </div>
-        <div class="recipe-tabs reveal">
-          <button class="recipe-tab active" onclick="showRecipe(0, this)">
+        <div class="rec-tabs">
+          <button class="rec-tab on" onclick="showRec(0, this)">
             Baby Spinach
           </button>
-          <button class="recipe-tab" onclick="showRecipe(1, this)">
+          <button class="rec-tab" onclick="showRec(1, this)">
             Cherry Tomatoes
           </button>
-          <button class="recipe-tab" onclick="showRecipe(2, this)">
-            Eggplant
-          </button>
+          <button class="rec-tab" onclick="showRec(2, this)">Eggplant</button>
         </div>
-        <div id="recipe-0" class="recipe-feature reveal">
-          <div class="recipe-img">
+
+        <div id="r0" class="rec-feat">
+          <div class="rec-img">
             <div
-              class="ri"
+              class="emoji"
               style="background: linear-gradient(135deg, #1a3a10, #3a6a2a)"
             >
               🥬
             </div>
           </div>
-          <div class="recipe-info">
-            <div class="veg-highlight">
-              <span class="veg-dot"></span
-              ><span class="veg-name">Star: Baby Spinach</span>
+          <div class="rec-body">
+            <div class="veg-pill">
+              <span class="veg-pip"></span
+              ><span class="veg-lbl">Star: Baby Spinach</span>
             </div>
             <h2>Garlic Spinach with Sesame & Soft Egg</h2>
             <p>
@@ -1692,143 +1830,144 @@
               finished with toasted sesame and a soft-boiled egg. Ready in 12
               minutes.
             </p>
-            <div class="recipe-meta">
-              <div class="rmi">
+            <div class="rec-meta">
+              <div class="rm">
                 <div class="val">12</div>
                 <div class="key">Minutes</div>
               </div>
-              <div class="rmi">
+              <div class="rm">
                 <div class="val">2</div>
                 <div class="key">Servings</div>
               </div>
-              <div class="rmi">
+              <div class="rm">
                 <div class="val">Easy</div>
                 <div class="key">Level</div>
               </div>
             </div>
-            <ol class="recipe-steps">
+            <ol class="rec-steps">
               <li>
-                <span class="step-num">1</span>Boil 2 eggs for 6.5 minutes then
-                transfer to ice water immediately.
+                <span class="sn">1</span>Boil 2 eggs for 6.5 minutes then
+                transfer to ice water.
               </li>
               <li>
-                <span class="step-num">2</span>Heat sesame oil in wok on high.
-                Add 4 cloves minced garlic, sauté 30 seconds.
+                <span class="sn">2</span>Heat sesame oil on high. Add 4 cloves
+                minced garlic, sauté 30 seconds.
               </li>
               <li>
-                <span class="step-num">3</span>Add 200g baby spinach in batches,
-                toss until just wilted (~90 seconds).
+                <span class="sn">3</span>Add 200g baby spinach in batches, toss
+                until just wilted (~90 seconds).
               </li>
               <li>
-                <span class="step-num">4</span>Season with light soy and sea
-                salt. Top with sesame seeds and halved soft eggs.
+                <span class="sn">4</span>Season with light soy and sea salt. Top
+                with sesame seeds and halved eggs.
               </li>
             </ol>
           </div>
         </div>
-        <div id="recipe-1" class="recipe-feature reveal" style="display: none">
-          <div class="recipe-img">
+
+        <div id="r1" class="rec-feat" style="display: none">
+          <div class="rec-img">
             <div
-              class="ri"
+              class="emoji"
               style="background: linear-gradient(135deg, #6a1a0a, #c04020)"
             >
               🍅
             </div>
           </div>
-          <div class="recipe-info">
-            <div class="veg-highlight">
-              <span class="veg-dot" style="background: #e06040"></span
-              ><span class="veg-name">Star: Cherry Tomatoes</span>
+          <div class="rec-body">
+            <div class="veg-pill">
+              <span class="veg-pip" style="background: #e06040"></span
+              ><span class="veg-lbl">Star: Cherry Tomatoes</span>
             </div>
             <h2>Roasted Cherry Tomato Pasta with Burrata</h2>
             <p>
-              Slow-roasting concentrates the natural sugars of our vine-ripened
-              tomatoes into a jammy, fragrant sauce served over pasta with
-              creamy burrata.
+              Slow-roasting concentrates the natural sugars into a jammy,
+              fragrant sauce. Served over pasta with creamy burrata.
             </p>
-            <div class="recipe-meta">
-              <div class="rmi">
+            <div class="rec-meta">
+              <div class="rm">
                 <div class="val">35</div>
                 <div class="key">Minutes</div>
               </div>
-              <div class="rmi">
+              <div class="rm">
                 <div class="val">3</div>
                 <div class="key">Servings</div>
               </div>
-              <div class="rmi">
+              <div class="rm">
                 <div class="val">Easy</div>
                 <div class="key">Level</div>
               </div>
             </div>
-            <ol class="recipe-steps">
+            <ol class="rec-steps">
               <li>
-                <span class="step-num">1</span>Preheat oven to 200°C. Toss 350g
-                cherry tomatoes with olive oil, garlic, salt.
+                <span class="sn">1</span>Preheat oven to 200°C. Toss 350g cherry
+                tomatoes with olive oil, garlic, salt.
               </li>
               <li>
-                <span class="step-num">2</span>Roast 25–30 minutes until
-                blistered and jammy. Add fresh basil last 2 minutes.
+                <span class="sn">2</span>Roast 25–30 minutes until blistered and
+                jammy. Add fresh basil last 2 minutes.
               </li>
               <li>
-                <span class="step-num">3</span>Cook 250g pasta al dente. Reserve
-                ½ cup pasta water before draining.
+                <span class="sn">3</span>Cook 250g pasta al dente. Reserve ½ cup
+                pasta water before draining.
               </li>
               <li>
-                <span class="step-num">4</span>Toss pasta with roasted tomatoes
-                and pasta water. Top with torn burrata.
+                <span class="sn">4</span>Toss pasta with roasted tomatoes and
+                water. Top with torn burrata.
               </li>
             </ol>
           </div>
         </div>
-        <div id="recipe-2" class="recipe-feature reveal" style="display: none">
-          <div class="recipe-img">
+
+        <div id="r2" class="rec-feat" style="display: none">
+          <div class="rec-img">
             <div
-              class="ri"
+              class="emoji"
               style="background: linear-gradient(135deg, #3a0a5a, #7a3aa0)"
             >
               🍆
             </div>
           </div>
-          <div class="recipe-info">
-            <div class="veg-highlight">
-              <span class="veg-dot" style="background: #9060c0"></span
-              ><span class="veg-name">Star: Purple Eggplant</span>
+          <div class="rec-body">
+            <div class="veg-pill">
+              <span class="veg-pip" style="background: #9060c0"></span
+              ><span class="veg-lbl">Star: Purple Eggplant</span>
             </div>
             <h2>Nyonya-Style Sambal Eggplant</h2>
             <p>
-              A Malaysian classic — smoky sambal clings to silky eggplant, bold
-              and fragrant. Served with steamed white rice.
+              A Malaysian classic — smoky sambal clings to silky eggplant. Bold,
+              fragrant, served with steamed white rice.
             </p>
-            <div class="recipe-meta">
-              <div class="rmi">
+            <div class="rec-meta">
+              <div class="rm">
                 <div class="val">25</div>
                 <div class="key">Minutes</div>
               </div>
-              <div class="rmi">
+              <div class="rm">
                 <div class="val">4</div>
                 <div class="key">Servings</div>
               </div>
-              <div class="rmi">
+              <div class="rm">
                 <div class="val">Medium</div>
                 <div class="key">Level</div>
               </div>
             </div>
-            <ol class="recipe-steps">
+            <ol class="rec-steps">
               <li>
-                <span class="step-num">1</span>Cut 3 eggplants into wedges, salt
+                <span class="sn">1</span>Cut 3 eggplants into wedges, salt
                 lightly, rest 10 minutes.
               </li>
               <li>
-                <span class="step-num">2</span>Pan-fry in hot oil until golden
-                on all sides. Set aside on paper towels.
+                <span class="sn">2</span>Pan-fry in hot oil until golden on all
+                sides. Set aside.
               </li>
               <li>
-                <span class="step-num">3</span>Fry sambal paste with sliced
-                shallots until fragrant and oil splits.
+                <span class="sn">3</span>Fry sambal paste with sliced shallots
+                until oil splits.
               </li>
               <li>
-                <span class="step-num">4</span>Return eggplant to pan, toss in
-                sambal. Finish with lime juice. Serve with rice.
+                <span class="sn">4</span>Return eggplant, toss in sambal. Finish
+                with lime. Serve with rice.
               </li>
             </ol>
           </div>
@@ -1836,80 +1975,53 @@
       </div>
     </section>
 
-    <!-- STORES + MAP -->
+    <!-- STORES -->
     <section id="stores">
-      <div class="stores-container">
-        <div class="stores-header reveal">
-          <span class="section-label">Find Our Products</span>
-          <h2 class="section-title">Available at these <em>stores</em></h2>
-          <hr class="section-divider" />
+      <div class="stores-wrap">
+        <div class="stores-head">
+          <span class="sec-label">Find Our Products</span>
+          <h2 class="sec-title">Available at these <em>stores</em></h2>
+          <hr class="sec-div" />
         </div>
-        <div class="stores-layout reveal">
-          <div class="stores-panel">
-            <div class="stores-panel-head">
-              <p>Click any store to navigate directly on the map.</p>
-              <div class="store-filter-tabs">
-                <button
-                  class="filter-btn active"
-                  onclick="filterStores('all', this)"
-                >
+        <div class="stores-layout">
+          <div class="s-panel">
+            <div class="s-panel-top">
+              <p>Click any store to see it on the map.</p>
+              <div class="s-filters">
+                <button class="s-f on" onclick="filterS('all', this)">
                   All
                 </button>
-                <button class="filter-btn" onclick="filterStores('AEON', this)">
+                <button class="s-f" onclick="filterS('AEON', this)">
                   AEON
                 </button>
-                <button
-                  class="filter-btn"
-                  onclick="filterStores('AEON Big', this)"
-                >
+                <button class="s-f" onclick="filterS('AEON Big', this)">
                   AEON Big
                 </button>
-                <button
-                  class="filter-btn"
-                  onclick="filterStores('Jaya Grocer', this)"
-                >
+                <button class="s-f" onclick="filterS('Jaya Grocer', this)">
                   Jaya Grocer
                 </button>
-                <button
-                  class="filter-btn"
-                  onclick="filterStores('Village Grocer', this)"
-                >
+                <button class="s-f" onclick="filterS('Village Grocer', this)">
                   Village Grocer
                 </button>
-                <button
-                  class="filter-btn"
-                  onclick="filterStores('Giant', this)"
-                >
+                <button class="s-f" onclick="filterS('Giant', this)">
                   Giant
                 </button>
-                <button class="filter-btn" onclick="filterStores('BIG', this)">
-                  BIG
-                </button>
+                <button class="s-f" onclick="filterS('BIG', this)">BIG</button>
               </div>
             </div>
-            <div class="store-list" id="storeList"></div>
+            <div class="s-list" id="sList"></div>
           </div>
-          <div class="map-frame-wrap">
+          <div class="map-wrap">
             <iframe
-              id="mapFrame"
-              src="https://maps.google.com/maps?q=Kuala+Lumpur+supermarket&t=&z=12&ie=UTF8&iwloc=&output=embed"
+              id="mapF"
+              src="https://maps.google.com/maps?q=Kuala+Lumpur&t=&z=12&ie=UTF8&iwloc=&output=embed"
               allowfullscreen
               loading="lazy"
             ></iframe>
-            <div class="map-info-card" id="mapInfoCard">
-              <h4 style="font-family: &quot;Playfair Display&quot;, serif">
-                Find a Store Near You
-              </h4>
-              <p
-                style="
-                  font-size: 0.72rem;
-                  color: rgba(59, 42, 26, 0.55);
-                  line-height: 1.5;
-                  margin-top: 4px;
-                "
-              >
-                Select any store from the list to see its exact location on the
-                map.
+            <div class="map-card" id="mapCard">
+              <h4>Find a Store</h4>
+              <p>
+                Select any store from the list to navigate to it on the map.
               </p>
             </div>
           </div>
@@ -1919,15 +2031,15 @@
 
     <!-- FOOTER -->
     <footer>
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="brand-name">Suan Mokkh <span>Garden</span></div>
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <div class="fn">Suan Mokkh <span>Garden</span></div>
           <p>
-            Certified organic vegetables grown with care in the Cameron
-            Highlands, delivered fresh to Kuala Lumpur daily.
+            Certified organic vegetables grown in the Cameron Highlands,
+            delivered fresh to Kuala Lumpur daily.
           </p>
         </div>
-        <div class="footer-col">
+        <div class="foot-col">
           <h4>Navigate</h4>
           <ul>
             <li><a href="#story">Our Farm</a></li>
@@ -1936,7 +2048,7 @@
             <li><a href="#stores">Find Us</a></li>
           </ul>
         </div>
-        <div class="footer-col">
+        <div class="foot-col">
           <h4>Info</h4>
           <ul>
             <li><a href="#">Certification</a></li>
@@ -1945,7 +2057,7 @@
             <li><a href="#">Press</a></li>
           </ul>
         </div>
-        <div class="footer-col">
+        <div class="foot-col">
           <h4>Contact</h4>
           <ul>
             <li><a href="#">hello@suanmokkh.my</a></li>
@@ -1955,313 +2067,332 @@
           </ul>
         </div>
       </div>
-      <div class="footer-bottom">
+      <div class="foot-bottom">
         <p>© 2026 Suan Mokkh Garden Sdn. Bhd. All rights reserved.</p>
         <p>Grown in Malaysia 🇲🇾</p>
       </div>
     </footer>
 
     <script>
-      /* ── NAV ── */
+      /* NAV */
       window.addEventListener("scroll", () =>
         document
-          .getElementById("navbar")
+          .getElementById("nav")
           .classList.toggle("scrolled", scrollY > 50),
       );
 
-      /* ── REVEAL ── */
-      new IntersectionObserver(
-        (es) =>
-          es.forEach((e, i) => {
-            if (e.isIntersecting)
-              setTimeout(() => e.target.classList.add("visible"), i * 75);
-          }),
-        { threshold: 0.08 },
-      ).observe || (() => {});
-      const ro = new IntersectionObserver(
-        (es) =>
-          es.forEach((e, i) => {
-            if (e.isIntersecting)
-              setTimeout(() => e.target.classList.add("visible"), i * 75);
-          }),
-        { threshold: 0.08 },
-      );
-      document.querySelectorAll(".reveal").forEach((el) => ro.observe(el));
+      /* COUNTERS */
+      (function () {
+        let done = false;
+        function run() {
+          if (done) return;
+          const el = document.querySelector(".why-stats");
+          if (!el) return;
+          const r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight) {
+            done = true;
+            el.querySelectorAll("[data-target]").forEach((n) => {
+              const t = +n.dataset.target,
+                step = t / 40;
+              let c = 0;
+              const iv = setInterval(() => {
+                c += step;
+                if (c >= t) {
+                  n.textContent = t;
+                  clearInterval(iv);
+                } else n.textContent = Math.floor(c);
+              }, 30);
+            });
+          }
+        }
+        window.addEventListener("scroll", run, { passive: true });
+        run();
+      })();
 
-      /* ── ROLLING COUNTERS ── */
-      const co = new IntersectionObserver(
-        (es) => {
-          es.forEach((e) => {
-            if (e.isIntersecting) {
-              e.target.querySelectorAll("[data-target]").forEach((el) => {
-                const tgt = +el.dataset.target;
-                let cur = 0;
-                const step = tgt / 45;
-                const t = setInterval(() => {
-                  cur += step;
-                  if (cur >= tgt) {
-                    el.textContent = tgt;
-                    clearInterval(t);
-                  } else el.textContent = Math.floor(cur);
-                }, 32);
-              });
-              co.unobserve(e.target);
-            }
-          });
-        },
-        { threshold: 0.4 },
-      );
-      const statsEl = document.querySelector(".why-stats");
-      if (statsEl) co.observe(statsEl);
+      /* CAROUSEL */
+      (function () {
+        const slides = document.querySelectorAll(".c-slide");
+        const total = slides.length;
+        const dotsEl = document.getElementById("cDots");
+        const prog = document.getElementById("cProg");
+        const DUR = 4000;
+        let idx = 0,
+          timer;
 
-      /* ── CAROUSEL ── */
-      let ci = 0;
-      const slides = document.querySelectorAll(".carousel-slide");
-      const total = slides.length;
-      const dotsC = document.getElementById("carouselDots");
-      const prog = document.getElementById("carouselProgress");
-      const DUR = 4200;
-      let autoT;
+        slides.forEach((_, i) => {
+          const d = document.createElement("button");
+          d.className = "c-dot" + (i === 0 ? " on" : "");
+          d.setAttribute("aria-label", "Slide " + (i + 1));
+          d.onclick = () => go(i);
+          dotsEl.appendChild(d);
+        });
 
-      slides.forEach((_, i) => {
-        const d = document.createElement("button");
-        d.className = "carousel-dot" + (i === 0 ? " active" : "");
-        d.onclick = () => goTo(i);
-        dotsC.appendChild(d);
-      });
+        function go(i) {
+          idx = (i + total) % total;
+          document.getElementById("cSlides").style.transform =
+            "translateX(-" + idx * 100 + "%)";
+          document
+            .querySelectorAll(".c-dot")
+            .forEach((d, j) => d.classList.toggle("on", j === idx));
+          prog.style.transition = "none";
+          prog.style.width = "0%";
+          requestAnimationFrame(() =>
+            requestAnimationFrame(() => {
+              prog.style.transition = "width " + DUR + "ms linear";
+              prog.style.width = "100%";
+            }),
+          );
+        }
 
-      function goTo(idx) {
-        ci = (idx + total) % total;
-        document.getElementById("carouselSlides").style.transform =
-          `translateX(-${ci * 100}%)`;
-        document
-          .querySelectorAll(".carousel-dot")
-          .forEach((d, i) => d.classList.toggle("active", i === ci));
-        prog.style.transition = "none";
-        prog.style.width = "0%";
-        requestAnimationFrame(() =>
-          requestAnimationFrame(() => {
-            prog.style.transition = `width ${DUR}ms linear`;
-            prog.style.width = "100%";
-          }),
-        );
-      }
-      function carouselMove(d) {
-        goTo(ci + d);
-      }
-      function startAuto() {
-        clearInterval(autoT);
-        autoT = setInterval(() => goTo(ci + 1), DUR);
-      }
-      const car = document.getElementById("storyCarousel");
-      car.addEventListener("mouseenter", () => {
-        clearInterval(autoT);
-        prog.style.transition = "none";
-      });
-      car.addEventListener("mouseleave", () => {
-        startAuto();
-      });
-      goTo(0);
-      startAuto();
+        function startTimer() {
+          clearInterval(timer);
+          timer = setInterval(() => go(idx + 1), DUR);
+        }
+        const car = document.getElementById("carousel");
+        car.addEventListener("mouseenter", () => {
+          clearInterval(timer);
+          prog.style.transition = "none";
+        });
+        car.addEventListener("mouseleave", startTimer);
+        go(0);
+        startTimer();
 
-      /* ── RECIPE TABS ── */
-      function showRecipe(idx, btn) {
-        [0, 1, 2].forEach((i) => {
-          const el = document.getElementById("recipe-" + i);
-          if (el) el.style.display = i === idx ? "grid" : "none";
+        window.cMove = function (d) {
+          go(idx + d);
+        };
+      })();
+
+      /* RECIPES */
+      window.showRec = function (i, btn) {
+        ["r0", "r1", "r2"].forEach((id, j) => {
+          const el = document.getElementById(id);
+          if (el) el.style.display = j === i ? "grid" : "none";
         });
         document
-          .querySelectorAll(".recipe-tab")
-          .forEach((t) => t.classList.remove("active"));
-        btn.classList.add("active");
-      }
-
-      /* ── STORES + SYNCED MAP ── */
-      const BC = {
-        AEON: "#e53e3e",
-        "AEON Big": "#dd6b20",
-        "Jaya Grocer": "#38a169",
-        "Village Grocer": "#805ad5",
-        Giant: "#3182ce",
-        BIG: "#2d7d46",
+          .querySelectorAll(".rec-tab")
+          .forEach((t) => t.classList.remove("on"));
+        btn.classList.add("on");
       };
-      const STORES = [
-        {
-          name: "AEON Wangsa Maju",
-          addr: "Jln Raya 1, Bandar Baru Wangsa Maju",
-          brand: "AEON",
-          icon: "🛒",
-          q: "AEON+Mall+Wangsa+Maju+Kuala+Lumpur",
-        },
-        {
-          name: "AEON Taman Maluri",
-          addr: "Jln Jejaka, Taman Maluri, Cheras",
-          brand: "AEON",
-          icon: "🛒",
-          q: "AEON+Taman+Maluri+Cheras+KL",
-        },
-        {
-          name: "AEON Mid Valley",
-          addr: "Mid Valley Megamall, Lingkaran Syed Putra",
-          brand: "AEON",
-          icon: "🛒",
-          q: "AEON+Mid+Valley+Megamall+KL",
-        },
-        {
-          name: "AEON Quill City Mall",
-          addr: "1018 Jln Sultan Ismail, City Centre",
-          brand: "AEON",
-          icon: "🛒",
-          q: "AEON+Quill+City+Mall+KL",
-        },
-        {
-          name: "AEON Big Danau Kota",
-          addr: "Jln Langkawi, Setapak, KL",
-          brand: "AEON Big",
-          icon: "🏪",
-          q: "AEON+Big+Danau+Kota+Setapak",
-        },
-        {
-          name: "AEON Big Sri Petaling",
-          addr: "Jln 1/149E, Bukit Jalil, KL",
-          brand: "AEON Big",
-          icon: "🏪",
-          q: "AEON+Big+Sri+Petaling+Kuala+Lumpur",
-        },
-        {
-          name: "Jaya Grocer Mid Valley",
-          addr: "Mid Valley Megamall, Ground Floor",
-          brand: "Jaya Grocer",
-          icon: "🥦",
-          q: "Jaya+Grocer+Mid+Valley+Megamall+KL",
-        },
-        {
-          name: "Jaya Grocer KLCC",
-          addr: "Suria KLCC, Level 2, Jln Ampang",
-          brand: "Jaya Grocer",
-          icon: "🥦",
-          q: "Jaya+Grocer+Suria+KLCC",
-        },
-        {
-          name: "Jaya Grocer Pavilion KL",
-          addr: "Pavilion KL, Jln Bukit Bintang",
-          brand: "Jaya Grocer",
-          icon: "🥦",
-          q: "Jaya+Grocer+Pavilion+KL+Bukit+Bintang",
-        },
-        {
-          name: "Jaya Grocer Publika",
-          addr: "Solaris Dutamas, Mont Kiara",
-          brand: "Jaya Grocer",
-          icon: "🥦",
-          q: "Jaya+Grocer+Publika+Mont+Kiara",
-        },
-        {
-          name: "Village Grocer Bangsar",
-          addr: "Bangsar Shopping Centre, Bangsar",
-          brand: "Village Grocer",
-          icon: "🏡",
-          q: "Village+Grocer+Bangsar+Shopping+Centre",
-        },
-        {
-          name: "Village Grocer The Gardens",
-          addr: "The Gardens Mall, Mid Valley City",
-          brand: "Village Grocer",
-          icon: "🏡",
-          q: "Village+Grocer+The+Gardens+Mall+KL",
-        },
-        {
-          name: "Village Grocer Empire Damansara",
-          addr: "Empire City Damansara, Petaling Jaya",
-          brand: "Village Grocer",
-          icon: "🏡",
-          q: "Village+Grocer+Empire+City+Damansara",
-        },
-        {
-          name: "Giant Cheras",
-          addr: "Taman Segar Perdana, Cheras, KL",
-          brand: "Giant",
-          icon: "🏬",
-          q: "Giant+Hypermarket+Cheras+Kuala+Lumpur",
-        },
-        {
-          name: "Giant Kepong",
-          addr: "Metro Prima Shopping Centre, Kepong",
-          brand: "Giant",
-          icon: "🏬",
-          q: "Giant+Supermarket+Kepong+Metro+Prima",
-        },
-        {
-          name: "Giant Ampang",
-          addr: "Ampang Point Shopping Centre, Ampang",
-          brand: "Giant",
-          icon: "🏬",
-          q: "Giant+Ampang+Point+Shopping+Centre",
-        },
-        {
-          name: "BIG @ KL Eco City",
-          addr: "KL Eco City Mall, Jln Bangsar",
-          brand: "BIG",
-          icon: "🌿",
-          q: "BIG+by+Village+Grocer+KL+Eco+City",
-        },
-        {
-          name: "BIG @ Desa ParkCity",
-          addr: "The Waterfront, Desa ParkCity, KL",
-          brand: "BIG",
-          icon: "🌿",
-          q: "BIG+Village+Grocer+Desa+ParkCity+KL",
-        },
-      ];
 
-      let activeIdx = null,
-        curFilter = "all";
+      /* STORES */
+      (function () {
+        const BC = {
+          AEON: "#e53e3e",
+          "AEON Big": "#dd6b20",
+          "Jaya Grocer": "#38a169",
+          "Village Grocer": "#805ad5",
+          Giant: "#3182ce",
+          BIG: "#2d7d46",
+        };
+        const DATA = [
+          {
+            n: "AEON Wangsa Maju",
+            a: "Jln Raya 1, Bandar Baru Wangsa Maju",
+            b: "AEON",
+            i: "🛒",
+            q: "AEON+Mall+Wangsa+Maju+Kuala+Lumpur",
+          },
+          {
+            n: "AEON Taman Maluri",
+            a: "Jln Jejaka, Taman Maluri, Cheras",
+            b: "AEON",
+            i: "🛒",
+            q: "AEON+Taman+Maluri+Cheras+KL",
+          },
+          {
+            n: "AEON Mid Valley",
+            a: "Mid Valley Megamall, Lingkaran Syed Putra",
+            b: "AEON",
+            i: "🛒",
+            q: "AEON+Mid+Valley+Megamall+KL",
+          },
+          {
+            n: "AEON Quill City Mall",
+            a: "1018 Jln Sultan Ismail, City Centre",
+            b: "AEON",
+            i: "🛒",
+            q: "AEON+Quill+City+Mall+KL",
+          },
+          {
+            n: "AEON Big Danau Kota",
+            a: "Jln Langkawi, Setapak, KL",
+            b: "AEON Big",
+            i: "🏪",
+            q: "AEON+Big+Danau+Kota+Setapak",
+          },
+          {
+            n: "AEON Big Sri Petaling",
+            a: "Jln 1/149E, Bukit Jalil, KL",
+            b: "AEON Big",
+            i: "🏪",
+            q: "AEON+Big+Sri+Petaling+Kuala+Lumpur",
+          },
+          {
+            n: "Jaya Grocer Mid Valley",
+            a: "Mid Valley Megamall, Ground Floor",
+            b: "Jaya Grocer",
+            i: "🥦",
+            q: "Jaya+Grocer+Mid+Valley+Megamall+KL",
+          },
+          {
+            n: "Jaya Grocer KLCC",
+            a: "Suria KLCC, Level 2, Jln Ampang",
+            b: "Jaya Grocer",
+            i: "🥦",
+            q: "Jaya+Grocer+Suria+KLCC",
+          },
+          {
+            n: "Jaya Grocer Pavilion KL",
+            a: "Pavilion KL, Jln Bukit Bintang",
+            b: "Jaya Grocer",
+            i: "🥦",
+            q: "Jaya+Grocer+Pavilion+KL+Bukit+Bintang",
+          },
+          {
+            n: "Jaya Grocer Publika",
+            a: "Solaris Dutamas, Mont Kiara",
+            b: "Jaya Grocer",
+            i: "🥦",
+            q: "Jaya+Grocer+Publika+Mont+Kiara",
+          },
+          {
+            n: "Village Grocer Bangsar",
+            a: "Bangsar Shopping Centre, Bangsar",
+            b: "Village Grocer",
+            i: "🏡",
+            q: "Village+Grocer+Bangsar+Shopping+Centre",
+          },
+          {
+            n: "Village Grocer The Gardens",
+            a: "The Gardens Mall, Mid Valley City",
+            b: "Village Grocer",
+            i: "🏡",
+            q: "Village+Grocer+The+Gardens+Mall+KL",
+          },
+          {
+            n: "Village Grocer Empire Damansara",
+            a: "Empire City Damansara, Petaling Jaya",
+            b: "Village Grocer",
+            i: "🏡",
+            q: "Village+Grocer+Empire+City+Damansara",
+          },
+          {
+            n: "Giant Cheras",
+            a: "Taman Segar Perdana, Cheras, KL",
+            b: "Giant",
+            i: "🏬",
+            q: "Giant+Hypermarket+Cheras+Kuala+Lumpur",
+          },
+          {
+            n: "Giant Kepong",
+            a: "Metro Prima Shopping Centre, Kepong",
+            b: "Giant",
+            i: "🏬",
+            q: "Giant+Supermarket+Kepong+Metro+Prima",
+          },
+          {
+            n: "Giant Ampang",
+            a: "Ampang Point Shopping Centre, Ampang",
+            b: "Giant",
+            i: "🏬",
+            q: "Giant+Ampang+Point+Shopping+Centre",
+          },
+          {
+            n: "BIG @ KL Eco City",
+            a: "KL Eco City Mall, Jln Bangsar",
+            b: "BIG",
+            i: "🌿",
+            q: "BIG+by+Village+Grocer+KL+Eco+City",
+          },
+          {
+            n: "BIG @ Desa ParkCity",
+            a: "The Waterfront, Desa ParkCity, KL",
+            b: "BIG",
+            i: "🌿",
+            q: "BIG+Village+Grocer+Desa+ParkCity+KL",
+          },
+        ];
 
-      function selectStore(idx) {
-        activeIdx = idx;
-        renderStores();
-        const s = STORES[idx];
-        // Update iframe to show specific location
-        document.getElementById("mapFrame").src =
-          `https://maps.google.com/maps?q=${s.q}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
-        // Update info card
-        const col = BC[s.brand];
-        document.getElementById("mapInfoCard").innerHTML = `
-    <h4>${s.name}</h4>
-    <p style="font-size:.72rem;color:rgba(59,42,26,.58);line-height:1.5;margin-top:4px;">${s.addr}</p>
-    <span class="brand-pill" style="background:${col}18;color:${col};">${s.brand}</span>
-    <a class="gmaps-link" href="https://www.google.com/maps/search/?api=1&query=${s.q}" target="_blank">Open in Google Maps →</a>
-  `;
-      }
+        let active = null,
+          filter = "all";
 
-      function filterStores(brand, btn) {
-        curFilter = brand;
-        activeIdx = null;
-        document
-          .querySelectorAll(".filter-btn")
-          .forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        renderStores();
-      }
+        function selectStore(idx) {
+          active = idx;
+          render();
+          const s = DATA[idx],
+            c = BC[s.b];
+          document.getElementById("mapF").src =
+            "https://maps.google.com/maps?q=" +
+            s.q +
+            "&t=&z=16&ie=UTF8&iwloc=&output=embed";
+          document.getElementById("mapCard").innerHTML =
+            "<h4>" +
+            s.n +
+            "</h4>" +
+            '<p style="font-size:.7rem;color:rgba(59,42,26,.56);line-height:1.5;margin-top:3px;">' +
+            s.a +
+            "</p>" +
+            '<span class="mpill" style="background:' +
+            c +
+            "18;color:" +
+            c +
+            ';">' +
+            s.b +
+            "</span>" +
+            '<a href="https://www.google.com/maps/search/?api=1&query=' +
+            s.q +
+            '" target="_blank">Open in Google Maps →</a>';
+        }
 
-      function renderStores() {
-        const filtered =
-          curFilter === "all"
-            ? STORES
-            : STORES.filter((s) => s.brand === curFilter);
-        document.getElementById("storeList").innerHTML = filtered
-          .map((s) => {
-            const i = STORES.indexOf(s),
-              col = BC[s.brand];
-            return `<div class="store-item${activeIdx === i ? " active" : ""}" onclick="selectStore(${i})">
-      <div class="store-icon-c" style="background:${col}18;">${s.icon}</div>
-      <div class="store-text"><h4>${s.name}</h4><p>${s.addr}</p></div>
-      <span class="store-brand-tag" style="background:${col}18;color:${col};">${s.brand}</span>
-    </div>`;
-          })
-          .join("");
-      }
-      renderStores();
+        function render() {
+          const list =
+            filter === "all" ? DATA : DATA.filter((s) => s.b === filter);
+          document.getElementById("sList").innerHTML = list
+            .map((s) => {
+              const ri = DATA.indexOf(s),
+                c = BC[s.b];
+              return (
+                '<div class="s-item' +
+                (active === ri ? " on" : "") +
+                '" onclick="window._selS(' +
+                ri +
+                ')">' +
+                '<div class="s-ico" style="background:' +
+                c +
+                '18;">' +
+                s.i +
+                "</div>" +
+                '<div class="s-txt"><h4>' +
+                s.n +
+                "</h4><p>" +
+                s.a +
+                "</p></div>" +
+                '<span class="s-tag" style="background:' +
+                c +
+                "18;color:" +
+                c +
+                ';">' +
+                s.b +
+                "</span>" +
+                "</div>"
+              );
+            })
+            .join("");
+        }
+
+        window._selS = selectStore;
+        window.filterS = function (brand, btn) {
+          filter = brand;
+          active = null;
+          document
+            .querySelectorAll(".s-f")
+            .forEach((b) => b.classList.remove("on"));
+          btn.classList.add("on");
+          render();
+        };
+
+        render();
+      })();
     </script>
   </body>
 </html>
