@@ -1,0 +1,2267 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Suan Mokkh Garden – Organic Vegetables</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --soil: #3b2a1a;
+        --moss: #4a5e3a;
+        --leaf: #6b8c4e;
+        --sage: #a8b89a;
+        --cream: #f5f0e8;
+        --warm-white: #fdfaf4;
+        --gold: #c8a84b;
+        --rust: #b5541e;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Lato", sans-serif;
+        background: var(--warm-white);
+        color: var(--soil);
+        overflow-x: hidden;
+      }
+
+      /* NAV */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 200;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 22px 56px;
+        transition: all 0.35s;
+      }
+      nav.scrolled {
+        background: rgba(253, 250, 244, 0.96);
+        backdrop-filter: blur(12px);
+        padding: 14px 56px;
+        box-shadow: 0 2px 24px rgba(59, 42, 26, 0.08);
+      }
+      .nav-logo {
+        font-family: "Playfair Display", serif;
+        font-size: 1.3rem;
+        color: #fff;
+        transition: color 0.3s;
+      }
+      nav.scrolled .nav-logo {
+        color: var(--moss);
+      }
+      .nav-logo span {
+        color: var(--gold);
+        font-style: italic;
+      }
+      .nav-links {
+        display: flex;
+        gap: 36px;
+        list-style: none;
+      }
+      .nav-links a {
+        text-decoration: none;
+        font-size: 0.78rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.8);
+        transition: color 0.2s;
+      }
+      nav.scrolled .nav-links a {
+        color: rgba(59, 42, 26, 0.65);
+      }
+      .nav-links a:hover {
+        color: var(--gold) !important;
+      }
+
+      /* HERO */
+      #hero {
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        padding: 0 10%;
+      }
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        /* 🌅 REPLACE: swap this div for <img src="farm.jpg" style="width:100%;height:100%;object-fit:cover"> */
+        background: linear-gradient(
+          160deg,
+          #1c3010 0%,
+          #2d4a1a 20%,
+          #4a7028 45%,
+          #8a9a40 65%,
+          #d4b840 82%,
+          #e8c870 100%
+        );
+      }
+      /* Warm sun glow */
+      .hero-bg::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse 55% 55% at 72% 38%,
+          rgba(240, 195, 60, 0.42) 0%,
+          rgba(200, 150, 30, 0.2) 45%,
+          transparent 70%
+        );
+      }
+      /* Overlay for text readability */
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to right,
+          rgba(18, 30, 8, 0.78) 0%,
+          rgba(18, 30, 8, 0.42) 58%,
+          transparent 100%
+        );
+      }
+      .hero-photo-hint {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 6px;
+        pointer-events: none;
+      }
+      .hero-photo-hint span {
+        font-size: 4rem;
+        opacity: 0.1;
+      }
+      .hero-photo-hint p {
+        color: rgba(255, 255, 255, 0.14);
+        font-size: 0.72rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 620px;
+      }
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 0.68rem;
+        letter-spacing: 3.5px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 22px;
+        animation: fadeUp 0.9s ease both;
+      }
+      .hero-eyebrow::before {
+        content: "";
+        display: block;
+        width: 30px;
+        height: 1px;
+        background: var(--gold);
+      }
+      .hero-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(3rem, 5.5vw, 5.2rem);
+        line-height: 1.06;
+        color: #fff;
+        animation: fadeUp 0.9s 0.15s ease both;
+      }
+      .hero-title em {
+        color: var(--gold);
+        font-style: italic;
+        display: block;
+      }
+      .hero-sub {
+        font-size: 1.02rem;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.8;
+        margin: 22px 0 36px;
+        max-width: 430px;
+        animation: fadeUp 0.9s 0.3s ease both;
+      }
+      .hero-cta {
+        display: flex;
+        gap: 16px;
+        animation: fadeUp 0.9s 0.45s ease both;
+      }
+      .btn-primary {
+        padding: 15px 36px;
+        background: var(--gold);
+        color: var(--soil);
+        text-decoration: none;
+        font-size: 0.76rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 700;
+        border-radius: 2px;
+        transition: all 0.22s;
+      }
+      .btn-primary:hover {
+        background: #d4b55a;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(200, 168, 75, 0.38);
+      }
+      .btn-ghost {
+        padding: 15px 36px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.76rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border-radius: 2px;
+        transition: all 0.22s;
+      }
+      .btn-ghost:hover {
+        border-color: #fff;
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .scroll-cue {
+        position: absolute;
+        bottom: 36px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        color: rgba(255, 255, 255, 0.38);
+        font-size: 0.64rem;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        animation: fadeIn 2s 1.2s ease both;
+      }
+      .scroll-line {
+        width: 1px;
+        height: 46px;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.5),
+          transparent
+        );
+        animation: dropLine 2.2s 1.5s infinite;
+      }
+      @keyframes dropLine {
+        0%,
+        100% {
+          transform: scaleY(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: scaleY(1.45);
+          opacity: 1;
+        }
+      }
+
+      /* SEASONAL TICKER */
+      .ticker-wrap {
+        background: var(--moss);
+        padding: 13px 0;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .ticker-inner {
+        display: inline-flex;
+        animation: ticker 32s linear infinite;
+      }
+      .ticker-inner:hover {
+        animation-play-state: paused;
+      }
+      .ticker-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 30px;
+        font-size: 0.77rem;
+        color: rgba(255, 255, 255, 0.82);
+        letter-spacing: 0.3px;
+      }
+      .ticker-dot {
+        width: 5px;
+        height: 5px;
+        background: var(--gold);
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .ticker-label {
+        font-size: 0.66rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 700;
+        padding: 0 24px;
+      }
+      @keyframes ticker {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* SECTION SHARED */
+      .section-label {
+        font-size: 0.67rem;
+        letter-spacing: 3.5px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 10px;
+        display: block;
+      }
+      .section-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.9rem, 3.2vw, 2.9rem);
+        color: var(--soil);
+        line-height: 1.2;
+      }
+      .section-title em {
+        color: var(--moss);
+        font-style: italic;
+      }
+      .section-divider {
+        width: 54px;
+        height: 2px;
+        background: var(--gold);
+        border: none;
+        margin: 20px 0;
+      }
+
+      /* WHY ORGANIC */
+      #why {
+        background: var(--cream);
+        padding: 100px 0;
+        overflow: hidden;
+      }
+      .why-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 56px;
+      }
+      .why-header {
+        text-align: center;
+        margin-bottom: 64px;
+      }
+      .why-header .section-divider {
+        margin: 20px auto;
+      }
+
+      /* Flip cards */
+      .why-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 26px;
+        margin-bottom: 64px;
+      }
+      .why-card-wrap {
+        height: 290px;
+        perspective: 1000px;
+        cursor: pointer;
+      }
+      .why-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .why-card-wrap:hover .why-card-inner,
+      .why-card-wrap.flipped .why-card-inner {
+        transform: rotateY(180deg);
+      }
+      .why-front,
+      .why-back {
+        position: absolute;
+        inset: 0;
+        backface-visibility: hidden;
+        border-radius: 6px;
+        padding: 34px 26px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      .why-front {
+        background: var(--warm-white);
+        box-shadow: 0 4px 20px rgba(59, 42, 26, 0.07);
+        border: 1px solid rgba(59, 42, 26, 0.05);
+      }
+      .why-back {
+        background: var(--moss);
+        transform: rotateY(180deg);
+      }
+      .why-icon {
+        font-size: 2.8rem;
+        margin-bottom: 16px;
+      }
+      .why-front h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.15rem;
+        color: var(--soil);
+        margin-bottom: 8px;
+      }
+      .why-front .why-preview {
+        font-size: 0.8rem;
+        color: rgba(59, 42, 26, 0.52);
+        line-height: 1.5;
+      }
+      .why-front .flip-hint {
+        margin-top: 14px;
+        font-size: 0.62rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gold);
+        opacity: 0.7;
+      }
+      .why-back p {
+        font-size: 0.88rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.86);
+      }
+      .why-back h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.05rem;
+        color: var(--gold);
+        margin-bottom: 12px;
+      }
+
+      /* Stats counter bar */
+      .why-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: rgba(59, 42, 26, 0.08);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .stat-block {
+        background: var(--warm-white);
+        padding: 34px 20px;
+        text-align: center;
+        transition: background 0.25s;
+      }
+      .stat-block:hover {
+        background: #f0ead8;
+      }
+      .stat-num {
+        font-family: "Playfair Display", serif;
+        font-size: 2.7rem;
+        color: var(--moss);
+        display: block;
+        line-height: 1;
+      }
+      .stat-suffix {
+        font-family: "Playfair Display", serif;
+        font-size: 1.6rem;
+        color: var(--gold);
+      }
+      .stat-label {
+        font-size: 0.68rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(59, 42, 26, 0.48);
+        margin-top: 8px;
+        display: block;
+      }
+
+      /* FARM STORY */
+      #story {
+        background: var(--warm-white);
+        padding: 100px 0;
+      }
+      .story-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 56px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 72px;
+        align-items: center;
+      }
+      .story-carousel {
+        position: relative;
+        border-radius: 6px;
+        overflow: hidden;
+        height: 540px;
+        box-shadow: 0 16px 56px rgba(59, 42, 26, 0.16);
+      }
+      .carousel-slides {
+        display: flex;
+        height: 100%;
+        transition: transform 0.62s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .carousel-slide {
+        min-width: 100%;
+        height: 100%;
+        position: relative;
+        flex-shrink: 0;
+        overflow: hidden;
+      }
+      .slide-img {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 7rem;
+      }
+      .carousel-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 24px 28px;
+        background: linear-gradient(to top, rgba(15, 28, 8, 0.82), transparent);
+        color: #fff;
+        font-size: 0.8rem;
+        letter-spacing: 0.2px;
+        line-height: 1.5;
+      }
+      .carousel-controls {
+        position: absolute;
+        bottom: 18px;
+        right: 18px;
+        display: flex;
+        gap: 7px;
+        z-index: 10;
+      }
+      .carousel-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.38);
+        cursor: pointer;
+        transition: all 0.22s;
+        border: none;
+        padding: 0;
+      }
+      .carousel-dot.active {
+        background: #fff;
+        transform: scale(1.35);
+      }
+      .carousel-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.22);
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        color: #fff;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+      .carousel-arrow:hover {
+        background: rgba(0, 0, 0, 0.4);
+      }
+      .carousel-prev {
+        left: 14px;
+      }
+      .carousel-next {
+        right: 14px;
+      }
+      .carousel-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        background: var(--gold);
+        z-index: 10;
+        transition: width 4s linear;
+      }
+
+      .story-text p {
+        font-size: 0.98rem;
+        line-height: 1.85;
+        color: rgba(59, 42, 26, 0.7);
+        margin-bottom: 15px;
+      }
+      .story-text .section-divider {
+        margin: 18px 0;
+      }
+      .story-values {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top: 28px;
+      }
+      .story-value {
+        padding: 16px 18px;
+        background: var(--cream);
+        border-left: 3px solid var(--leaf);
+        border-radius: 2px;
+      }
+      .story-value h4 {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--moss);
+        margin-bottom: 3px;
+      }
+      .story-value p {
+        font-size: 0.76rem;
+        color: rgba(59, 42, 26, 0.56);
+        margin: 0;
+        line-height: 1.4;
+      }
+
+      /* PRODUCTS */
+      #products {
+        background: var(--cream);
+        padding: 100px 0;
+      }
+      .products-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 56px;
+      }
+      .products-header {
+        text-align: center;
+        margin-bottom: 52px;
+      }
+      .products-header .section-divider {
+        margin: 18px auto;
+      }
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(238px, 1fr));
+        gap: 22px;
+      }
+      .product-card {
+        background: var(--warm-white);
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(59, 42, 26, 0.06);
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+        cursor: pointer;
+      }
+      .product-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 14px 36px rgba(59, 42, 26, 0.13);
+      }
+      .product-img {
+        height: 192px;
+        overflow: hidden;
+        position: relative;
+      }
+      .pi {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        transition: transform 0.4s;
+      }
+      .product-card:hover .pi {
+        transform: scale(1.07);
+      }
+      .product-badge {
+        position: absolute;
+        top: 11px;
+        right: 11px;
+        background: var(--rust);
+        color: #fff;
+        font-size: 0.6rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 4px 9px;
+        border-radius: 2px;
+        font-weight: 700;
+      }
+      .product-info {
+        padding: 18px 20px;
+      }
+      .product-info h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.08rem;
+        margin-bottom: 5px;
+      }
+      .product-info p {
+        font-size: 0.77rem;
+        color: rgba(59, 42, 26, 0.56);
+        line-height: 1.5;
+      }
+      .product-tag {
+        display: inline-block;
+        margin-top: 9px;
+        font-size: 0.62rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--moss);
+        font-weight: 700;
+      }
+
+      /* RECIPES */
+      #recipes {
+        background: var(--soil);
+        padding: 100px 0;
+      }
+      .recipes-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 56px;
+      }
+      .recipes-header {
+        margin-bottom: 44px;
+      }
+      .recipe-tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 36px;
+        flex-wrap: wrap;
+      }
+      .recipe-tab {
+        padding: 9px 22px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 2px;
+        font-size: 0.74rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: rgba(253, 250, 244, 0.48);
+        cursor: pointer;
+        transition: all 0.2s;
+        background: transparent;
+      }
+      .recipe-tab.active,
+      .recipe-tab:hover {
+        background: var(--leaf);
+        border-color: var(--leaf);
+        color: #fff;
+      }
+      .recipe-feature {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 56px;
+        align-items: center;
+      }
+      .recipe-img {
+        border-radius: 4px;
+        overflow: hidden;
+        height: 460px;
+      }
+      .ri {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 7.5rem;
+      }
+      .veg-highlight {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.06);
+        padding: 9px 16px;
+        border-radius: 2px;
+        margin-bottom: 22px;
+      }
+      .veg-dot {
+        width: 7px;
+        height: 7px;
+        background: var(--leaf);
+        border-radius: 50%;
+      }
+      .veg-name {
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--sage);
+      }
+      .recipe-info h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 2.1rem;
+        color: var(--cream);
+        line-height: 1.2;
+        margin-bottom: 16px;
+      }
+      .recipe-info > p {
+        font-size: 0.9rem;
+        line-height: 1.8;
+        color: rgba(253, 250, 244, 0.62);
+        margin-bottom: 22px;
+      }
+      .recipe-meta {
+        display: flex;
+        gap: 26px;
+        margin-bottom: 26px;
+      }
+      .rmi .val {
+        font-family: "Playfair Display", serif;
+        font-size: 1.35rem;
+        color: var(--gold);
+      }
+      .rmi .key {
+        font-size: 0.62rem;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: rgba(253, 250, 244, 0.38);
+      }
+      .recipe-steps {
+        list-style: none;
+      }
+      .recipe-steps li {
+        display: flex;
+        gap: 13px;
+        margin-bottom: 11px;
+        font-size: 0.84rem;
+        line-height: 1.6;
+        color: rgba(253, 250, 244, 0.66);
+      }
+      .step-num {
+        min-width: 21px;
+        height: 21px;
+        background: var(--leaf);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.66rem;
+        font-weight: 700;
+        color: #fff;
+        margin-top: 2px;
+        flex-shrink: 0;
+      }
+
+      /* STORES */
+      #stores {
+        background: var(--warm-white);
+        padding: 100px 0;
+      }
+      .stores-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 56px;
+      }
+      .stores-header {
+        margin-bottom: 48px;
+      }
+      .stores-layout {
+        display: grid;
+        grid-template-columns: 400px 1fr;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 16px 56px rgba(59, 42, 26, 0.13);
+      }
+
+      .stores-panel {
+        background: var(--cream);
+        display: flex;
+        flex-direction: column;
+        height: 580px;
+      }
+      .stores-panel-head {
+        padding: 22px 22px 14px;
+        border-bottom: 1px solid rgba(59, 42, 26, 0.08);
+      }
+      .stores-panel-head p {
+        font-size: 0.78rem;
+        color: rgba(59, 42, 26, 0.52);
+        line-height: 1.5;
+        margin-bottom: 12px;
+      }
+      .store-filter-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+      .filter-btn {
+        padding: 5px 12px;
+        border: 1px solid rgba(59, 42, 26, 0.16);
+        border-radius: 20px;
+        font-size: 0.7rem;
+        cursor: pointer;
+        background: transparent;
+        transition: all 0.18s;
+        color: var(--soil);
+      }
+      .filter-btn.active,
+      .filter-btn:hover {
+        background: var(--moss);
+        border-color: var(--moss);
+        color: #fff;
+      }
+
+      .store-list {
+        flex: 1;
+        overflow-y: auto;
+        padding: 8px 0;
+      }
+      .store-list::-webkit-scrollbar {
+        width: 3px;
+      }
+      .store-list::-webkit-scrollbar-thumb {
+        background: var(--sage);
+        border-radius: 2px;
+      }
+      .store-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 11px 18px;
+        cursor: pointer;
+        transition: all 0.16s;
+        border-left: 3px solid transparent;
+      }
+      .store-item:hover {
+        background: rgba(74, 94, 58, 0.06);
+      }
+      .store-item.active {
+        background: rgba(74, 94, 58, 0.11);
+        border-left-color: var(--moss);
+      }
+      .store-icon-c {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+        flex-shrink: 0;
+      }
+      .store-text h4 {
+        font-size: 0.83rem;
+        font-weight: 700;
+        color: var(--soil);
+      }
+      .store-text p {
+        font-size: 0.7rem;
+        color: rgba(59, 42, 26, 0.48);
+        margin-top: 1px;
+      }
+      .store-brand-tag {
+        margin-left: auto;
+        font-size: 0.58rem;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        padding: 3px 7px;
+        border-radius: 2px;
+        font-weight: 700;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .map-frame-wrap {
+        position: relative;
+        height: 580px;
+        background: #e8e0d4;
+      }
+      .map-frame-wrap iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+      }
+      .map-info-card {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        background: rgba(253, 250, 244, 0.97);
+        padding: 14px 18px;
+        border-radius: 6px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.13);
+        max-width: 230px;
+        z-index: 10;
+        transition: all 0.3s;
+      }
+      .map-info-card h4 {
+        font-family: "Playfair Display", serif;
+        font-size: 0.96rem;
+        color: var(--soil);
+        margin-bottom: 4px;
+      }
+      .map-info-card p {
+        font-size: 0.72rem;
+        color: rgba(59, 42, 26, 0.58);
+        line-height: 1.5;
+      }
+      .map-info-card .brand-pill {
+        display: inline-block;
+        margin-top: 7px;
+        font-size: 0.6rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 3px 7px;
+        border-radius: 2px;
+        font-weight: 700;
+      }
+      .map-info-card a.gmaps-link {
+        display: block;
+        margin-top: 9px;
+        font-size: 0.7rem;
+        color: var(--moss);
+        text-decoration: none;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+      }
+      .map-info-card a.gmaps-link:hover {
+        text-decoration: underline;
+      }
+
+      /* FOOTER */
+      footer {
+        background: var(--soil);
+        padding: 60px 56px 30px;
+      }
+      .footer-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 44px;
+        padding-bottom: 36px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      }
+      .footer-brand .brand-name {
+        font-family: "Playfair Display", serif;
+        font-size: 1.35rem;
+        color: var(--cream);
+        margin-bottom: 10px;
+      }
+      .footer-brand .brand-name span {
+        color: var(--gold);
+      }
+      .footer-brand p {
+        font-size: 0.8rem;
+        line-height: 1.7;
+        color: rgba(253, 250, 244, 0.42);
+        max-width: 240px;
+      }
+      .footer-col h4 {
+        font-size: 0.66rem;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 16px;
+      }
+      .footer-col ul {
+        list-style: none;
+      }
+      .footer-col ul li {
+        margin-bottom: 8px;
+      }
+      .footer-col ul li a {
+        text-decoration: none;
+        font-size: 0.8rem;
+        color: rgba(253, 250, 244, 0.47);
+        transition: color 0.2s;
+      }
+      .footer-col ul li a:hover {
+        color: var(--cream);
+      }
+      .footer-bottom {
+        max-width: 1200px;
+        margin: 22px auto 0;
+        display: flex;
+        justify-content: space-between;
+      }
+      .footer-bottom p {
+        font-size: 0.7rem;
+        color: rgba(253, 250, 244, 0.26);
+      }
+
+      /* ANIMATIONS */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.72s ease,
+          transform 0.72s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav id="navbar">
+      <div class="nav-logo">Suan Mokkh <span>Garden</span></div>
+      <ul class="nav-links">
+        <li><a href="#story">Our Farm</a></li>
+        <li><a href="#products">Produce</a></li>
+        <li><a href="#recipes">Recipes</a></li>
+        <li><a href="#stores">Find Us</a></li>
+      </ul>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════════
+     HERO
+     To use your own farm photo, replace the .hero-bg div
+     with: <img class="hero-bg" src="farm.jpg" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;">
+     For a video: <video class="hero-bg" autoplay muted loop playsinline src="farm.mp4" style="...same styles...">
+═══════════════════════════════════════════════════ -->
+    <section id="hero">
+      <div class="hero-bg">
+        <img
+          src="farm.jpg"
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            inset: 0;
+          "
+        />
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Certified Organic · Cameron Highlands</div>
+        <h1 class="hero-title">
+          Grown with care.<br />
+          <em>Eaten with joy.</em>
+        </h1>
+        <p class="hero-sub">
+          From our sun-drenched highland fields to your family table —
+          vegetables grown without chemicals, harvested at peak freshness, every
+          single day.
+        </p>
+        <div class="hero-cta">
+          <a href="#products" class="btn-primary">Explore Produce</a>
+          <a href="#story" class="btn-ghost">Our Story</a>
+        </div>
+      </div>
+      <div class="scroll-cue">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="ticker-wrap">
+      <div class="ticker-inner">
+        <span class="ticker-label">🌱 In Season Now</span>
+        <span class="ticker-item"
+          ><span class="ticker-dot"></span>Baby Spinach</span
+        >
+        <span class="ticker-item"
+          ><span class="ticker-dot"></span>Red Capsicum</span
+        >
+        <span class="ticker-item"
+          ><span class="ticker-dot"></span>Cherry Tomatoes</span
+        >
+        <span class="ticker-item"
+          ><span class="ticker-dot"></span>French Beans</span
+        >
+        <span class="ticker-item"
+          ><span class="ticker-dot"></span>Butterhead Lettuce</span
+        >
+        <span class="ticker-item"
+          ><span class="ticker-dot"></span>Purple Eggplant</span
+        >
+        <span class="ticker-item"><span class="ticker-dot"></span>Kale</span>
+        <span class="ticker-item"
+          ><span class="ticker-dot"></span>Sweet Corn</span
+        >
+        <span class="ticker-item"><span class="ticker-dot"></span>Okra</span>
+        <span class="ticker-item"
+          ><span class="ticker-dot"></span>Lemongrass</span
+        >
+        <span class="ticker-label">🌱 In Season Now</span>
+        <span class="ticker-item"
+          ><span class="ticker-dot"></span>Baby Spinach</span
+        >
+        <span class="ticker-item"
+          ><span class="ticker-dot"></span>Red Capsicum</span
+        >
+        <span class="ticker-item"
+          ><span class="ticker-dot"></span>Cherry Tomatoes</span
+        >
+        <span class="ticker-item"
+          ><span class="ticker-dot"></span>French Beans</span
+        >
+        <span class="ticker-item"
+          ><span class="ticker-dot"></span>Butterhead Lettuce</span
+        >
+        <span class="ticker-item"
+          ><span class="ticker-dot"></span>Purple Eggplant</span
+        >
+        <span class="ticker-item"><span class="ticker-dot"></span>Kale</span>
+        <span class="ticker-item"
+          ><span class="ticker-dot"></span>Sweet Corn</span
+        >
+        <span class="ticker-item"><span class="ticker-dot"></span>Okra</span>
+        <span class="ticker-item"
+          ><span class="ticker-dot"></span>Lemongrass</span
+        >
+      </div>
+    </div>
+
+    <!-- WHY ORGANIC -->
+    <section id="why">
+      <div class="why-container">
+        <div class="why-header reveal">
+          <span class="section-label">Why It Matters</span>
+          <h2 class="section-title">The organic <em>difference</em></h2>
+          <hr class="section-divider" />
+          <p
+            style="
+              font-size: 0.9rem;
+              color: rgba(59, 42, 26, 0.55);
+              max-width: 460px;
+              margin: 0 auto;
+            "
+          >
+            Hover or tap each card to discover what makes our produce different.
+          </p>
+        </div>
+        <div class="why-cards reveal">
+          <div class="why-card-wrap" onclick="this.classList.toggle('flipped')">
+            <div class="why-card-inner">
+              <div class="why-front">
+                <div class="why-icon">🌍</div>
+                <h3>No Pesticides</h3>
+                <p class="why-preview">
+                  100% natural growing methods — nothing synthetic, ever.
+                </p>
+                <span class="flip-hint">↻ Tap to learn more</span>
+              </div>
+              <div class="why-back">
+                <h3>No Pesticides</h3>
+                <p>
+                  Every plant is grown using only natural composts and
+                  biological pest control. What you eat is exactly what nature
+                  intended — nothing added, nothing hidden. Safer for your
+                  family and kinder to the Earth.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="why-card-wrap" onclick="this.classList.toggle('flipped')">
+            <div class="why-card-inner">
+              <div class="why-front">
+                <div class="why-icon">💧</div>
+                <h3>Sustainable Water</h3>
+                <p class="why-preview">
+                  Smart drip irrigation using 60% less water.
+                </p>
+                <span class="flip-hint">↻ Tap to learn more</span>
+              </div>
+              <div class="why-back">
+                <h3>Sustainable Water</h3>
+                <p>
+                  Our drip irrigation uses 60% less water than conventional
+                  farming. Healthy organic soil retains moisture naturally,
+                  reducing dependence on external sources and protecting Cameron
+                  Highlands' watersheds.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="why-card-wrap" onclick="this.classList.toggle('flipped')">
+            <div class="why-card-inner">
+              <div class="why-front">
+                <div class="why-icon">🫀</div>
+                <h3>More Nutrients</h3>
+                <p class="why-preview">
+                  Richer in vitamins C, E & natural antioxidants.
+                </p>
+                <span class="flip-hint">↻ Tap to learn more</span>
+              </div>
+              <div class="why-back">
+                <h3>More Nutrients</h3>
+                <p>
+                  Organically farmed vegetables contain measurably higher levels
+                  of antioxidants, vitamins C and E, and essential minerals.
+                  Slower, natural growth allows nutrients to fully develop
+                  before harvest.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="why-stats reveal">
+          <div class="stat-block">
+            <span class="stat-num" data-target="14">0</span
+            ><span class="stat-label">Acres of Farm</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-num" data-target="12">0</span
+            ><span class="stat-label">Years Growing</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-num" data-target="18">0</span
+            ><span class="stat-label">Retail Partners</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-num" data-target="24">0</span
+            ><span class="stat-label">Hrs Farm-to-Shelf</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FARM STORY -->
+    <section id="story">
+      <div class="story-grid reveal">
+        <div class="story-carousel" id="storyCarousel">
+          <div class="carousel-slides" id="carouselSlides">
+            <div class="carousel-slide">
+              <div
+                class="slide-img"
+                style="
+                  background: linear-gradient(
+                    160deg,
+                    #2d4a1a,
+                    #5a7a35,
+                    #c8b060
+                  );
+                "
+              >
+                🏡
+              </div>
+              <div class="carousel-caption">
+                The Lim family homestead — our farm's heart since 2013
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <img
+                src="farm1.jpg"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  position: absolute;
+                  inset: 0;
+                "
+              />
+              <div class="carousel-caption">Your caption here</div>
+              <div class="carousel-caption">
+                Seedling nursery — every plant starts here under careful watch
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <img
+                src="farm2.jpg"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  position: absolute;
+                  inset: 0;
+                "
+              />
+              <div class="carousel-caption">Your caption here</div>
+              <div class="carousel-caption">
+                Row after row of baby spinach, ready within 21 days
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <img
+                src="farm3.jpg"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  position: absolute;
+                  inset: 0;
+                "
+              />
+              <div class="carousel-caption">Your caption here</div>
+              <div class="carousel-caption">
+                Harvest morning — our team hand-picks before 7am daily
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <img
+                src="farm4.jpg"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  position: absolute;
+                  inset: 0;
+                "
+              />
+              <div class="carousel-caption">Your caption here</div>
+              <div class="carousel-caption">
+                From our farm gate to KL shelves — within 24 hours
+              </div>
+            </div>
+          </div>
+          <button
+            class="carousel-arrow carousel-prev"
+            onclick="carouselMove(-1)"
+          >
+            ‹
+          </button>
+          <button
+            class="carousel-arrow carousel-next"
+            onclick="carouselMove(1)"
+          >
+            ›
+          </button>
+          <div class="carousel-controls" id="carouselDots"></div>
+          <div class="carousel-progress" id="carouselProgress"></div>
+        </div>
+
+        <div class="story-text">
+          <span class="section-label">Our Farm Story</span>
+          <h2 class="section-title">
+            Rooted in the <em>Cameron Highlands</em>
+          </h2>
+          <hr class="section-divider" />
+          <p>
+            Suan Mokkh Garden — meaning "Garden of Liberation" in Thai — was
+            founded in 2013 by the Lim family on 14 acres of rich highland soil.
+            What began as a modest plot of spinach and herbs has grown into one
+            of Peninsular Malaysia's most trusted certified organic farms.
+          </p>
+          <p>
+            Every seed we plant carries our commitment: no synthetic
+            fertilisers, no pesticides, no shortcuts. We rotate our crops
+            seasonally, enrich our soil with organic compost, and harvest by
+            hand to ensure each vegetable reaches you at its absolute peak.
+          </p>
+          <p>
+            Certified by <strong>MyOrganic Malaysia</strong> and audited
+            annually. We believe food grown with care should be accessible to
+            everyday Malaysian families.
+          </p>
+          <div class="story-values">
+            <div class="story-value">
+              <h4>🌿 Certified Organic</h4>
+              <p>MyOrganic Malaysia certified since 2016</p>
+            </div>
+            <div class="story-value">
+              <h4>🤝 Family Owned</h4>
+              <p>Three generations on the same land</p>
+            </div>
+            <div class="story-value">
+              <h4>🚜 24hr Farm-to-Shelf</h4>
+              <p>Harvested today, in store tomorrow</p>
+            </div>
+            <div class="story-value">
+              <h4>♻️ Zero Waste</h4>
+              <p>All trimmings composted back into soil</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="products">
+      <div class="products-container">
+        <div class="products-header reveal">
+          <span class="section-label">What We Grow</span>
+          <h2 class="section-title">Our Fresh <em>Produce</em></h2>
+          <hr class="section-divider" />
+          <p
+            style="
+              color: rgba(59, 42, 26, 0.58);
+              font-size: 0.93rem;
+              max-width: 460px;
+              margin: 0 auto;
+            "
+          >
+            Hand-picked at peak ripeness, packed with care, delivered fresh to
+            supermarkets across Kuala Lumpur.
+          </p>
+        </div>
+        <div class="products-grid reveal">
+          <div class="product-card">
+            <div class="product-img">
+              <div
+                class="pi"
+                style="background: linear-gradient(135deg, #3d7a3a, #5aac55)"
+              >
+                🥬
+              </div>
+              <span class="product-badge">In Season</span>
+            </div>
+            <div class="product-info">
+              <h3>Baby Spinach</h3>
+              <p>
+                Tender young leaves harvested before 21 days for maximum
+                sweetness and iron.
+              </p>
+              <span class="product-tag">Leafy Greens</span>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img">
+              <div
+                class="pi"
+                style="background: linear-gradient(135deg, #c8501e, #e07a40)"
+              >
+                🍅
+              </div>
+              <span class="product-badge">In Season</span>
+            </div>
+            <div class="product-info">
+              <h3>Cherry Tomatoes</h3>
+              <p>
+                Vine-ripened, bursting with natural sweetness. Red and yellow
+                varieties.
+              </p>
+              <span class="product-tag">Fruiting Veg</span>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img">
+              <div
+                class="pi"
+                style="background: linear-gradient(135deg, #8b4ab0, #c080e0)"
+              >
+                🍆
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>Purple Eggplant</h3>
+              <p>
+                Silky texture, low bitterness — ideal for curries, grilling,
+                stir-fries.
+              </p>
+              <span class="product-tag">Fruiting Veg</span>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img">
+              <div
+                class="pi"
+                style="background: linear-gradient(135deg, #d4a200, #f0c840)"
+              >
+                🌽
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>Sweet Corn</h3>
+              <p>
+                Non-GMO heritage variety, harvested within 24hrs for peak
+                sweetness.
+              </p>
+              <span class="product-tag">Seasonal</span>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img">
+              <div
+                class="pi"
+                style="background: linear-gradient(135deg, #2a7a4a, #4aac7a)"
+              >
+                🥦
+              </div>
+              <span class="product-badge">In Season</span>
+            </div>
+            <div class="product-info">
+              <h3>Butterhead Lettuce</h3>
+              <p>
+                Soft, pale green with mild buttery flavour. Perfect for wraps
+                and salads.
+              </p>
+              <span class="product-tag">Leafy Greens</span>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img">
+              <div
+                class="pi"
+                style="background: linear-gradient(135deg, #b03a2a, #e06050)"
+              >
+                🌶️
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>Red Capsicum</h3>
+              <p>
+                Fully vine-ripened for natural sweetness and rich vitamin C
+                content.
+              </p>
+              <span class="product-tag">Fruiting Veg</span>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img">
+              <div
+                class="pi"
+                style="background: linear-gradient(135deg, #4a7a2a, #80c050)"
+              >
+                🫛
+              </div>
+              <span class="product-badge">In Season</span>
+            </div>
+            <div class="product-info">
+              <h3>French Beans</h3>
+              <p>Slim, crisp, vibrant green — blanch, sauté, or enjoy raw.</p>
+              <span class="product-tag">Legumes</span>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img">
+              <div
+                class="pi"
+                style="background: linear-gradient(135deg, #2a5a3a, #4a9a6a)"
+              >
+                🌿
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>Kale</h3>
+              <p>Curly-leaf variety packed with antioxidants and fibre.</p>
+              <span class="product-tag">Leafy Greens</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECIPES -->
+    <section id="recipes">
+      <div class="recipes-container">
+        <div class="recipes-header reveal">
+          <span class="section-label">Weekly Recipe</span>
+          <h2 class="section-title" style="color: var(--cream)">
+            Cook with what's <em style="color: var(--gold)">in season</em>
+          </h2>
+        </div>
+        <div class="recipe-tabs reveal">
+          <button class="recipe-tab active" onclick="showRecipe(0, this)">
+            Baby Spinach
+          </button>
+          <button class="recipe-tab" onclick="showRecipe(1, this)">
+            Cherry Tomatoes
+          </button>
+          <button class="recipe-tab" onclick="showRecipe(2, this)">
+            Eggplant
+          </button>
+        </div>
+        <div id="recipe-0" class="recipe-feature reveal">
+          <div class="recipe-img">
+            <div
+              class="ri"
+              style="background: linear-gradient(135deg, #1a3a10, #3a6a2a)"
+            >
+              🥬
+            </div>
+          </div>
+          <div class="recipe-info">
+            <div class="veg-highlight">
+              <span class="veg-dot"></span
+              ><span class="veg-name">Star: Baby Spinach</span>
+            </div>
+            <h2>Garlic Spinach with Sesame & Soft Egg</h2>
+            <p>
+              Fresh baby spinach wilts beautifully in a hot wok with garlic,
+              finished with toasted sesame and a soft-boiled egg. Ready in 12
+              minutes.
+            </p>
+            <div class="recipe-meta">
+              <div class="rmi">
+                <div class="val">12</div>
+                <div class="key">Minutes</div>
+              </div>
+              <div class="rmi">
+                <div class="val">2</div>
+                <div class="key">Servings</div>
+              </div>
+              <div class="rmi">
+                <div class="val">Easy</div>
+                <div class="key">Level</div>
+              </div>
+            </div>
+            <ol class="recipe-steps">
+              <li>
+                <span class="step-num">1</span>Boil 2 eggs for 6.5 minutes then
+                transfer to ice water immediately.
+              </li>
+              <li>
+                <span class="step-num">2</span>Heat sesame oil in wok on high.
+                Add 4 cloves minced garlic, sauté 30 seconds.
+              </li>
+              <li>
+                <span class="step-num">3</span>Add 200g baby spinach in batches,
+                toss until just wilted (~90 seconds).
+              </li>
+              <li>
+                <span class="step-num">4</span>Season with light soy and sea
+                salt. Top with sesame seeds and halved soft eggs.
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div id="recipe-1" class="recipe-feature reveal" style="display: none">
+          <div class="recipe-img">
+            <div
+              class="ri"
+              style="background: linear-gradient(135deg, #6a1a0a, #c04020)"
+            >
+              🍅
+            </div>
+          </div>
+          <div class="recipe-info">
+            <div class="veg-highlight">
+              <span class="veg-dot" style="background: #e06040"></span
+              ><span class="veg-name">Star: Cherry Tomatoes</span>
+            </div>
+            <h2>Roasted Cherry Tomato Pasta with Burrata</h2>
+            <p>
+              Slow-roasting concentrates the natural sugars of our vine-ripened
+              tomatoes into a jammy, fragrant sauce served over pasta with
+              creamy burrata.
+            </p>
+            <div class="recipe-meta">
+              <div class="rmi">
+                <div class="val">35</div>
+                <div class="key">Minutes</div>
+              </div>
+              <div class="rmi">
+                <div class="val">3</div>
+                <div class="key">Servings</div>
+              </div>
+              <div class="rmi">
+                <div class="val">Easy</div>
+                <div class="key">Level</div>
+              </div>
+            </div>
+            <ol class="recipe-steps">
+              <li>
+                <span class="step-num">1</span>Preheat oven to 200°C. Toss 350g
+                cherry tomatoes with olive oil, garlic, salt.
+              </li>
+              <li>
+                <span class="step-num">2</span>Roast 25–30 minutes until
+                blistered and jammy. Add fresh basil last 2 minutes.
+              </li>
+              <li>
+                <span class="step-num">3</span>Cook 250g pasta al dente. Reserve
+                ½ cup pasta water before draining.
+              </li>
+              <li>
+                <span class="step-num">4</span>Toss pasta with roasted tomatoes
+                and pasta water. Top with torn burrata.
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div id="recipe-2" class="recipe-feature reveal" style="display: none">
+          <div class="recipe-img">
+            <div
+              class="ri"
+              style="background: linear-gradient(135deg, #3a0a5a, #7a3aa0)"
+            >
+              🍆
+            </div>
+          </div>
+          <div class="recipe-info">
+            <div class="veg-highlight">
+              <span class="veg-dot" style="background: #9060c0"></span
+              ><span class="veg-name">Star: Purple Eggplant</span>
+            </div>
+            <h2>Nyonya-Style Sambal Eggplant</h2>
+            <p>
+              A Malaysian classic — smoky sambal clings to silky eggplant, bold
+              and fragrant. Served with steamed white rice.
+            </p>
+            <div class="recipe-meta">
+              <div class="rmi">
+                <div class="val">25</div>
+                <div class="key">Minutes</div>
+              </div>
+              <div class="rmi">
+                <div class="val">4</div>
+                <div class="key">Servings</div>
+              </div>
+              <div class="rmi">
+                <div class="val">Medium</div>
+                <div class="key">Level</div>
+              </div>
+            </div>
+            <ol class="recipe-steps">
+              <li>
+                <span class="step-num">1</span>Cut 3 eggplants into wedges, salt
+                lightly, rest 10 minutes.
+              </li>
+              <li>
+                <span class="step-num">2</span>Pan-fry in hot oil until golden
+                on all sides. Set aside on paper towels.
+              </li>
+              <li>
+                <span class="step-num">3</span>Fry sambal paste with sliced
+                shallots until fragrant and oil splits.
+              </li>
+              <li>
+                <span class="step-num">4</span>Return eggplant to pan, toss in
+                sambal. Finish with lime juice. Serve with rice.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STORES + MAP -->
+    <section id="stores">
+      <div class="stores-container">
+        <div class="stores-header reveal">
+          <span class="section-label">Find Our Products</span>
+          <h2 class="section-title">Available at these <em>stores</em></h2>
+          <hr class="section-divider" />
+        </div>
+        <div class="stores-layout reveal">
+          <div class="stores-panel">
+            <div class="stores-panel-head">
+              <p>Click any store to navigate directly on the map.</p>
+              <div class="store-filter-tabs">
+                <button
+                  class="filter-btn active"
+                  onclick="filterStores('all', this)"
+                >
+                  All
+                </button>
+                <button class="filter-btn" onclick="filterStores('AEON', this)">
+                  AEON
+                </button>
+                <button
+                  class="filter-btn"
+                  onclick="filterStores('AEON Big', this)"
+                >
+                  AEON Big
+                </button>
+                <button
+                  class="filter-btn"
+                  onclick="filterStores('Jaya Grocer', this)"
+                >
+                  Jaya Grocer
+                </button>
+                <button
+                  class="filter-btn"
+                  onclick="filterStores('Village Grocer', this)"
+                >
+                  Village Grocer
+                </button>
+                <button
+                  class="filter-btn"
+                  onclick="filterStores('Giant', this)"
+                >
+                  Giant
+                </button>
+                <button class="filter-btn" onclick="filterStores('BIG', this)">
+                  BIG
+                </button>
+              </div>
+            </div>
+            <div class="store-list" id="storeList"></div>
+          </div>
+          <div class="map-frame-wrap">
+            <iframe
+              id="mapFrame"
+              src="https://maps.google.com/maps?q=Kuala+Lumpur+supermarket&t=&z=12&ie=UTF8&iwloc=&output=embed"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+            <div class="map-info-card" id="mapInfoCard">
+              <h4 style="font-family: &quot;Playfair Display&quot;, serif">
+                Find a Store Near You
+              </h4>
+              <p
+                style="
+                  font-size: 0.72rem;
+                  color: rgba(59, 42, 26, 0.55);
+                  line-height: 1.5;
+                  margin-top: 4px;
+                "
+              >
+                Select any store from the list to see its exact location on the
+                map.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-name">Suan Mokkh <span>Garden</span></div>
+          <p>
+            Certified organic vegetables grown with care in the Cameron
+            Highlands, delivered fresh to Kuala Lumpur daily.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="#story">Our Farm</a></li>
+            <li><a href="#products">Produce</a></li>
+            <li><a href="#recipes">Recipes</a></li>
+            <li><a href="#stores">Find Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Info</h4>
+          <ul>
+            <li><a href="#">Certification</a></li>
+            <li><a href="#">Farm Visits</a></li>
+            <li><a href="#">Wholesale</a></li>
+            <li><a href="#">Press</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="#">hello@suanmokkh.my</a></li>
+            <li><a href="#">+60 3-XXXX XXXX</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Suan Mokkh Garden Sdn. Bhd. All rights reserved.</p>
+        <p>Grown in Malaysia 🇲🇾</p>
+      </div>
+    </footer>
+
+    <script>
+      /* ── NAV ── */
+      window.addEventListener("scroll", () =>
+        document
+          .getElementById("navbar")
+          .classList.toggle("scrolled", scrollY > 50),
+      );
+
+      /* ── REVEAL ── */
+      new IntersectionObserver(
+        (es) =>
+          es.forEach((e, i) => {
+            if (e.isIntersecting)
+              setTimeout(() => e.target.classList.add("visible"), i * 75);
+          }),
+        { threshold: 0.08 },
+      ).observe || (() => {});
+      const ro = new IntersectionObserver(
+        (es) =>
+          es.forEach((e, i) => {
+            if (e.isIntersecting)
+              setTimeout(() => e.target.classList.add("visible"), i * 75);
+          }),
+        { threshold: 0.08 },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => ro.observe(el));
+
+      /* ── ROLLING COUNTERS ── */
+      const co = new IntersectionObserver(
+        (es) => {
+          es.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.querySelectorAll("[data-target]").forEach((el) => {
+                const tgt = +el.dataset.target;
+                let cur = 0;
+                const step = tgt / 45;
+                const t = setInterval(() => {
+                  cur += step;
+                  if (cur >= tgt) {
+                    el.textContent = tgt;
+                    clearInterval(t);
+                  } else el.textContent = Math.floor(cur);
+                }, 32);
+              });
+              co.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.4 },
+      );
+      const statsEl = document.querySelector(".why-stats");
+      if (statsEl) co.observe(statsEl);
+
+      /* ── CAROUSEL ── */
+      let ci = 0;
+      const slides = document.querySelectorAll(".carousel-slide");
+      const total = slides.length;
+      const dotsC = document.getElementById("carouselDots");
+      const prog = document.getElementById("carouselProgress");
+      const DUR = 4200;
+      let autoT;
+
+      slides.forEach((_, i) => {
+        const d = document.createElement("button");
+        d.className = "carousel-dot" + (i === 0 ? " active" : "");
+        d.onclick = () => goTo(i);
+        dotsC.appendChild(d);
+      });
+
+      function goTo(idx) {
+        ci = (idx + total) % total;
+        document.getElementById("carouselSlides").style.transform =
+          `translateX(-${ci * 100}%)`;
+        document
+          .querySelectorAll(".carousel-dot")
+          .forEach((d, i) => d.classList.toggle("active", i === ci));
+        prog.style.transition = "none";
+        prog.style.width = "0%";
+        requestAnimationFrame(() =>
+          requestAnimationFrame(() => {
+            prog.style.transition = `width ${DUR}ms linear`;
+            prog.style.width = "100%";
+          }),
+        );
+      }
+      function carouselMove(d) {
+        goTo(ci + d);
+      }
+      function startAuto() {
+        clearInterval(autoT);
+        autoT = setInterval(() => goTo(ci + 1), DUR);
+      }
+      const car = document.getElementById("storyCarousel");
+      car.addEventListener("mouseenter", () => {
+        clearInterval(autoT);
+        prog.style.transition = "none";
+      });
+      car.addEventListener("mouseleave", () => {
+        startAuto();
+      });
+      goTo(0);
+      startAuto();
+
+      /* ── RECIPE TABS ── */
+      function showRecipe(idx, btn) {
+        [0, 1, 2].forEach((i) => {
+          const el = document.getElementById("recipe-" + i);
+          if (el) el.style.display = i === idx ? "grid" : "none";
+        });
+        document
+          .querySelectorAll(".recipe-tab")
+          .forEach((t) => t.classList.remove("active"));
+        btn.classList.add("active");
+      }
+
+      /* ── STORES + SYNCED MAP ── */
+      const BC = {
+        AEON: "#e53e3e",
+        "AEON Big": "#dd6b20",
+        "Jaya Grocer": "#38a169",
+        "Village Grocer": "#805ad5",
+        Giant: "#3182ce",
+        BIG: "#2d7d46",
+      };
+      const STORES = [
+        {
+          name: "AEON Wangsa Maju",
+          addr: "Jln Raya 1, Bandar Baru Wangsa Maju",
+          brand: "AEON",
+          icon: "🛒",
+          q: "AEON+Mall+Wangsa+Maju+Kuala+Lumpur",
+        },
+        {
+          name: "AEON Taman Maluri",
+          addr: "Jln Jejaka, Taman Maluri, Cheras",
+          brand: "AEON",
+          icon: "🛒",
+          q: "AEON+Taman+Maluri+Cheras+KL",
+        },
+        {
+          name: "AEON Mid Valley",
+          addr: "Mid Valley Megamall, Lingkaran Syed Putra",
+          brand: "AEON",
+          icon: "🛒",
+          q: "AEON+Mid+Valley+Megamall+KL",
+        },
+        {
+          name: "AEON Quill City Mall",
+          addr: "1018 Jln Sultan Ismail, City Centre",
+          brand: "AEON",
+          icon: "🛒",
+          q: "AEON+Quill+City+Mall+KL",
+        },
+        {
+          name: "AEON Big Danau Kota",
+          addr: "Jln Langkawi, Setapak, KL",
+          brand: "AEON Big",
+          icon: "🏪",
+          q: "AEON+Big+Danau+Kota+Setapak",
+        },
+        {
+          name: "AEON Big Sri Petaling",
+          addr: "Jln 1/149E, Bukit Jalil, KL",
+          brand: "AEON Big",
+          icon: "🏪",
+          q: "AEON+Big+Sri+Petaling+Kuala+Lumpur",
+        },
+        {
+          name: "Jaya Grocer Mid Valley",
+          addr: "Mid Valley Megamall, Ground Floor",
+          brand: "Jaya Grocer",
+          icon: "🥦",
+          q: "Jaya+Grocer+Mid+Valley+Megamall+KL",
+        },
+        {
+          name: "Jaya Grocer KLCC",
+          addr: "Suria KLCC, Level 2, Jln Ampang",
+          brand: "Jaya Grocer",
+          icon: "🥦",
+          q: "Jaya+Grocer+Suria+KLCC",
+        },
+        {
+          name: "Jaya Grocer Pavilion KL",
+          addr: "Pavilion KL, Jln Bukit Bintang",
+          brand: "Jaya Grocer",
+          icon: "🥦",
+          q: "Jaya+Grocer+Pavilion+KL+Bukit+Bintang",
+        },
+        {
+          name: "Jaya Grocer Publika",
+          addr: "Solaris Dutamas, Mont Kiara",
+          brand: "Jaya Grocer",
+          icon: "🥦",
+          q: "Jaya+Grocer+Publika+Mont+Kiara",
+        },
+        {
+          name: "Village Grocer Bangsar",
+          addr: "Bangsar Shopping Centre, Bangsar",
+          brand: "Village Grocer",
+          icon: "🏡",
+          q: "Village+Grocer+Bangsar+Shopping+Centre",
+        },
+        {
+          name: "Village Grocer The Gardens",
+          addr: "The Gardens Mall, Mid Valley City",
+          brand: "Village Grocer",
+          icon: "🏡",
+          q: "Village+Grocer+The+Gardens+Mall+KL",
+        },
+        {
+          name: "Village Grocer Empire Damansara",
+          addr: "Empire City Damansara, Petaling Jaya",
+          brand: "Village Grocer",
+          icon: "🏡",
+          q: "Village+Grocer+Empire+City+Damansara",
+        },
+        {
+          name: "Giant Cheras",
+          addr: "Taman Segar Perdana, Cheras, KL",
+          brand: "Giant",
+          icon: "🏬",
+          q: "Giant+Hypermarket+Cheras+Kuala+Lumpur",
+        },
+        {
+          name: "Giant Kepong",
+          addr: "Metro Prima Shopping Centre, Kepong",
+          brand: "Giant",
+          icon: "🏬",
+          q: "Giant+Supermarket+Kepong+Metro+Prima",
+        },
+        {
+          name: "Giant Ampang",
+          addr: "Ampang Point Shopping Centre, Ampang",
+          brand: "Giant",
+          icon: "🏬",
+          q: "Giant+Ampang+Point+Shopping+Centre",
+        },
+        {
+          name: "BIG @ KL Eco City",
+          addr: "KL Eco City Mall, Jln Bangsar",
+          brand: "BIG",
+          icon: "🌿",
+          q: "BIG+by+Village+Grocer+KL+Eco+City",
+        },
+        {
+          name: "BIG @ Desa ParkCity",
+          addr: "The Waterfront, Desa ParkCity, KL",
+          brand: "BIG",
+          icon: "🌿",
+          q: "BIG+Village+Grocer+Desa+ParkCity+KL",
+        },
+      ];
+
+      let activeIdx = null,
+        curFilter = "all";
+
+      function selectStore(idx) {
+        activeIdx = idx;
+        renderStores();
+        const s = STORES[idx];
+        // Update iframe to show specific location
+        document.getElementById("mapFrame").src =
+          `https://maps.google.com/maps?q=${s.q}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
+        // Update info card
+        const col = BC[s.brand];
+        document.getElementById("mapInfoCard").innerHTML = `
+    <h4>${s.name}</h4>
+    <p style="font-size:.72rem;color:rgba(59,42,26,.58);line-height:1.5;margin-top:4px;">${s.addr}</p>
+    <span class="brand-pill" style="background:${col}18;color:${col};">${s.brand}</span>
+    <a class="gmaps-link" href="https://www.google.com/maps/search/?api=1&query=${s.q}" target="_blank">Open in Google Maps →</a>
+  `;
+      }
+
+      function filterStores(brand, btn) {
+        curFilter = brand;
+        activeIdx = null;
+        document
+          .querySelectorAll(".filter-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderStores();
+      }
+
+      function renderStores() {
+        const filtered =
+          curFilter === "all"
+            ? STORES
+            : STORES.filter((s) => s.brand === curFilter);
+        document.getElementById("storeList").innerHTML = filtered
+          .map((s) => {
+            const i = STORES.indexOf(s),
+              col = BC[s.brand];
+            return `<div class="store-item${activeIdx === i ? " active" : ""}" onclick="selectStore(${i})">
+      <div class="store-icon-c" style="background:${col}18;">${s.icon}</div>
+      <div class="store-text"><h4>${s.name}</h4><p>${s.addr}</p></div>
+      <span class="store-brand-tag" style="background:${col}18;color:${col};">${s.brand}</span>
+    </div>`;
+          })
+          .join("");
+      }
+      renderStores();
+    </script>
+  </body>
+</html>
