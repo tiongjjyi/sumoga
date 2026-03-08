@@ -29,7 +29,18 @@
       }
       body {
         font-family: "Lato", sans-serif;
-        background: var(--warm);
+        background:
+          radial-gradient(
+            circle at 15% 12%,
+            rgba(200, 168, 75, 0.12),
+            transparent 38%
+          ),
+          radial-gradient(
+            circle at 88% 2%,
+            rgba(74, 94, 58, 0.1),
+            transparent 34%
+          ),
+          linear-gradient(180deg, #fbf7ef 0%, #f4ecdd 100%);
         color: var(--soil);
         overflow-x: hidden;
       }
@@ -343,7 +354,18 @@
 
       /* ── WHY ORGANIC ── */
       #why {
-        background: var(--cream);
+        background:
+          radial-gradient(
+            circle at 10% 10%,
+            rgba(200, 168, 75, 0.1),
+            transparent 42%
+          ),
+          radial-gradient(
+            circle at 90% 90%,
+            rgba(107, 140, 78, 0.09),
+            transparent 40%
+          ),
+          var(--cream);
         padding: 90px 0;
       }
       .why-wrap {
@@ -366,7 +388,7 @@
       }
       .why-cards {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 24px;
         margin-bottom: 56px;
       }
@@ -405,8 +427,18 @@
         border: 1px solid rgba(59, 42, 26, 0.05);
       }
       .flip-back {
-        background: var(--moss);
+        background:
+          linear-gradient(rgba(30, 44, 21, 0.72), rgba(30, 44, 21, 0.72)),
+          var(--moss);
+        background-size: cover;
+        background-position: center;
         transform: rotateY(180deg);
+      }
+      .flip-wrap:hover .flip-back,
+      .flip-wrap.flipped .flip-back {
+        background-image:
+          linear-gradient(rgba(30, 44, 21, 0.72), rgba(30, 44, 21, 0.72)),
+          url("farm1.jpg");
       }
       .flip-icon {
         font-size: 2.8rem;
@@ -1481,17 +1513,18 @@
           <div class="flip-wrap" onclick="this.classList.toggle('flipped')">
             <div class="flip-inner">
               <div class="flip-front">
-                <div class="flip-icon">🌍</div>
-                <h3>No Pesticides</h3>
-                <p>100% natural growing — nothing synthetic, ever.</p>
+                <div class="flip-icon">🍅</div>
+                <h3>Taste &amp; Flavor</h3>
+                <p>More than just subjective.</p>
                 <span class="flip-hint">↻ Tap to learn more</span>
               </div>
               <div class="flip-back">
-                <h3>No Pesticides</h3>
+                <h3>Taste &amp; Flavor: More Than Just Subjective</h3>
                 <p>
-                  Every plant grown using only natural composts and biological
-                  pest control. Nothing added, nothing hidden. Safer for your
-                  family and kinder to the Earth.
+                  Higher Dry Matter Content: Because organic vegetables
+                  typically have a longer growth cycle, they often contain less
+                  water and more dry matter. This results in a denser texture
+                  and a more concentrated, robust flavor.
                 </p>
               </div>
             </div>
@@ -1499,19 +1532,18 @@
           <div class="flip-wrap" onclick="this.classList.toggle('flipped')">
             <div class="flip-inner">
               <div class="flip-front">
-                <div class="flip-icon">💧</div>
-                <h3>Sustainable Water</h3>
-                <p>
-                  Drip irrigation using 60% less water than conventional farms.
-                </p>
+                <div class="flip-icon">🥗</div>
+                <h3>Reduced Pesticide Residue</h3>
+                <p>Clean eating with a lower pesticide load.</p>
                 <span class="flip-hint">↻ Tap to learn more</span>
               </div>
               <div class="flip-back">
-                <h3>Sustainable Water</h3>
+                <h3>Reduced Pesticide Residue</h3>
                 <p>
-                  Our drip irrigation uses 60% less water than conventional
-                  farming. Healthy organic soil retains moisture naturally,
-                  protecting Cameron Highlands' precious watersheds.
+                  Clean Eating: Organic farming strictly prohibits the use of
+                  synthetic pesticides and herbicides. Choosing organic
+                  significantly lowers your body's pesticide load, especially
+                  beneficial for children and pregnant women.
                 </p>
               </div>
             </div>
@@ -1519,17 +1551,37 @@
           <div class="flip-wrap" onclick="this.classList.toggle('flipped')">
             <div class="flip-inner">
               <div class="flip-front">
-                <div class="flip-icon">🫀</div>
-                <h3>More Nutrients</h3>
-                <p>Richer in vitamins C, E and natural antioxidants.</p>
+                <div class="flip-icon">🐝</div>
+                <h3>Ecosystem Integrity</h3>
+                <p>Protecting pollinators and wildlife.</p>
                 <span class="flip-hint">↻ Tap to learn more</span>
               </div>
               <div class="flip-back">
-                <h3>More Nutrients</h3>
+                <h3>Ecosystem Integrity</h3>
                 <p>
-                  Organically farmed vegetables contain measurably higher levels
-                  of antioxidants, vitamins C and E, and essential minerals.
-                  Slower natural growth lets nutrients fully develop.
+                  Protecting Pollinators: Many synthetic pesticides (such as
+                  neonicotinoids) have been linked to bee population collapse.
+                  Organic farms avoid these chemicals, providing a safer haven
+                  for bees, butterflies, and birds.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="flip-wrap" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-icon">🪱</div>
+                <h3>Boosting Biodiversity</h3>
+                <p>Living soil supports resilient farming.</p>
+                <span class="flip-hint">↻ Tap to learn more</span>
+              </div>
+              <div class="flip-back">
+                <h3>Boosting Biodiversity</h3>
+                <p>
+                  Living Soil: By using compost, green manure, and crop
+                  rotation, organic farming fosters a thriving underground
+                  ecosystem. Organic soil typically contains 30%-60% more
+                  earthworms, fungi, and beneficial bacteria.
                 </p>
               </div>
             </div>
@@ -1568,7 +1620,7 @@
             <div class="c-slide">
               <img src="farm1.jpg" alt="Farm" />
               <div class="c-caption">
-                The Lim family homestead — our farm's heart since 2013
+                The family homestead — our farm's heart since 2013
               </div>
             </div>
 
@@ -1611,9 +1663,10 @@
           <hr class="sec-div" />
           <p>
             Suan Mokkh Garden — meaning "Garden of Liberation" in Thai — was
-            founded in 2013 by the Lim family on 14 acres of rich highland soil.
-            What began as a modest plot of spinach and herbs has grown into one
-            of Peninsular Malaysia's most trusted certified organic farms.
+            founded in 2013 by the Tiong family on 14 acres of rich highland
+            soil. What began as a modest plot of spinach and herbs has grown
+            into one of Peninsular Malaysia's most trusted certified organic
+            farms.
           </p>
           <p>
             Every seed carries our commitment: no synthetic fertilisers, no
