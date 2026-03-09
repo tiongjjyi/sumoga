@@ -140,6 +140,7 @@
       .hero-bg {
         position: absolute;
         inset: 0;
+        overflow: hidden;
         background: linear-gradient(
           160deg,
           #1c3010 0%,
@@ -150,11 +151,18 @@
           #e8c870 100%
         );
       }
-      .hero-bg img {
+      .hero-photo {
+        position: absolute;
+        inset: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
+        opacity: 0;
+        transition: opacity 0.9s ease;
+      }
+      .hero-photo.on {
+        opacity: 1;
       }
       .hero-bg::after {
         content: "";
@@ -446,11 +454,25 @@
         background-position: center;
         transform: rotateY(180deg);
       }
-      .flip-wrap:hover .flip-back,
-      .flip-wrap.flipped .flip-back {
+      .flip-wrap.taste-and-flavor .flip-back {
         background-image:
           linear-gradient(rgba(30, 44, 21, 0.72), rgba(30, 44, 21, 0.72)),
-          url("farm1.jpg");
+          url("taste_and_flavor.JPG");
+      }
+      .flip-wrap.reduced-pesticide-residue .flip-back {
+        background-image:
+          linear-gradient(rgba(30, 44, 21, 0.72), rgba(30, 44, 21, 0.72)),
+          url("reduce_pesticide_residue.JPG");
+      }
+      .flip-wrap.ecosystem-integrity .flip-back {
+        background-image:
+          linear-gradient(rgba(30, 44, 21, 0.72), rgba(30, 44, 21, 0.72)),
+          url("ecosystem_integrity.JPG");
+      }
+      .flip-wrap.boosting-biodiversity .flip-back {
+        background-image:
+          linear-gradient(rgba(30, 44, 21, 0.72), rgba(30, 44, 21, 0.72)),
+          url("boosting_diversity.jpg");
       }
       .flip-icon {
         font-size: 2.8rem;
@@ -521,75 +543,123 @@
 
       /* ── FARM STORY ── */
       #story {
-        background: var(--warm);
+        background:
+          radial-gradient(
+            1100px 420px at 20% 0%,
+            rgba(108, 127, 82, 0.24),
+            transparent 68%
+          ),
+          var(--warm);
         padding: 90px 0;
       }
       .story-wrap {
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 56px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 70px;
-        align-items: center;
       }
-      .carousel {
+      .story-rotator {
         position: relative;
-        border-radius: 6px;
+      }
+      .story-panel {
+        display: none;
+        grid-template-columns: minmax(0, 1.03fr) minmax(0, 0.97fr);
+        gap: 58px;
+        align-items: stretch;
+      }
+      .story-panel.on {
+        display: grid;
+        animation: storyPanelIn 0.62s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      @keyframes storyPanelIn {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .story-media {
+        position: relative;
+        border-radius: 8px;
         overflow: hidden;
-        height: 520px;
+        min-height: 520px;
+        background: #12190f;
         box-shadow: 0 14px 50px rgba(59, 42, 26, 0.16);
       }
-      .c-slides {
-        display: flex;
-        height: 100%;
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      .c-slide {
-        min-width: 100%;
-        height: 100%;
+      .story-shots {
         position: relative;
-        flex-shrink: 0;
-        overflow: hidden;
+        height: 100%;
       }
-      .c-slide img {
+      .story-shot {
         position: absolute;
         inset: 0;
+        opacity: 0;
+        z-index: 0;
+        transition: opacity 0.5s ease;
+      }
+      .story-shot.on {
+        opacity: 1;
+        z-index: 1;
+      }
+      .story-shot img,
+      .story-shot video {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center;
+        display: block;
+        transform: scale(1.04);
+        transition: transform 5.2s ease;
+      }
+      .story-shot.on img,
+      .story-shot.on video {
+        transform: scale(1);
+      }
+      .story-shot .video-fallback {
+        display: none;
+      }
+      .story-shot.video-fallback-on video {
+        display: none;
+      }
+      .story-shot.video-fallback-on .video-fallback {
         display: block;
       }
-      .c-slide .c-emoji {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 7rem;
+      .story-shot::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(15, 28, 8, 0.9),
+          transparent 62%
+        );
+        pointer-events: none;
       }
-      .c-caption {
+      .story-caption {
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
-        padding: 22px 26px;
-        background: linear-gradient(to top, rgba(15, 28, 8, 0.82), transparent);
+        z-index: 2;
+        padding: 20px 22px 18px;
         color: #fff;
-        font-size: 0.79rem;
+        font-size: 0.77rem;
         line-height: 1.5;
+        letter-spacing: 0.1px;
       }
-      .c-dots {
+      .story-media-dots {
         position: absolute;
-        bottom: 16px;
+        bottom: 14px;
         right: 16px;
         display: flex;
         gap: 6px;
         z-index: 10;
       }
-      .c-dot {
-        width: 7px;
-        height: 7px;
+      .story-media-dot {
+        width: 8px;
+        height: 8px;
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.35);
         border: none;
@@ -597,20 +667,20 @@
         padding: 0;
         transition: all 0.2s;
       }
-      .c-dot.on {
+      .story-media-dot.on {
         background: #fff;
         transform: scale(1.35);
       }
-      .c-arr {
+      .story-media-arr {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
         z-index: 10;
-        background: rgba(0, 0, 0, 0.22);
-        border: 1px solid rgba(255, 255, 255, 0.25);
+        background: rgba(0, 0, 0, 0.24);
+        border: 1px solid rgba(255, 255, 255, 0.28);
         color: #fff;
-        width: 38px;
-        height: 38px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
         cursor: pointer;
         font-size: 1rem;
@@ -619,29 +689,62 @@
         justify-content: center;
         transition: background 0.2s;
       }
-      .c-arr:hover {
+      .story-media-arr:hover {
         background: rgba(0, 0, 0, 0.4);
       }
-      .c-prev {
+      .story-media-arr.prev {
         left: 12px;
       }
-      .c-next {
+      .story-media-arr.next {
         right: 12px;
       }
-      .c-progress {
+      .story-media-progress {
         position: absolute;
         bottom: 0;
         left: 0;
-        height: 3px;
+        height: 4px;
         background: var(--gold);
         z-index: 10;
         width: 0;
+      }
+      .story-text {
+        background: rgba(242, 238, 227, 0.72);
+        border: 1px solid rgba(59, 42, 26, 0.12);
+        border-radius: 8px;
+        padding: 34px 34px 32px;
+        backdrop-filter: blur(2px);
       }
       .story-text p {
         font-size: 0.97rem;
         line-height: 1.85;
         color: rgba(59, 42, 26, 0.7);
         margin-bottom: 14px;
+      }
+      .story-panel-nav {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+      }
+      .story-panel-btn {
+        border: 1px solid rgba(59, 42, 26, 0.22);
+        background: rgba(255, 255, 255, 0.66);
+        color: rgba(59, 42, 26, 0.78);
+        border-radius: 999px;
+        padding: 8px 16px;
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 1.7px;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          color 0.2s,
+          border-color 0.2s;
+      }
+      .story-panel-btn.on {
+        background: var(--moss);
+        color: #fff;
+        border-color: var(--moss);
       }
       .story-vals {
         display: grid;
@@ -910,6 +1013,77 @@
         color: #fff;
         margin-top: 2px;
         flex-shrink: 0;
+      }
+      .nl-source {
+        margin: -8px 0 16px;
+        font-size: 0.73rem;
+        color: rgba(253, 250, 244, 0.52);
+        border-left: 2px solid rgba(200, 168, 75, 0.5);
+        padding-left: 10px;
+      }
+      .nl-source a {
+        color: var(--gold);
+        text-decoration: none;
+      }
+      .nl-source a:hover {
+        text-decoration: underline;
+      }
+      .ing-picks {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+      .ing-chip {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: transparent;
+        color: rgba(253, 250, 244, 0.65);
+        font-size: 0.64rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border-radius: 16px;
+        padding: 5px 10px;
+        cursor: pointer;
+        transition: all 0.18s;
+      }
+      .ing-chip.on,
+      .ing-chip:hover {
+        border-color: var(--gold);
+        background: rgba(200, 168, 75, 0.18);
+        color: #fff;
+      }
+      .ing-list {
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-bottom: 18px;
+      }
+      .ing-list li {
+        font-size: 0.74rem;
+        line-height: 1.45;
+        color: rgba(253, 250, 244, 0.74);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 4px;
+        padding: 8px 10px;
+        transition: all 0.18s;
+      }
+      .ing-list li.hit {
+        border-color: rgba(200, 168, 75, 0.45);
+        background: rgba(200, 168, 75, 0.12);
+      }
+      .sell-tag {
+        display: inline-block;
+        margin-left: 7px;
+        padding: 1px 6px;
+        border-radius: 10px;
+        background: rgba(107, 140, 78, 0.24);
+        color: #dbe9ce;
+        border: 1px solid rgba(107, 140, 78, 0.5);
+        font-size: 0.57rem;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
       }
 
       /* ── STORES ── */
@@ -1253,11 +1427,17 @@
           grid-template-columns: repeat(2, 1fr);
         }
         .story-wrap {
-          grid-template-columns: 1fr;
-          gap: 36px;
+          padding: 0 32px;
         }
-        .carousel {
-          height: 360px;
+        .story-panel {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+        .story-media {
+          min-height: 390px;
+        }
+        .story-text {
+          padding: 30px 28px;
         }
         .prod-grid {
           grid-template-columns: repeat(2, 1fr);
@@ -1268,6 +1448,9 @@
         }
         .rec-img {
           height: 280px;
+        }
+        .ing-list {
+          grid-template-columns: 1fr;
         }
         .stores-layout {
           grid-template-columns: 1fr;
@@ -1378,11 +1561,20 @@
         }
         .story-wrap {
           padding: 0 18px;
-          grid-template-columns: 1fr;
           gap: 28px;
         }
-        .carousel {
-          height: 260px;
+        .story-panel {
+          gap: 18px;
+        }
+        .story-media {
+          min-height: 280px;
+        }
+        .story-media-arr {
+          width: 34px;
+          height: 34px;
+        }
+        .story-text {
+          padding: 24px 18px;
         }
         .story-vals {
           grid-template-columns: 1fr;
@@ -1431,6 +1623,10 @@
         }
         .rec-img {
           height: 200px;
+        }
+        .ing-chip {
+          font-size: 0.6rem;
+          padding: 5px 8px;
         }
         .rec-body h2 {
           font-size: 1.55rem;
@@ -1513,22 +1709,29 @@
       </button>
     </nav>
 
-    <!-- ═══ HERO ═══
-  To add your farm photo, replace the line:
-    <div class="hero-bg">
-  with:
-    <div class="hero-bg"><img src="your-photo.jpg" alt="Farm">
--->
     <section id="hero">
-      <div class="hero-bg"><img src="farm.jpg" alt="Farm" /></div>
+      <div class="hero-bg">
+        <img
+          id="heroImgA"
+          class="hero-photo on"
+          src="home_photo/home1.jpg"
+          alt="Suan Mokkh organic farm"
+        />
+        <img
+          id="heroImgB"
+          class="hero-photo"
+          src="home_photo/home2.jpg"
+          alt="Suan Mokkh organic farm"
+        />
+      </div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <div class="hero-eyebrow">Certified Organic · Cameron Highlands</div>
+        <div class="hero-eyebrow">Certified Organic · Port Dickson</div>
         <h1 class="hero-title">Grown with care.<em>Eaten with joy.</em></h1>
         <p class="hero-sub">
-          From our sun-drenched highland fields to your family table —
-          vegetables grown without chemicals, harvested at peak freshness, every
-          single day.
+          From our sun-drenched nature fields to your family table — vegetables
+          grown without chemicals, harvested at peak freshness, every single
+          day.
         </p>
         <div class="hero-cta">
           <a href="#products" class="btn-gold">Explore Produce</a>
@@ -1573,6 +1776,240 @@
       </div>
     </div>
 
+    <!-- FARM STORY -->
+    <section id="story">
+      <div class="story-wrap">
+        <div class="story-rotator" id="storyRotator">
+          <article class="story-panel on" data-story-panel>
+            <div class="story-media" data-story-media>
+              <div class="story-shots">
+                <figure class="story-shot on">
+                  <img
+                    src="farm_story1/farm1.jpg"
+                    alt="Suan Mokkh family homestead"
+                    loading="lazy"
+                  />
+                  <figcaption class="story-caption">
+                    The family homestead — our farm's heart since 2013.
+                  </figcaption>
+                </figure>
+                <figure class="story-shot">
+                  <img
+                    src="farm_story1/farm2.jpg"
+                    alt="Seedlings growing in the nursery"
+                    loading="lazy"
+                  />
+                  <figcaption class="story-caption">
+                    Seedling nursery — every plant starts here under careful
+                    watch.
+                  </figcaption>
+                </figure>
+                <figure class="story-shot">
+                  <video
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                    poster="farm_story1/farm3_frame.jpg"
+                  >
+                    <source src="farm_story1/farm3.mp4" type="video/mp4" />
+                  </video>
+                  <img
+                    class="video-fallback"
+                    src="farm_story1/farm3_frame.jpg"
+                    alt="Farm team working across the field"
+                    loading="lazy"
+                  />
+                  <figcaption class="story-caption">
+                    A moving glimpse of daily farm rhythm and hands-on care.
+                  </figcaption>
+                </figure>
+                <figure class="story-shot">
+                  <img
+                    src="farm_story1/farm4.jpg"
+                    alt="Fresh harvest prepared for delivery"
+                    loading="lazy"
+                  />
+                  <figcaption class="story-caption">
+                    From our farm gate to shelves — freshness delivered within
+                    24 hours.
+                  </figcaption>
+                </figure>
+              </div>
+              <button
+                class="story-media-arr prev"
+                data-media-move="-1"
+                aria-label="Previous farm media"
+              >
+                &#8249;
+              </button>
+              <button
+                class="story-media-arr next"
+                data-media-move="1"
+                aria-label="Next farm media"
+              >
+                &#8250;
+              </button>
+              <div class="story-media-dots"></div>
+              <div class="story-media-progress"></div>
+            </div>
+            <div class="story-text">
+              <span class="sec-label">Our Farm Story</span>
+              <h2 class="sec-title">Rooted in <em>Port Dickson</em></h2>
+              <hr class="sec-div" />
+              <p>
+                Suan Mokkh Garden — meaning "Garden of Liberation" in Thai — was
+                founded in 2013 by the Tiong family on 14 acres of rich highland
+                soil. What began as a modest plot of spinach and herbs has grown
+                into one of Peninsular Malaysia's most trusted certified organic
+                farms.
+              </p>
+              <p>
+                Every seed carries our commitment: no synthetic fertilisers, no
+                pesticides, no shortcuts. We rotate crops seasonally, enrich
+                soil with organic compost, and harvest by hand so each vegetable
+                reaches you at its absolute peak.
+              </p>
+              <p>
+                Certified by <strong>MyOrganic Malaysia</strong> and audited
+                annually. We believe food grown with care should be accessible
+                to everyday Malaysian families.
+              </p>
+              <div class="story-vals">
+                <div class="sval">
+                  <h4>🌿 Certified Organic</h4>
+                  <p>MyOrganic Malaysia certified since 2016</p>
+                </div>
+                <div class="sval">
+                  <h4>🤝 Family Owned</h4>
+                  <p>Three generations on the same land</p>
+                </div>
+                <div class="sval">
+                  <h4>🚜 24hr Farm-to-Shelf</h4>
+                  <p>Harvested today, in store tomorrow</p>
+                </div>
+                <div class="sval">
+                  <h4>♻️ Zero Waste</h4>
+                  <p>All trimmings composted back into soil</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="story-panel" data-story-panel>
+            <div class="story-media" data-story-media>
+              <div class="story-shots">
+                <figure class="story-shot on">
+                  <video
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                    poster="farm_story2/farm1_frame.jpg"
+                  >
+                    <source src="farm_story2/farm1.MOV" />
+                  </video>
+                  <img
+                    class="video-fallback"
+                    src="farm_story2/farm1_frame.jpg"
+                    alt="Symbiosis in the fields"
+                    loading="lazy"
+                  />
+                  <figcaption class="story-caption">
+                    Animals and crops sharing one living ecosystem.
+                  </figcaption>
+                </figure>
+                <figure class="story-shot">
+                  <video
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                    poster="farm_story2/farm2_frame.jpg"
+                  >
+                    <source src="farm_story2/farm2.MOV" />
+                  </video>
+                  <img
+                    class="video-fallback"
+                    src="farm_story2/farm2_frame.jpg"
+                    alt="Natural cycle between animals and soil"
+                    loading="lazy"
+                  />
+                  <figcaption class="story-caption">
+                    Every movement in the field feeds the next cycle of life.
+                  </figcaption>
+                </figure>
+                <figure class="story-shot">
+                  <img
+                    src="farm_story2/farm3.jpg"
+                    alt="Sheep and crops in ecological balance"
+                    loading="lazy"
+                  />
+                  <figcaption class="story-caption">
+                    Nourish, return, renew — nature thriving in full circle.
+                  </figcaption>
+                </figure>
+              </div>
+              <button
+                class="story-media-arr prev"
+                data-media-move="-1"
+                aria-label="Previous symbiosis media"
+              >
+                &#8249;
+              </button>
+              <button
+                class="story-media-arr next"
+                data-media-move="1"
+                aria-label="Next symbiosis media"
+              >
+                &#8250;
+              </button>
+              <div class="story-media-dots"></div>
+              <div class="story-media-progress"></div>
+            </div>
+            <div class="story-text">
+              <span class="sec-label">Our Farm Story</span>
+              <h2 class="sec-title">
+                On Symbiosis &amp; The <em>Circle of Life</em>
+              </h2>
+              <hr class="sec-div" />
+              <p>
+                In our fields, life connects in the most graceful way. We strive
+                to maintain a delicate ecological balance: our lush greenery
+                serves as both a sanctuary for crops and a playground for
+                animals. Here, our sheep roam freely, nourished by the fibrous
+                remnants of our organic harvests. In return, they provide the
+                soil with the richest natural nutrients. This beautiful
+                cycle—sourced from nature and returned to nature— allows the
+                earth to flourish. It is more than just farming; it is the
+                rhythm of life in perfect harmony.
+              </p>
+              <div class="story-vals">
+                <div class="sval">
+                  <h4>🐑 Grazing Loop</h4>
+                  <p>Sheep feed on harvest remnants, reducing field waste.</p>
+                </div>
+                <div class="sval">
+                  <h4>🌾 Natural Return</h4>
+                  <p>Nutrients flow back into soil without synthetic input.</p>
+                </div>
+                <div class="sval">
+                  <h4>🦋 Shared Habitat</h4>
+                  <p>Crops, animals, and pollinators thrive side by side.</p>
+                </div>
+                <div class="sval">
+                  <h4>♻️ Living Rhythm</h4>
+                  <p>Nature-sourced, nature-returned, season after season.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <div class="story-panel-nav" id="storyPanelNav"></div>
+        </div>
+      </div>
+    </section>
+
     <!-- WHY ORGANIC -->
     <section id="why">
       <div class="why-wrap">
@@ -1585,7 +2022,10 @@
           </p>
         </div>
         <div class="why-cards">
-          <div class="flip-wrap" onclick="this.classList.toggle('flipped')">
+          <div
+            class="flip-wrap taste-and-flavor"
+            onclick="this.classList.toggle('flipped')"
+          >
             <div class="flip-inner">
               <div class="flip-front">
                 <div class="flip-icon">🍅</div>
@@ -1604,7 +2044,10 @@
               </div>
             </div>
           </div>
-          <div class="flip-wrap" onclick="this.classList.toggle('flipped')">
+          <div
+            class="flip-wrap reduced-pesticide-residue"
+            onclick="this.classList.toggle('flipped')"
+          >
             <div class="flip-inner">
               <div class="flip-front">
                 <div class="flip-icon">🥗</div>
@@ -1623,7 +2066,10 @@
               </div>
             </div>
           </div>
-          <div class="flip-wrap" onclick="this.classList.toggle('flipped')">
+          <div
+            class="flip-wrap ecosystem-integrity"
+            onclick="this.classList.toggle('flipped')"
+          >
             <div class="flip-inner">
               <div class="flip-front">
                 <div class="flip-icon">🐝</div>
@@ -1642,7 +2088,10 @@
               </div>
             </div>
           </div>
-          <div class="flip-wrap" onclick="this.classList.toggle('flipped')">
+          <div
+            class="flip-wrap boosting-biodiversity"
+            onclick="this.classList.toggle('flipped')"
+          >
             <div class="flip-inner">
               <div class="flip-front">
                 <div class="flip-icon">🪱</div>
@@ -1668,109 +2117,16 @@
             ><span class="stat-l">Acres of Farm</span>
           </div>
           <div class="stat-b">
-            <span class="stat-n" data-target="12">0</span
+            <span class="stat-n" data-target="20">0</span
             ><span class="stat-l">Years Growing</span>
           </div>
           <div class="stat-b">
-            <span class="stat-n" data-target="18">0</span
+            <span class="stat-n" data-target="67">0</span
             ><span class="stat-l">Retail Partners</span>
           </div>
           <div class="stat-b">
             <span class="stat-n" data-target="24">0</span
             ><span class="stat-l">Hrs Farm-to-Shelf</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FARM STORY -->
-    <section id="story">
-      <div class="story-wrap">
-        <!-- CAROUSEL
-      Replace each .c-emoji div with <img src="farmX.jpg" alt="...">
-      to show your real farm photos. Add or remove .c-slide blocks freely.
-    -->
-        <div class="carousel" id="carousel">
-          <div class="c-slides" id="cSlides">
-            <div class="c-slide">
-              <img src="farm1.jpg" alt="Farm" />
-              <div class="c-caption">
-                The family homestead — our farm's heart since 2013
-              </div>
-            </div>
-
-            <div class="c-slide">
-              <img src="farm2.jpg" alt="Farm" />
-              <div class="c-caption">
-                Seedling nursery — every plant starts here under careful watch
-              </div>
-            </div>
-
-            <div class="c-slide">
-              <img src="farm3.jpg" alt="Farm" />
-              <div class="c-caption">
-                Row after row of baby spinach, ready within 21 days
-              </div>
-            </div>
-
-            <div class="c-slide">
-              <img src="farm4.jpg" alt="Farm" />
-              <div class="c-caption">
-                Harvest morning — our team hand-picks before 7am daily
-              </div>
-            </div>
-
-            <div class="c-slide">
-              <img src="farm5.jpg" alt="Farm" />
-              <div class="c-caption">
-                From our farm gate to KL shelves — within 24 hours
-              </div>
-            </div>
-          </div>
-          <button class="c-arr c-prev" onclick="cMove(-1)">&#8249;</button>
-          <button class="c-arr c-next" onclick="cMove(1)">&#8250;</button>
-          <div class="c-dots" id="cDots"></div>
-          <div class="c-progress" id="cProg"></div>
-        </div>
-        <div class="story-text">
-          <span class="sec-label">Our Farm Story</span>
-          <h2 class="sec-title">Rooted in the <em>Cameron Highlands</em></h2>
-          <hr class="sec-div" />
-          <p>
-            Suan Mokkh Garden — meaning "Garden of Liberation" in Thai — was
-            founded in 2013 by the Tiong family on 14 acres of rich highland
-            soil. What began as a modest plot of spinach and herbs has grown
-            into one of Peninsular Malaysia's most trusted certified organic
-            farms.
-          </p>
-          <p>
-            Every seed carries our commitment: no synthetic fertilisers, no
-            pesticides, no shortcuts. We rotate crops seasonally, enrich soil
-            with organic compost, and harvest by hand so each vegetable reaches
-            you at its absolute peak.
-          </p>
-          <p>
-            Certified by <strong>MyOrganic Malaysia</strong> and audited
-            annually. We believe food grown with care should be accessible to
-            everyday Malaysian families.
-          </p>
-          <div class="story-vals">
-            <div class="sval">
-              <h4>🌿 Certified Organic</h4>
-              <p>MyOrganic Malaysia certified since 2016</p>
-            </div>
-            <div class="sval">
-              <h4>🤝 Family Owned</h4>
-              <p>Three generations on the same land</p>
-            </div>
-            <div class="sval">
-              <h4>🚜 24hr Farm-to-Shelf</h4>
-              <p>Harvested today, in store tomorrow</p>
-            </div>
-            <div class="sval">
-              <h4>♻️ Zero Waste</h4>
-              <p>All trimmings composted back into soil</p>
-            </div>
           </div>
         </div>
       </div>
@@ -1930,15 +2286,18 @@
         </div>
         <div class="rec-tabs">
           <button class="rec-tab on" onclick="showRec(0, this)">
-            Baby Spinach
+            Nasi Lemak
           </button>
           <button class="rec-tab" onclick="showRec(1, this)">
+            Baby Spinach
+          </button>
+          <button class="rec-tab" onclick="showRec(2, this)">
             Cherry Tomatoes
           </button>
-          <button class="rec-tab" onclick="showRec(2, this)">Eggplant</button>
+          <button class="rec-tab" onclick="showRec(3, this)">Eggplant</button>
         </div>
 
-        <div id="r0" class="rec-feat">
+        <div id="r0" class="rec-feat" style="display: none">
           <div class="rec-img">
             <div
               class="emoji"
@@ -2100,6 +2459,127 @@
             </ol>
           </div>
         </div>
+
+        <div id="r3" class="rec-feat">
+          <div class="rec-img">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Nasi%20lemak%2001a.jpg"
+              alt="Nasi lemak served with sambal, egg and cucumber"
+              loading="lazy"
+            />
+          </div>
+          <div class="rec-body">
+            <div class="veg-pill">
+              <span class="veg-pip" style="background: #e4d07e"></span
+              ><span class="veg-lbl"
+                >Featured: Pandan, Lemongrass, Eggs, Cucumber</span
+              >
+            </div>
+            <h2>Farm-Fresh Nasi Lemak</h2>
+            <p>
+              Creamy coconut rice infused with pandan and lemongrass, plated
+              with sambal, boiled eggs, crunchy peanuts, and fresh cucumber.
+            </p>
+            <p class="nl-source">
+              <strong>Recipe Source:</strong> Inspired by
+              <a
+                href="https://www.nyonyacooking.com/recipes/nasi-lemak-recipe~BynkuvoPf9-X"
+                target="_blank"
+                rel="noopener"
+                >Nyonya Cooking's Nasi Lemak recipe</a
+              >
+              and adapted in our own wording/style.
+              <br />
+              <strong>Photo Credit:</strong>
+              <a
+                href="https://commons.wikimedia.org/wiki/File:Nasi_lemak_01a.jpg"
+                target="_blank"
+                rel="noopener"
+                >Wikimedia Commons (Takeaway, CC BY-SA 3.0)</a
+              >.
+            </p>
+            <div class="rec-meta">
+              <div class="rm">
+                <div class="val">45</div>
+                <div class="key">Minutes</div>
+              </div>
+              <div class="rm">
+                <div class="val">4</div>
+                <div class="key">Servings</div>
+              </div>
+              <div class="rm">
+                <div class="val">Medium</div>
+                <div class="key">Level</div>
+              </div>
+            </div>
+
+            <div class="ing-picks">
+              <button class="ing-chip on" onclick="filterNL('all', this)">
+                Show All
+              </button>
+              <button class="ing-chip" onclick="filterNL('pandan', this)">
+                Pandan
+              </button>
+              <button class="ing-chip" onclick="filterNL('lemongrass', this)">
+                Lemongrass
+              </button>
+              <button class="ing-chip" onclick="filterNL('eggs', this)">
+                Eggs
+              </button>
+              <button class="ing-chip" onclick="filterNL('cucumber', this)">
+                Cucumber
+              </button>
+            </div>
+
+            <ul class="ing-list" id="nlIngList">
+              <li class="hit" data-keys="pandan">
+                2 pandan leaves, knotted <span class="sell-tag">We Sell</span>
+              </li>
+              <li class="hit" data-keys="lemongrass">
+                1 stalk lemongrass, lightly bruised
+                <span class="sell-tag">We Sell</span>
+              </li>
+              <li class="hit" data-keys="eggs">
+                4 eggs, boiled <span class="sell-tag">We Sell</span>
+              </li>
+              <li class="hit" data-keys="cucumber">
+                1 cucumber, sliced <span class="sell-tag">We Sell</span>
+              </li>
+              <li class="hit" data-keys="other">2 cups rice, rinsed</li>
+              <li class="hit" data-keys="other">
+                1 cup coconut milk + 1 cup water
+              </li>
+              <li class="hit" data-keys="other">
+                Sambal (homemade or ready-made)
+              </li>
+              <li class="hit" data-keys="other">
+                Toasted peanuts + crispy anchovies
+              </li>
+            </ul>
+
+            <ol class="rec-steps">
+              <li>
+                <span class="sn">1</span>Cook rice with coconut milk, water,
+                pandan, lemongrass, and salt until fluffy.
+              </li>
+              <li>
+                <span class="sn">2</span>Boil eggs to your preferred doneness,
+                then peel and halve.
+              </li>
+              <li>
+                <span class="sn">3</span>Warm sambal and prep cucumber slices.
+              </li>
+              <li>
+                <span class="sn">4</span>Plate coconut rice with sambal, eggs,
+                peanuts, anchovies, and cucumber.
+              </li>
+              <li>
+                <span class="sn">5</span>Finish with extra cucumber and sambal
+                on the side for a fresher farm-style serving.
+              </li>
+            </ol>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -2155,8 +2635,8 @@
         <div class="foot-brand">
           <div class="fn">Suan Mokkh <span>Garden</span></div>
           <p>
-            Certified organic vegetables grown in the Cameron Highlands,
-            delivered fresh to Kuala Lumpur daily.
+            Certified organic vegetables grown in Port Dickson, delivered fresh
+            to Kuala Lumpur daily.
           </p>
         </div>
         <div class="foot-col">
@@ -2201,6 +2681,46 @@
           .classList.toggle("scrolled", scrollY > 50),
       );
 
+      /* HERO ROTATOR */
+      (function () {
+        const imgs = [
+          "home_photo/home1.jpg",
+          "home_photo/home2.jpg",
+          "home_photo/home3.jpg",
+        ];
+        const a = document.getElementById("heroImgA");
+        const b = document.getElementById("heroImgB");
+        if (!a || !b || imgs.length < 2) return;
+
+        let active = 0;
+        let idx = 0;
+        const slots = [a, b];
+        const DUR = 5200;
+
+        setInterval(() => {
+          idx = (idx + 1) % imgs.length;
+          const nextSlot = slots[1 - active];
+          const activeSlot = slots[active];
+          const nextSrc = imgs[idx];
+
+          if (nextSlot.src.endsWith(nextSrc)) {
+            nextSlot.classList.add("on");
+            activeSlot.classList.remove("on");
+            active = 1 - active;
+            return;
+          }
+
+          const pre = new Image();
+          pre.onload = () => {
+            nextSlot.src = nextSrc;
+            nextSlot.classList.add("on");
+            activeSlot.classList.remove("on");
+            active = 1 - active;
+          };
+          pre.src = nextSrc;
+        }, DUR);
+      })();
+
       /* COUNTERS */
       (function () {
         let done = false;
@@ -2229,62 +2749,193 @@
         run();
       })();
 
-      /* CAROUSEL */
+      /* STORY ROTATOR */
       (function () {
-        const slides = document.querySelectorAll(".c-slide");
-        const total = slides.length;
-        const dotsEl = document.getElementById("cDots");
-        const prog = document.getElementById("cProg");
-        const DUR = 4000;
-        let idx = 0,
-          timer;
+        const panels = Array.from(
+          document.querySelectorAll("[data-story-panel]"),
+        );
+        const panelNav = document.getElementById("storyPanelNav");
+        if (!panels.length || !panelNav) return;
 
-        slides.forEach((_, i) => {
-          const d = document.createElement("button");
-          d.className = "c-dot" + (i === 0 ? " on" : "");
-          d.setAttribute("aria-label", "Slide " + (i + 1));
-          d.onclick = () => go(i);
-          dotsEl.appendChild(d);
+        const MEDIA_DUR = 4800;
+        let panelIdx = 0;
+        let panelTimer = null;
+        const panelDurations = panels.map((panel) => {
+          const shotCount = panel.querySelectorAll(".story-shot").length;
+          return Math.max(1, shotCount) * MEDIA_DUR;
         });
 
-        function go(i) {
-          idx = (i + total) % total;
-          document.getElementById("cSlides").style.transform =
-            "translateX(-" + idx * 100 + "%)";
-          document
-            .querySelectorAll(".c-dot")
-            .forEach((d, j) => d.classList.toggle("on", j === idx));
-          prog.style.transition = "none";
-          prog.style.width = "0%";
-          requestAnimationFrame(() =>
-            requestAnimationFrame(() => {
-              prog.style.transition = "width " + DUR + "ms linear";
-              prog.style.width = "100%";
-            }),
+        function setOrientation(shot, width, height) {
+          const isPortrait = height > width * 1.02;
+          shot.classList.toggle("is-portrait", isPortrait);
+          shot.classList.toggle("is-landscape", !isPortrait);
+        }
+
+        const carousels = panels.map((panel) => {
+          const media = panel.querySelector("[data-story-media]");
+          const shots = Array.from(panel.querySelectorAll(".story-shot"));
+          const dotsWrap = panel.querySelector(".story-media-dots");
+          const progress = panel.querySelector(".story-media-progress");
+          const arrows = panel.querySelectorAll("[data-media-move]");
+          let idx = 0;
+          let timer = null;
+          let active = false;
+
+          if (!media || !shots.length || !dotsWrap || !progress) return null;
+
+          shots.forEach((shot, i) => {
+            const dot = document.createElement("button");
+            dot.className = "story-media-dot" + (i === 0 ? " on" : "");
+            dot.type = "button";
+            dot.setAttribute("aria-label", "Media " + (i + 1));
+            dot.addEventListener("click", () => go(i, true));
+            dotsWrap.appendChild(dot);
+
+            const img = shot.querySelector("img");
+            if (img) {
+              if (img.complete && img.naturalWidth) {
+                setOrientation(shot, img.naturalWidth, img.naturalHeight);
+              } else {
+                img.addEventListener("load", () =>
+                  setOrientation(shot, img.naturalWidth, img.naturalHeight),
+                );
+              }
+            }
+
+            const video = shot.querySelector("video");
+            if (video) {
+              const applyVideoSize = () =>
+                setOrientation(
+                  shot,
+                  video.videoWidth || 16,
+                  video.videoHeight || 9,
+                );
+              if (video.readyState >= 1) applyVideoSize();
+              video.addEventListener("loadedmetadata", applyVideoSize);
+            }
+          });
+
+          function animateProgress() {
+            progress.style.transition = "none";
+            progress.style.width = "0%";
+            requestAnimationFrame(() =>
+              requestAnimationFrame(() => {
+                progress.style.transition = "width " + MEDIA_DUR + "ms linear";
+                progress.style.width = "100%";
+              }),
+            );
+          }
+
+          function syncPlayback() {
+            shots.forEach((shot, j) => {
+              const video = shot.querySelector("video");
+              if (!video) return;
+              if (active && j === idx) {
+                video.play().catch(() => {});
+              } else {
+                video.pause();
+                video.currentTime = 0;
+              }
+            });
+          }
+
+          function go(next, isManual) {
+            idx = (next + shots.length) % shots.length;
+            shots.forEach((shot, j) => shot.classList.toggle("on", j === idx));
+            dotsWrap
+              .querySelectorAll(".story-media-dot")
+              .forEach((dot, j) => dot.classList.toggle("on", j === idx));
+            animateProgress();
+            syncPlayback();
+            if (isManual) restartPanelTimer();
+          }
+
+          function start() {
+            clearInterval(timer);
+            timer = setInterval(() => go(idx + 1, false), MEDIA_DUR);
+            animateProgress();
+            syncPlayback();
+          }
+
+          function stop() {
+            clearInterval(timer);
+            progress.style.transition = "none";
+            progress.style.width = "0%";
+            shots.forEach((shot) => {
+              const video = shot.querySelector("video");
+              if (video) video.pause();
+            });
+          }
+
+          arrows.forEach((arrow) => {
+            arrow.addEventListener("click", () => {
+              const delta = Number(arrow.dataset.mediaMove || 0);
+              go(idx + delta, true);
+            });
+          });
+
+          media.addEventListener("mouseenter", () => {
+            if (!window.matchMedia("(hover: hover)").matches) return;
+            clearInterval(timer);
+            progress.style.transition = "none";
+          });
+          media.addEventListener("mouseleave", () => {
+            if (!active || !window.matchMedia("(hover: hover)").matches) return;
+            start();
+          });
+
+          return {
+            activate() {
+              active = true;
+              go(idx, false);
+              start();
+            },
+            deactivate() {
+              active = false;
+              stop();
+            },
+          };
+        });
+
+        panels.forEach((_, i) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "story-panel-btn" + (i === 0 ? " on" : "");
+          btn.textContent = i === 0 ? "Farm Roots" : "Symbiosis";
+          btn.setAttribute("aria-label", "Show story " + (i + 1));
+          btn.addEventListener("click", () => showPanel(i, true));
+          panelNav.appendChild(btn);
+        });
+
+        function showPanel(i, isManual) {
+          panelIdx = (i + panels.length) % panels.length;
+          panels.forEach((panel, j) =>
+            panel.classList.toggle("on", j === panelIdx),
           );
+          panelNav
+            .querySelectorAll(".story-panel-btn")
+            .forEach((btn, j) => btn.classList.toggle("on", j === panelIdx));
+          carousels.forEach((carousel, j) => {
+            if (!carousel) return;
+            if (j === panelIdx) carousel.activate();
+            else carousel.deactivate();
+          });
+          if (isManual) restartPanelTimer();
         }
 
-        function startTimer() {
-          clearInterval(timer);
-          timer = setInterval(() => go(idx + 1), DUR);
+        function restartPanelTimer() {
+          clearInterval(panelTimer);
+          const dur = panelDurations[panelIdx] || 12000;
+          panelTimer = setInterval(() => showPanel(panelIdx + 1, false), dur);
         }
-        const car = document.getElementById("carousel");
-        car.addEventListener("mouseenter", () => {
-          clearInterval(timer);
-          prog.style.transition = "none";
-        });
-        car.addEventListener("mouseleave", startTimer);
-        go(0);
-        startTimer();
 
-        window.cMove = function (d) {
-          go(idx + d);
-        };
+        showPanel(0, false);
+        restartPanelTimer();
       })();
 
       /* RECIPES */
       window.showRec = function (i, btn) {
-        ["r0", "r1", "r2"].forEach((id, j) => {
+        ["r3", "r0", "r1", "r2"].forEach((id, j) => {
           const el = document.getElementById(id);
           if (el) el.style.display = j === i ? "grid" : "none";
         });
@@ -2292,6 +2943,18 @@
           .querySelectorAll(".rec-tab")
           .forEach((t) => t.classList.remove("on"));
         btn.classList.add("on");
+      };
+      window.filterNL = function (key, btn) {
+        document
+          .querySelectorAll("#r3 .ing-chip")
+          .forEach((b) => b.classList.remove("on"));
+        btn.classList.add("on");
+        document.querySelectorAll("#nlIngList li").forEach((li) => {
+          const keys = (li.dataset.keys || "").split(",");
+          const hit = key === "all" || keys.includes(key);
+          li.classList.toggle("hit", hit);
+          li.style.opacity = hit ? "1" : "0.42";
+        });
       };
 
       /* STORES */
