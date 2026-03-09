@@ -64,8 +64,11 @@
         box-shadow: 0 2px 20px rgba(59, 42, 26, 0.08);
       }
       .nav-logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
         font-family: "Playfair Display", serif;
-        font-size: 1.25rem;
+        font-size: 1.28rem;
         color: #fff;
         transition: color 0.3s;
         text-decoration: none;
@@ -73,7 +76,16 @@
       nav.scrolled .nav-logo {
         color: var(--moss);
       }
-      .nav-logo span {
+      .nav-logo-mark {
+        display: block;
+        width: auto;
+        height: 62px;
+        background: #fff;
+        padding: 3px;
+        border-radius: 3px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+      }
+      .nav-logo-text em {
         color: var(--gold);
         font-style: italic;
       }
@@ -936,6 +948,31 @@
         line-height: 1.5;
         margin-bottom: 11px;
       }
+      .s-search-wrap {
+        margin-bottom: 8px;
+      }
+      .s-search {
+        width: 100%;
+        border: 1px solid rgba(59, 42, 26, 0.16);
+        border-radius: 5px;
+        background: #fff;
+        color: var(--soil);
+        font-size: 0.75rem;
+        padding: 9px 11px;
+        outline: none;
+        transition:
+          border-color 0.18s,
+          box-shadow 0.18s;
+      }
+      .s-search:focus {
+        border-color: var(--moss);
+        box-shadow: 0 0 0 2px rgba(74, 94, 58, 0.12);
+      }
+      .s-meta {
+        font-size: 0.66rem;
+        color: rgba(59, 42, 26, 0.46);
+        margin-bottom: 8px;
+      }
       .s-filters {
         display: flex;
         flex-wrap: wrap;
@@ -968,6 +1005,19 @@
       .s-list::-webkit-scrollbar-thumb {
         background: var(--sage);
         border-radius: 2px;
+      }
+      .s-group-h {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        background: var(--cream);
+        font-size: 0.62rem;
+        letter-spacing: 1.3px;
+        text-transform: uppercase;
+        color: rgba(59, 42, 26, 0.58);
+        border-top: 1px solid rgba(59, 42, 26, 0.08);
+        border-bottom: 1px solid rgba(59, 42, 26, 0.08);
+        padding: 7px 16px;
       }
       .s-item {
         display: flex;
@@ -1015,6 +1065,12 @@
         font-weight: 700;
         white-space: nowrap;
         flex-shrink: 0;
+      }
+      .s-empty {
+        padding: 18px 16px;
+        font-size: 0.74rem;
+        color: rgba(59, 42, 26, 0.54);
+        line-height: 1.6;
       }
       .map-wrap {
         position: relative;
@@ -1146,6 +1202,12 @@
         .nav-links {
           gap: 18px;
         }
+        .nav-logo-mark {
+          height: 54px;
+        }
+        .nav-logo-text {
+          font-size: 1.14rem;
+        }
         #hero {
           padding: 0 7%;
         }
@@ -1236,6 +1298,12 @@
         }
         .nav-links {
           display: none;
+        }
+        .nav-logo-mark {
+          height: 46px;
+        }
+        .nav-logo-text {
+          font-size: 1rem;
         }
         .nav-links.open {
           display: flex;
@@ -1422,7 +1490,14 @@
   <body>
     <!-- NAV -->
     <nav id="nav">
-      <a class="nav-logo" href="#">Suan Mokkh <span>Garden</span></a>
+      <a class="nav-logo" href="#">
+        <img
+          src="logo-mark.png"
+          alt="Suan Mokkh Garden logo"
+          class="nav-logo-mark"
+        />
+        <span class="nav-logo-text">Suan Mokkh <em>Garden</em></span>
+      </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#story">Our Farm</a></li>
         <li><a href="#products">Produce</a></li>
@@ -2039,28 +2114,20 @@
         <div class="stores-layout">
           <div class="s-panel">
             <div class="s-panel-top">
-              <p>Click any store to see it on the map.</p>
-              <div class="s-filters">
-                <button class="s-f on" onclick="filterS('all', this)">
-                  All
-                </button>
-                <button class="s-f" onclick="filterS('AEON', this)">
-                  AEON
-                </button>
-                <button class="s-f" onclick="filterS('AEON Big', this)">
-                  AEON Big
-                </button>
-                <button class="s-f" onclick="filterS('Jaya Grocer', this)">
-                  Jaya Grocer
-                </button>
-                <button class="s-f" onclick="filterS('Village Grocer', this)">
-                  Village Grocer
-                </button>
-                <button class="s-f" onclick="filterS('Giant', this)">
-                  Giant
-                </button>
-                <button class="s-f" onclick="filterS('BIG', this)">BIG</button>
+              <p>
+                Search by name, brand, or area. Click any store to view on map.
+              </p>
+              <div class="s-search-wrap">
+                <input
+                  id="sSearch"
+                  class="s-search"
+                  type="search"
+                  placeholder="Search store / area..."
+                  oninput="window.searchS(this.value)"
+                />
               </div>
+              <div class="s-meta" id="sMeta"></div>
+              <div class="s-filters" id="sFilters"></div>
             </div>
             <div class="s-list" id="sList"></div>
           </div>
@@ -2229,204 +2296,470 @@
 
       /* STORES */
       (function () {
-        const BC = {
-          AEON: "#e53e3e",
-          "AEON Big": "#dd6b20",
-          "Jaya Grocer": "#38a169",
-          "Village Grocer": "#805ad5",
-          Giant: "#3182ce",
-          BIG: "#2d7d46",
+        const BRAND_META = {
+          AEON: { c: "#e53e3e", i: "🛒" },
+          "AEON Big": { c: "#dd6b20", i: "🏪" },
+          MAX: { c: "#7b341e", i: "🧺" },
+          Giant: { c: "#3182ce", i: "🏬" },
+          Mercato: { c: "#b7791f", i: "🧀" },
+          "Cold Storage": { c: "#2f855a", i: "🧊" },
+          "Village Grocer": { c: "#805ad5", i: "🏡" },
+          "B.I.G": { c: "#2d7d46", i: "🌿" },
+          "The Food Merchant": { c: "#744210", i: "🥖" },
+          "Jaya Grocer": { c: "#38a169", i: "🥦" },
+          "Lotus's": { c: "#d53f8c", i: "🛍️" },
         };
-        const DATA = [
-          {
-            n: "AEON Wangsa Maju",
-            a: "Jln Raya 1, Bandar Baru Wangsa Maju",
-            b: "AEON",
-            i: "🛒",
-            q: "AEON+Mall+Wangsa+Maju+Kuala+Lumpur",
-          },
-          {
-            n: "AEON Taman Maluri",
-            a: "Jln Jejaka, Taman Maluri, Cheras",
-            b: "AEON",
-            i: "🛒",
-            q: "AEON+Taman+Maluri+Cheras+KL",
-          },
-          {
-            n: "AEON Mid Valley",
-            a: "Mid Valley Megamall, Lingkaran Syed Putra",
-            b: "AEON",
-            i: "🛒",
-            q: "AEON+Mid+Valley+Megamall+KL",
-          },
-          {
-            n: "AEON Quill City Mall",
-            a: "1018 Jln Sultan Ismail, City Centre",
-            b: "AEON",
-            i: "🛒",
-            q: "AEON+Quill+City+Mall+KL",
-          },
-          {
-            n: "AEON Big Danau Kota",
-            a: "Jln Langkawi, Setapak, KL",
-            b: "AEON Big",
-            i: "🏪",
-            q: "AEON+Big+Danau+Kota+Setapak",
-          },
-          {
-            n: "AEON Big Sri Petaling",
-            a: "Jln 1/149E, Bukit Jalil, KL",
-            b: "AEON Big",
-            i: "🏪",
-            q: "AEON+Big+Sri+Petaling+Kuala+Lumpur",
-          },
-          {
-            n: "Jaya Grocer Mid Valley",
-            a: "Mid Valley Megamall, Ground Floor",
-            b: "Jaya Grocer",
-            i: "🥦",
-            q: "Jaya+Grocer+Mid+Valley+Megamall+KL",
-          },
-          {
-            n: "Jaya Grocer KLCC",
-            a: "Suria KLCC, Level 2, Jln Ampang",
-            b: "Jaya Grocer",
-            i: "🥦",
-            q: "Jaya+Grocer+Suria+KLCC",
-          },
-          {
-            n: "Jaya Grocer Pavilion KL",
-            a: "Pavilion KL, Jln Bukit Bintang",
-            b: "Jaya Grocer",
-            i: "🥦",
-            q: "Jaya+Grocer+Pavilion+KL+Bukit+Bintang",
-          },
-          {
-            n: "Jaya Grocer Publika",
-            a: "Solaris Dutamas, Mont Kiara",
-            b: "Jaya Grocer",
-            i: "🥦",
-            q: "Jaya+Grocer+Publika+Mont+Kiara",
-          },
-          {
-            n: "Village Grocer Bangsar",
-            a: "Bangsar Shopping Centre, Bangsar",
-            b: "Village Grocer",
-            i: "🏡",
-            q: "Village+Grocer+Bangsar+Shopping+Centre",
-          },
-          {
-            n: "Village Grocer The Gardens",
-            a: "The Gardens Mall, Mid Valley City",
-            b: "Village Grocer",
-            i: "🏡",
-            q: "Village+Grocer+The+Gardens+Mall+KL",
-          },
-          {
-            n: "Village Grocer Empire Damansara",
-            a: "Empire City Damansara, Petaling Jaya",
-            b: "Village Grocer",
-            i: "🏡",
-            q: "Village+Grocer+Empire+City+Damansara",
-          },
-          {
-            n: "Giant Cheras",
-            a: "Taman Segar Perdana, Cheras, KL",
-            b: "Giant",
-            i: "🏬",
-            q: "Giant+Hypermarket+Cheras+Kuala+Lumpur",
-          },
-          {
-            n: "Giant Kepong",
-            a: "Metro Prima Shopping Centre, Kepong",
-            b: "Giant",
-            i: "🏬",
-            q: "Giant+Supermarket+Kepong+Metro+Prima",
-          },
-          {
-            n: "Giant Ampang",
-            a: "Ampang Point Shopping Centre, Ampang",
-            b: "Giant",
-            i: "🏬",
-            q: "Giant+Ampang+Point+Shopping+Centre",
-          },
-          {
-            n: "BIG @ KL Eco City",
-            a: "KL Eco City Mall, Jln Bangsar",
-            b: "BIG",
-            i: "🌿",
-            q: "BIG+by+Village+Grocer+KL+Eco+City",
-          },
-          {
-            n: "BIG @ Desa ParkCity",
-            a: "The Waterfront, Desa ParkCity, KL",
-            b: "BIG",
-            i: "🌿",
-            q: "BIG+Village+Grocer+Desa+ParkCity+KL",
-          },
+
+        const RAW_STORES = [
+          "AEON NILAI",
+          "AEON BANDAR BARU KLANG",
+          "AEON PUCHONG IOI",
+          "AEON MELACCA",
+          "AEON AYER KEROH",
+          "AEON BANDAR UTAMA",
+          "AEON BUKIT TINGGI",
+          "AEON CHERAS SELATAN",
+          "MAX KEPONG PRIME DPC",
+          "AEON KEPONG METRO PRIMA",
+          "AEON MID VALLEY",
+          "AEON RAWANG",
+          "AEON SEREMBAN 2",
+          "AEON SRI KEMBANGAN",
+          "AEON TAMAN MALURI",
+          "MAX BANGSAR SOUTH",
+          "AEON PUTRAJAYA IOI",
+          "GIANT NILAI",
+          "GIANT SUNGAI WANG",
+          "GIANT BUKIT ANTARABANGSA",
+          "GIANT BANDAR KINRARA",
+          "GIANT TMC BANGSAR",
+          "GIANT ULU KELANG",
+          "GIANT AMPANG POINT",
+          "GIANT SHAH ALAM",
+          "GIANT KLANG",
+          "GIANT DESA PETALING",
+          "MERCATO TRX",
+          "MERCATO MONT KIARA",
+          "MERCATO KLCC",
+          "COLD STORAGE GREAT EASTERN",
+          "GIANT KOTA DAMANSARA",
+          "GIANT SETIA WANGSA",
+          "GIANT SUNWAY PUTRA",
+          "VG M-CITY",
+          "VG GIZA",
+          "VG DAMANSARA JAYA",
+          "VG MELAWATI MALL UK",
+          "VG BANGSAR",
+          "VG VERVE MONT KIARA",
+          "VG IOI DAMANSARA",
+          "B.I.G BANGSAR",
+          "VG SUNWAY",
+          "VG ECO CHERAS",
+          "B.I.G LINC",
+          "B.I.G PUBLIKA",
+          "TFM PAVILLION",
+          "JAYA GROCER CYBERJAYA",
+          "JAYA GROCER SUBANG JAYA",
+          "JAYA GROCER GARDEN MALL MV",
+          "JAYA GROCER USJ-21",
+          "JAYA GROCER LALAPORT",
+          "AEON BIG PUCHONG",
+          "AEON BiG SUBANG JAYA",
+          "AEON BiG PUTRAJAYA",
+          "AEON BiG WANGSA MAJU",
+          "AEON BiG AMPANG",
+          "AEON BiG MID VALLEY",
+          "LOTUS'S DATUM JELATEK",
+          "LOTUS'S IKANO",
+          "LOTUS'S KEPONG",
+          "LOTUS'S PUCHONG",
+          "LOTUS'S BUKIT TINGGI",
+          "LOTUS'S MELACCA",
+          "LOTUS'S IOI",
+          "LOTUS'S RIMBAYU",
+          "LOTUS'S KELANA JAYA",
         ];
 
-        let active = null,
-          filter = "all";
+        const STORE_FIX = {
+          "AEON BANDAR BARU KLANG": {
+            area: "Bukit Raja, Bandar Baru Klang",
+            query: "AEON Bukit Raja Bandar Baru Klang Klang Selangor",
+          },
+          "AEON MELACCA": {
+            area: "Bandaraya Melaka",
+            query: "AEON Bandaraya Melaka Shopping Centre",
+          },
+          "AEON AYER KEROH": {
+            area: "Ayer Keroh, Melaka",
+            query: "AEON Melaka Shopping Centre Ayer Keroh",
+          },
+          "MAX KEPONG PRIME DPC": {
+            area: "Kepong, Desa ParkCity",
+            query: "MaxValu Prime Desa ParkCity Kepong",
+          },
+          "MAX BANGSAR SOUTH": {
+            area: "Bangsar South",
+            query: "MaxValu Prime Bangsar South Kuala Lumpur",
+          },
+          "MERCATO TRX": {
+            area: "The Exchange TRX",
+            query: "Mercato The Exchange TRX",
+          },
+          "MERCATO MONT KIARA": {
+            area: "Solaris Mont Kiara",
+            query: "Mercato Solaris Mont Kiara",
+          },
+          "MERCATO KLCC": {
+            area: "Suria KLCC",
+            query: "Mercato Suria KLCC",
+          },
+          "VG M-CITY": {
+            area: "M-City, Ampang",
+            name: "Village Grocer M-City",
+            query: "Village Grocer M-City Ampang",
+          },
+          "VG GIZA": {
+            area: "Giza Mall, Kota Damansara",
+            name: "Village Grocer Giza",
+            query: "Village Grocer Giza Mall Kota Damansara",
+          },
+          "VG MELAWATI MALL UK": {
+            area: "Melawati Mall, Ulu Kelang",
+            name: "Village Grocer Melawati Mall",
+            query: "Village Grocer Melawati Mall Ulu Kelang",
+          },
+          "VG VERVE MONT KIARA": {
+            area: "Verve Shops, Mont Kiara",
+            name: "Village Grocer Verve Mont Kiara",
+            query: "Village Grocer Verve Shops Mont Kiara",
+          },
+          "VG IOI DAMANSARA": {
+            area: "IOI Damansara",
+            name: "Village Grocer IOI Damansara",
+            query: "Village Grocer IOI Damansara",
+          },
+          "VG SUNWAY": {
+            area: "Sunway Velocity",
+            name: "Village Grocer Sunway Velocity",
+            query: "Village Grocer Sunway Velocity",
+          },
+          "VG ECO CHERAS": {
+            area: "EcoCheras Mall",
+            name: "Village Grocer EcoCheras",
+            query: "Village Grocer EcoCheras Mall",
+          },
+          "B.I.G BANGSAR": {
+            area: "Bangsar Shopping Centre",
+            name: "B.I.G Bangsar",
+            query: "B.I.G Bangsar Shopping Centre",
+          },
+          "B.I.G LINC": {
+            area: "The LINC KL",
+            name: "B.I.G The LINC KL",
+            query: "B.I.G The LINC KL",
+          },
+          "B.I.G PUBLIKA": {
+            area: "Publika Shopping Gallery",
+            name: "B.I.G Publika",
+            query: "B.I.G Publika Shopping Gallery",
+          },
+          "TFM PAVILLION": {
+            area: "Pavilion Kuala Lumpur",
+            name: "The Food Merchant Pavilion",
+            query: "The Food Merchant Pavilion Kuala Lumpur",
+          },
+          "JAYA GROCER GARDEN MALL MV": {
+            area: "The Gardens Mall, Mid Valley City",
+            name: "Jaya Grocer The Gardens Mall",
+            query: "Jaya Grocer The Gardens Mall Mid Valley",
+          },
+          "JAYA GROCER LALAPORT": {
+            area: "LaLaport BBCC",
+            name: "Jaya Grocer LaLaport BBCC",
+            query: "Jaya Grocer LaLaport Bukit Bintang City Centre",
+          },
+          "LOTUS'S DATUM JELATEK": {
+            area: "Datum Jelatek, Ampang",
+            query: "Lotus's Datum Jelatek Ampang Kuala Lumpur",
+          },
+          "LOTUS'S IKANO": {
+            area: "Ikano, Mutiara Damansara",
+            query: "Lotus's Ikano Mutiara Damansara",
+          },
+          "LOTUS'S BUKIT TINGGI": {
+            area: "Bukit Tinggi, Klang",
+            query: "Lotus's Bukit Tinggi Klang",
+          },
+          "LOTUS'S MELACCA": {
+            area: "Melaka",
+            query: "Lotus's Melaka",
+          },
+          "LOTUS'S IOI": {
+            area: "IOI Puchong",
+            query: "Lotus's IOI Puchong",
+          },
+        };
 
-        function selectStore(idx) {
-          active = idx;
+        function detectBrand(raw) {
+          if (/^AEON\s+(BIG|BiG)\s+/i.test(raw)) return "AEON Big";
+          if (/^AEON\s+/i.test(raw)) return "AEON";
+          if (/^MAX\s+/i.test(raw)) return "MAX";
+          if (/^GIANT\s+/i.test(raw)) return "Giant";
+          if (/^MERCATO\s+/i.test(raw)) return "Mercato";
+          if (/^COLD STORAGE\s+/i.test(raw)) return "Cold Storage";
+          if (/^VG\s+/i.test(raw)) return "Village Grocer";
+          if (/^B\.I\.G\s+/i.test(raw)) return "B.I.G";
+          if (/^TFM\s+/i.test(raw)) return "The Food Merchant";
+          if (/^JAYA GROCER\s+/i.test(raw)) return "Jaya Grocer";
+          if (/^LOTUS'S\s+/i.test(raw)) return "Lotus's";
+          return "Other";
+        }
+
+        function areaFromRaw(raw) {
+          return raw
+            .replace(
+              /^(AEON\s+BIG|AEON\s+BiG|AEON|MAX|GIANT|MERCATO|COLD STORAGE|VG|B\.I\.G|TFM|JAYA GROCER|LOTUS'S)\s+/i,
+              "",
+            )
+            .replace(/-/g, " ")
+            .trim();
+        }
+
+        const ACRONYMS = new Set([
+          "AEON",
+          "BIG",
+          "MAX",
+          "TRX",
+          "KLCC",
+          "IOI",
+          "USJ-21",
+          "DPC",
+          "BBCC",
+          "KL",
+          "TMC",
+          "M-CITY",
+        ]);
+        const TOKEN_FIX = {
+          MELACCA: "Melaka",
+          PAVILLION: "Pavilion",
+          LALAPORT: "LaLaport",
+          ECOCHERAS: "EcoCheras",
+          RIMBAYU: "Rimbayu",
+        };
+
+        function titleToken(token) {
+          const up = token.toUpperCase();
+          if (TOKEN_FIX[up]) return TOKEN_FIX[up];
+          if (ACRONYMS.has(up) || /^[A-Z]{2,}\d*$/.test(up)) return up;
+          if (/^\d+$/.test(token)) return token;
+          return token.charAt(0).toUpperCase() + token.slice(1).toLowerCase();
+        }
+
+        function titleCase(input) {
+          return input
+            .split(/\s+/)
+            .filter(Boolean)
+            .map((word) =>
+              word
+                .split("-")
+                .map((part) => titleToken(part))
+                .join("-"),
+            )
+            .join(" ");
+        }
+
+        function canonicalArea(raw) {
+          const fixed = STORE_FIX[raw]?.area;
+          return fixed || titleCase(areaFromRaw(raw));
+        }
+
+        function labelFromParts(raw, brand, area) {
+          const fixed = STORE_FIX[raw]?.name;
+          if (fixed) return fixed;
+          return brand + " " + area;
+        }
+
+        function queryFromParts(raw, name, area) {
+          const fixed = STORE_FIX[raw]?.query;
+          if (fixed) {
+            const scoped = /malaysia/i.test(fixed)
+              ? fixed
+              : fixed + " Malaysia";
+            return encodeURIComponent(scoped);
+          }
+          return encodeURIComponent(name + " " + area + " Malaysia");
+        }
+
+        function esc(s) {
+          return String(s)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+        }
+
+        const DATA = RAW_STORES.map((raw, id) => {
+          const b = detectBrand(raw);
+          const meta = BRAND_META[b] || { c: "#5f6b7a", i: "📍" };
+          const area = canonicalArea(raw);
+          const n = labelFromParts(raw, b, area);
+          return {
+            id,
+            n,
+            a: area + ", Malaysia",
+            b,
+            i: meta.i,
+            c: meta.c,
+            q: queryFromParts(raw, n, area),
+            raw,
+          };
+        }).sort((a, b) => a.b.localeCompare(b.b) || a.n.localeCompare(b.n));
+
+        const BY_ID = Object.fromEntries(DATA.map((s) => [s.id, s]));
+        const brandOrder = Object.keys(BRAND_META);
+        const BRANDS = Array.from(new Set(DATA.map((s) => s.b))).sort(
+          (a, b) => {
+            const ai = brandOrder.indexOf(a);
+            const bi = brandOrder.indexOf(b);
+            return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+          },
+        );
+
+        let active = null;
+        let filter = "all";
+        let searchTerm = "";
+
+        function selectStore(id) {
+          const s = BY_ID[id];
+          if (!s) return;
+          active = id;
           render();
-          const s = DATA[idx],
-            c = BC[s.b];
           document.getElementById("mapF").src =
             "https://maps.google.com/maps?q=" +
             s.q +
             "&t=&z=16&ie=UTF8&iwloc=&output=embed";
           document.getElementById("mapCard").innerHTML =
             "<h4>" +
-            s.n +
+            esc(s.n) +
             "</h4>" +
             '<p style="font-size:.7rem;color:rgba(59,42,26,.56);line-height:1.5;margin-top:3px;">' +
-            s.a +
+            esc(s.a) +
             "</p>" +
             '<span class="mpill" style="background:' +
-            c +
+            s.c +
             "18;color:" +
-            c +
+            s.c +
             ';">' +
-            s.b +
+            esc(s.b) +
             "</span>" +
             '<a href="https://www.google.com/maps/search/?api=1&query=' +
             s.q +
-            '" target="_blank">Open in Google Maps →</a>';
+            '" target="_blank" rel="noopener">Open in Google Maps →</a>';
+        }
+
+        function storeItem(s) {
+          return (
+            '<div class="s-item' +
+            (active === s.id ? " on" : "") +
+            '" onclick="window._selS(' +
+            s.id +
+            ')">' +
+            '<div class="s-ico" style="background:' +
+            s.c +
+            '18;">' +
+            s.i +
+            "</div>" +
+            '<div class="s-txt"><h4>' +
+            esc(s.n) +
+            "</h4><p>" +
+            esc(s.a) +
+            "</p></div>" +
+            '<span class="s-tag" style="background:' +
+            s.c +
+            "18;color:" +
+            s.c +
+            ';">' +
+            esc(s.b) +
+            "</span>" +
+            "</div>"
+          );
+        }
+
+        function getFiltered() {
+          const q = searchTerm.trim().toLowerCase();
+          return DATA.filter((s) => {
+            const matchBrand = filter === "all" || s.b === filter;
+            if (!matchBrand) return false;
+            if (!q) return true;
+            return (s.n + " " + s.a + " " + s.b).toLowerCase().includes(q);
+          });
+        }
+
+        function renderFilters() {
+          const counts = DATA.reduce((acc, s) => {
+            acc[s.b] = (acc[s.b] || 0) + 1;
+            return acc;
+          }, {});
+          const box = document.getElementById("sFilters");
+          box.innerHTML = "";
+
+          function addFilter(label, brand, count) {
+            const b = document.createElement("button");
+            b.className = "s-f" + (filter === brand ? " on" : "");
+            b.textContent = label + " (" + count + ")";
+            b.onclick = function () {
+              window.filterS(brand, b);
+            };
+            box.appendChild(b);
+          }
+
+          addFilter("All", "all", DATA.length);
+          BRANDS.forEach((b) => addFilter(b, b, counts[b] || 0));
         }
 
         function render() {
-          const list =
-            filter === "all" ? DATA : DATA.filter((s) => s.b === filter);
-          document.getElementById("sList").innerHTML = list
-            .map((s) => {
-              const ri = DATA.indexOf(s),
-                c = BC[s.b];
+          const list = getFiltered();
+          const meta = document.getElementById("sMeta");
+          const baseTotal =
+            filter === "all"
+              ? DATA.length
+              : DATA.filter((s) => s.b === filter).length;
+          meta.textContent =
+            list.length +
+            " of " +
+            baseTotal +
+            " stores shown" +
+            (searchTerm ? ' for "' + searchTerm + '"' : "") +
+            ".";
+
+          const panel = document.getElementById("sList");
+          if (!list.length) {
+            panel.innerHTML =
+              '<div class="s-empty">No matching store found. Try a different keyword or switch brand filters.</div>';
+            return;
+          }
+
+          const groups = list.reduce((acc, s) => {
+            if (!acc[s.b]) acc[s.b] = [];
+            acc[s.b].push(s);
+            return acc;
+          }, {});
+
+          const orderedGroups =
+            filter === "all" ? BRANDS.filter((b) => groups[b]) : [filter];
+
+          panel.innerHTML = orderedGroups
+            .map((b) => {
+              const stores = groups[b] || [];
               return (
-                '<div class="s-item' +
-                (active === ri ? " on" : "") +
-                '" onclick="window._selS(' +
-                ri +
-                ')">' +
-                '<div class="s-ico" style="background:' +
-                c +
-                '18;">' +
-                s.i +
-                "</div>" +
-                '<div class="s-txt"><h4>' +
-                s.n +
-                "</h4><p>" +
-                s.a +
-                "</p></div>" +
-                '<span class="s-tag" style="background:' +
-                c +
-                "18;color:" +
-                c +
-                ';">' +
-                s.b +
-                "</span>" +
+                '<div class="s-group">' +
+                '<div class="s-group-h">' +
+                esc(b) +
+                " (" +
+                stores.length +
+                ")</div>" +
+                stores.map((s) => storeItem(s)).join("") +
                 "</div>"
               );
             })
@@ -2440,10 +2773,16 @@
           document
             .querySelectorAll(".s-f")
             .forEach((b) => b.classList.remove("on"));
-          btn.classList.add("on");
+          if (btn) btn.classList.add("on");
+          render();
+        };
+        window.searchS = function (value) {
+          searchTerm = value || "";
+          active = null;
           render();
         };
 
+        renderFilters();
         render();
       })();
     </script>
