@@ -3,7 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Suan Mokkh Garden – Organic Vegetables</title>
+    <title>Suan Mokkh Garden – Organic Vegetables in Port Dickson</title>
+    <meta
+      name="description"
+      content="Discover Suan Mokkh Garden, a family organic farm in Port Dickson founded in 2002. Explore our fresh vegetables and find us at 67 store locations."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Suan Mokkh Garden" />
+    <meta property="og:locale" content="en_MY" />
+    <meta property="og:title" content="Suan Mokkh Garden – Grown with care. Eaten with joy." />
+    <meta
+      property="og:description"
+      content="Family-grown organic vegetables from Port Dickson since 2002. Explore our produce and find a store near you."
+    />
+    <!-- Before publishing, make both image URLs absolute using the public website URL. -->
+    <meta property="og:image" content="home_photo/home1.jpg" />
+    <meta property="og:image:width" content="2560" />
+    <meta property="og:image:height" content="1920" />
+    <meta property="og:image:alt" content="Vegetable beds and greenery at Suan Mokkh Garden" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Suan Mokkh Garden – Organic Vegetables" />
+    <meta name="twitter:description" content="Family-grown organic vegetables from Port Dickson since 2002. Find us at 67 store locations." />
+    <meta name="twitter:image" content="home_photo/home1.jpg" />
+    <meta name="twitter:image:alt" content="Vegetable beds and greenery at Suan Mokkh Garden" />
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
       rel="stylesheet"
@@ -26,6 +48,24 @@
       }
       html {
         scroll-behavior: smooth;
+      }
+      section {
+        scroll-margin-top: 100px;
+      }
+      :focus-visible {
+        outline: 3px solid var(--gold);
+        outline-offset: 4px;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+        border: 0;
       }
       body {
         font-family: "Lato", sans-serif;
@@ -424,7 +464,6 @@
         transform-style: preserve-3d;
         transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
       }
-      .flip-wrap:hover .flip-inner,
       .flip-wrap.flipped .flip-inner {
         transform: rotateY(180deg);
       }
@@ -467,7 +506,7 @@
       .flip-wrap.ecosystem-integrity .flip-back {
         background-image:
           linear-gradient(rgba(30, 44, 21, 0.72), rgba(30, 44, 21, 0.72)),
-          url("ecosystem_integrity.JPG");
+          url("ecosystem_integrity.jpg");
       }
       .flip-wrap.boosting-biodiversity .flip-back {
         background-image:
@@ -643,7 +682,7 @@
         left: 0;
         right: 0;
         z-index: 2;
-        padding: 20px 22px 18px;
+        padding: 20px 22px 52px;
         color: #fff;
         font-size: 0.77rem;
         line-height: 1.5;
@@ -658,18 +697,47 @@
         z-index: 10;
       }
       .story-media-dot {
-        width: 8px;
-        height: 8px;
+        width: 24px;
+        height: 24px;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.35);
+        background: transparent;
         border: none;
         cursor: pointer;
         padding: 0;
         transition: all 0.2s;
       }
-      .story-media-dot.on {
+      .story-media-dot::before {
+        content: "";
+        display: block;
+        width: 8px;
+        height: 8px;
+        margin: auto;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.45);
+      }
+      .story-media-dot.on::before {
         background: #fff;
         transform: scale(1.35);
+      }
+      .slideshow-toggle {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        z-index: 10;
+        padding: 10px 14px;
+        min-height: 44px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 4px;
+        background: rgba(15, 28, 8, 0.8);
+        color: #fff;
+        font: inherit;
+        font-size: 0.75rem;
+        cursor: pointer;
+      }
+      .hero-toggle {
+        top: auto;
+        bottom: 20px;
+        right: 6%;
       }
       .story-media-arr {
         position: absolute;
@@ -721,7 +789,7 @@
         margin-bottom: 14px;
       }
       .story-panel-nav {
-        margin-top: 20px;
+        margin-bottom: 24px;
         display: flex;
         gap: 10px;
         justify-content: center;
@@ -873,217 +941,16 @@
         color: var(--moss);
         font-weight: 700;
       }
-
-      /* ── RECIPES ── */
-      #recipes {
-        background: var(--soil);
-        padding: 90px 0;
+      .prod-cta {
+        margin-top: 36px;
+        text-align: center;
       }
-      .rec-wrap {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 56px;
-      }
-      .rec-head {
-        margin-bottom: 40px;
-      }
-      .rec-head .sec-title {
-        color: var(--cream);
-      }
-      .rec-tabs {
-        display: flex;
-        gap: 9px;
-        margin-bottom: 34px;
-        flex-wrap: wrap;
-      }
-      .rec-tab {
-        padding: 8px 20px;
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        border-radius: 2px;
-        font-size: 0.73rem;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        color: rgba(253, 250, 244, 0.46);
-        cursor: pointer;
-        transition: all 0.2s;
-        background: transparent;
-      }
-      .rec-tab.on,
-      .rec-tab:hover {
-        background: var(--leaf);
-        border-color: var(--leaf);
-        color: #fff;
-      }
-      .rec-feat {
-        display: grid;
-        grid-template-columns: 1.2fr 1fr;
-        gap: 52px;
-        align-items: center;
-      }
-      .rec-img {
-        border-radius: 4px;
-        overflow: hidden;
-        height: 450px;
-      }
-      .rec-img .emoji {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 8rem;
-      }
-      .rec-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-      .veg-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 9px;
-        background: rgba(255, 255, 255, 0.06);
-        padding: 8px 15px;
-        border-radius: 2px;
-        margin-bottom: 20px;
-      }
-      .veg-pip {
-        width: 6px;
-        height: 6px;
-        background: var(--leaf);
-        border-radius: 50%;
-      }
-      .veg-lbl {
-        font-size: 0.69rem;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--sage);
-      }
-      .rec-body h2 {
-        font-family: "Playfair Display", serif;
-        font-size: 2rem;
-        color: var(--cream);
-        line-height: 1.2;
-        margin-bottom: 14px;
-      }
-      .rec-body > p {
-        font-size: 0.88rem;
-        line-height: 1.8;
-        color: rgba(253, 250, 244, 0.62);
-        margin-bottom: 20px;
-      }
-      .rec-meta {
-        display: flex;
-        gap: 24px;
-        margin-bottom: 24px;
-      }
-      .rm .val {
-        font-family: "Playfair Display", serif;
-        font-size: 1.3rem;
-        color: var(--gold);
-      }
-      .rm .key {
-        font-size: 0.61rem;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        color: rgba(253, 250, 244, 0.38);
-      }
-      .rec-steps {
-        list-style: none;
-      }
-      .rec-steps li {
-        display: flex;
-        gap: 12px;
-        margin-bottom: 10px;
-        font-size: 0.83rem;
-        line-height: 1.6;
-        color: rgba(253, 250, 244, 0.65);
-      }
-      .sn {
-        min-width: 20px;
-        height: 20px;
-        background: var(--leaf);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.64rem;
-        font-weight: 700;
-        color: #fff;
-        margin-top: 2px;
-        flex-shrink: 0;
-      }
-      .nl-source {
-        margin: -8px 0 16px;
-        font-size: 0.73rem;
-        color: rgba(253, 250, 244, 0.52);
-        border-left: 2px solid rgba(200, 168, 75, 0.5);
-        padding-left: 10px;
-      }
-      .nl-source a {
-        color: var(--gold);
-        text-decoration: none;
-      }
-      .nl-source a:hover {
-        text-decoration: underline;
-      }
-      .ing-picks {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        margin-bottom: 12px;
-      }
-      .ing-chip {
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        background: transparent;
-        color: rgba(253, 250, 244, 0.65);
-        font-size: 0.64rem;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        border-radius: 16px;
-        padding: 5px 10px;
-        cursor: pointer;
-        transition: all 0.18s;
-      }
-      .ing-chip.on,
-      .ing-chip:hover {
-        border-color: var(--gold);
-        background: rgba(200, 168, 75, 0.18);
-        color: #fff;
-      }
-      .ing-list {
-        list-style: none;
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 8px;
+      .prod-cta p {
         margin-bottom: 18px;
+        line-height: 1.6;
       }
-      .ing-list li {
-        font-size: 0.74rem;
-        line-height: 1.45;
-        color: rgba(253, 250, 244, 0.74);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(255, 255, 255, 0.04);
-        border-radius: 4px;
-        padding: 8px 10px;
-        transition: all 0.18s;
-      }
-      .ing-list li.hit {
-        border-color: rgba(200, 168, 75, 0.45);
-        background: rgba(200, 168, 75, 0.12);
-      }
-      .sell-tag {
+      .prod-cta .btn-gold {
         display: inline-block;
-        margin-left: 7px;
-        padding: 1px 6px;
-        border-radius: 10px;
-        background: rgba(107, 140, 78, 0.24);
-        color: #dbe9ce;
-        border: 1px solid rgba(107, 140, 78, 0.5);
-        font-size: 0.57rem;
-        letter-spacing: 0.8px;
-        text-transform: uppercase;
       }
 
       /* ── STORES ── */
@@ -1101,13 +968,14 @@
       }
       .stores-layout {
         display: grid;
-        grid-template-columns: 390px 1fr;
+        grid-template-columns: 390px minmax(0, 1fr);
         border-radius: 8px;
         overflow: hidden;
         box-shadow: 0 14px 50px rgba(59, 42, 26, 0.13);
       }
       .s-panel {
         background: var(--cream);
+        min-width: 0;
         display: flex;
         flex-direction: column;
         height: 580px;
@@ -1197,6 +1065,12 @@
         padding: 7px 16px;
       }
       .s-item {
+        width: 100%;
+        border: 0;
+        background: transparent;
+        font: inherit;
+        color: inherit;
+        text-align: left;
         display: flex;
         align-items: center;
         gap: 11px;
@@ -1204,6 +1078,9 @@
         cursor: pointer;
         transition: all 0.15s;
         border-left: 3px solid transparent;
+      }
+      .s-item:focus-visible {
+        outline-offset: -3px;
       }
       .s-item:hover {
         background: rgba(74, 94, 58, 0.06);
@@ -1222,12 +1099,18 @@
         font-size: 0.9rem;
         flex-shrink: 0;
       }
-      .s-txt h4 {
+      .s-txt .s-name {
+        display: block;
         font-size: 0.82rem;
         font-weight: 700;
         color: var(--soil);
       }
-      .s-txt p {
+      .s-txt {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+      .s-txt .s-area {
+        display: block;
         font-size: 0.69rem;
         color: rgba(59, 42, 26, 0.47);
         margin-top: 1px;
@@ -1313,7 +1196,7 @@
         max-width: 1200px;
         margin: 0 auto;
         display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1fr;
+        grid-template-columns: 2fr 1fr 1fr;
         gap: 40px;
         padding-bottom: 32px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.07);
@@ -1347,6 +1230,7 @@
         margin-bottom: 8px;
       }
       .foot-col ul li a {
+        overflow-wrap: anywhere;
         text-decoration: none;
         font-size: 0.79rem;
         color: rgba(253, 250, 244, 0.45);
@@ -1354,6 +1238,24 @@
       }
       .foot-col ul li a:hover {
         color: var(--cream);
+      }
+      .copy-email {
+        border: 1px solid rgba(253, 250, 244, 0.4);
+        border-radius: 4px;
+        background: transparent;
+        color: var(--cream);
+        padding: 9px 12px;
+        min-height: 44px;
+        font: inherit;
+        font-size: 0.75rem;
+        cursor: pointer;
+      }
+      .copy-status {
+        margin-top: 10px;
+        min-height: 2.8em;
+        color: var(--cream);
+        font-size: 0.75rem;
+        line-height: 1.4;
       }
       .foot-bottom {
         max-width: 1200px;
@@ -1391,7 +1293,6 @@
         .why-wrap,
         .story-wrap,
         .prod-wrap,
-        .rec-wrap,
         .stores-wrap {
           padding: 0 32px;
         }
@@ -1412,7 +1313,6 @@
           transform-style: flat !important;
           transition: none !important;
         }
-        .flip-wrap:hover .flip-inner,
         .flip-wrap.flipped .flip-inner {
           transform: none !important;
         }
@@ -1444,16 +1344,6 @@
         }
         .prod-grid {
           grid-template-columns: repeat(2, 1fr);
-        }
-        .rec-feat {
-          grid-template-columns: 1fr;
-          gap: 30px;
-        }
-        .rec-img {
-          height: 280px;
-        }
-        .ing-list {
-          grid-template-columns: 1fr;
         }
         .stores-layout {
           grid-template-columns: 1fr;
@@ -1574,8 +1464,8 @@
           min-height: 280px;
         }
         .story-media-arr {
-          width: 34px;
-          height: 34px;
+          width: 44px;
+          height: 44px;
         }
         .story-text {
           padding: 24px 18px;
@@ -1609,34 +1499,6 @@
         }
         .prod-info p {
           font-size: 0.73rem;
-        }
-
-        #recipes {
-          padding: 60px 0;
-        }
-        .rec-wrap {
-          padding: 0 18px;
-        }
-        .rec-tab {
-          padding: 7px 13px;
-          font-size: 0.67rem;
-        }
-        .rec-feat {
-          grid-template-columns: 1fr;
-          gap: 24px;
-        }
-        .rec-img {
-          height: 200px;
-        }
-        .ing-chip {
-          font-size: 0.6rem;
-          padding: 5px 8px;
-        }
-        .rec-body h2 {
-          font-size: 1.55rem;
-        }
-        .rec-body > p {
-          font-size: 0.83rem;
         }
 
         #stores {
@@ -1699,6 +1561,23 @@
           font-size: 1.75rem;
         }
       }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+        .ticker-inner {
+          flex-wrap: wrap;
+          justify-content: center;
+          width: auto;
+          white-space: normal;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1715,13 +1594,14 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="#story">Our Farm</a></li>
         <li><a href="#products">Produce</a></li>
-        <li><a href="#recipes">Recipes</a></li>
         <li><a href="#stores">Find Us</a></li>
       </ul>
       <button
         class="nav-hamburger"
-        onclick="document.getElementById('navLinks').classList.toggle('open')"
-        aria-label="Menu"
+        type="button"
+        aria-label="Open menu"
+        aria-controls="navLinks"
+        aria-expanded="false"
       >
         <span></span><span></span><span></span>
       </button>
@@ -1752,10 +1632,13 @@
           day.
         </p>
         <div class="hero-cta">
-          <a href="#products" class="btn-gold">Explore Produce</a>
-          <a href="#story" class="btn-outline">Our Story</a>
+          <a href="#stores" class="btn-gold">Find a Store</a>
+          <a href="#products" class="btn-outline">Explore Produce</a>
         </div>
       </div>
+      <button type="button" class="slideshow-toggle hero-toggle" id="heroPause">
+        Pause slideshow
+      </button>
       <div class="scroll-cue">
         <span>Scroll</span>
         <div class="scroll-line"></div>
@@ -1798,6 +1681,7 @@
     <section id="story">
       <div class="story-wrap">
         <div class="story-rotator" id="storyRotator">
+          <div class="story-panel-nav" id="storyPanelNav" role="group" aria-label="Choose a farm story"></div>
           <article class="story-panel on" data-story-panel>
             <div class="story-media" data-story-media>
               <div class="story-shots">
@@ -1808,7 +1692,7 @@
                     loading="lazy"
                   />
                   <figcaption class="story-caption">
-                    The family homestead — our farm's heart since 2013.
+                    The family homestead — our farm's heart since 2002.
                   </figcaption>
                 </figure>
                 <figure class="story-shot">
@@ -1877,7 +1761,7 @@
               <hr class="sec-div" />
               <p>
                 Suan Mokkh Garden — meaning "Garden of Liberation" in Thai — was
-                founded in 2013 by the Tiong family on 14 acres of rich highland
+                founded in 2002 by the Tiong family on 14 acres of rich highland
                 soil. What began as a modest plot of spinach and herbs has grown
                 into one of Peninsular Malaysia's most trusted certified organic
                 farms.
@@ -2023,7 +1907,6 @@
             </div>
           </article>
 
-          <div class="story-panel-nav" id="storyPanelNav"></div>
         </div>
       </div>
     </section>
@@ -2036,13 +1919,12 @@
           <h2 class="sec-title">The organic <em>difference</em></h2>
           <hr class="sec-div" />
           <p>
-            Hover or tap each card to discover what makes our produce different.
+            Discover what makes our produce different.
           </p>
         </div>
         <div class="why-cards">
           <div
             class="flip-wrap taste-and-flavor"
-            onclick="this.classList.toggle('flipped')"
           >
             <div class="flip-inner">
               <div class="flip-front">
@@ -2064,7 +1946,6 @@
           </div>
           <div
             class="flip-wrap reduced-pesticide-residue"
-            onclick="this.classList.toggle('flipped')"
           >
             <div class="flip-inner">
               <div class="flip-front">
@@ -2086,7 +1967,6 @@
           </div>
           <div
             class="flip-wrap ecosystem-integrity"
-            onclick="this.classList.toggle('flipped')"
           >
             <div class="flip-inner">
               <div class="flip-front">
@@ -2108,7 +1988,6 @@
           </div>
           <div
             class="flip-wrap boosting-biodiversity"
-            onclick="this.classList.toggle('flipped')"
           >
             <div class="flip-inner">
               <div class="flip-front">
@@ -2135,12 +2014,12 @@
             ><span class="stat-l">Acres of Farm</span>
           </div>
           <div class="stat-b">
-            <span class="stat-n" data-target="20">0</span
-            ><span class="stat-l">Years Growing</span>
+            <span class="stat-n">2002</span
+            ><span class="stat-l">Founded</span>
           </div>
           <div class="stat-b">
             <span class="stat-n" data-target="67">0</span
-            ><span class="stat-l">Retail Partners</span>
+            ><span class="stat-l">Store Locations</span>
           </div>
           <div class="stat-b">
             <span class="stat-n" data-target="24">0</span
@@ -2290,313 +2169,9 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- RECIPES -->
-    <section id="recipes">
-      <div class="rec-wrap">
-        <div class="rec-head">
-          <span class="sec-label">Weekly Recipe</span>
-          <h2 class="sec-title">
-            Cook with what's <em style="color: var(--gold)">in season</em>
-          </h2>
-        </div>
-        <div class="rec-tabs">
-          <button class="rec-tab on" onclick="showRec(0, this)">
-            Nasi Lemak
-          </button>
-          <button class="rec-tab" onclick="showRec(1, this)">
-            Baby Spinach
-          </button>
-          <button class="rec-tab" onclick="showRec(2, this)">
-            Cherry Tomatoes
-          </button>
-          <button class="rec-tab" onclick="showRec(3, this)">Eggplant</button>
-        </div>
-
-        <div id="r0" class="rec-feat" style="display: none">
-          <div class="rec-img">
-            <div
-              class="emoji"
-              style="background: linear-gradient(135deg, #1a3a10, #3a6a2a)"
-            >
-              🥬
-            </div>
-          </div>
-          <div class="rec-body">
-            <div class="veg-pill">
-              <span class="veg-pip"></span
-              ><span class="veg-lbl">Star: Baby Spinach</span>
-            </div>
-            <h2>Garlic Spinach with Sesame & Soft Egg</h2>
-            <p>
-              Fresh baby spinach wilts beautifully in a hot wok with garlic,
-              finished with toasted sesame and a soft-boiled egg. Ready in 12
-              minutes.
-            </p>
-            <div class="rec-meta">
-              <div class="rm">
-                <div class="val">12</div>
-                <div class="key">Minutes</div>
-              </div>
-              <div class="rm">
-                <div class="val">2</div>
-                <div class="key">Servings</div>
-              </div>
-              <div class="rm">
-                <div class="val">Easy</div>
-                <div class="key">Level</div>
-              </div>
-            </div>
-            <ol class="rec-steps">
-              <li>
-                <span class="sn">1</span>Boil 2 eggs for 6.5 minutes then
-                transfer to ice water.
-              </li>
-              <li>
-                <span class="sn">2</span>Heat sesame oil on high. Add 4 cloves
-                minced garlic, sauté 30 seconds.
-              </li>
-              <li>
-                <span class="sn">3</span>Add 200g baby spinach in batches, toss
-                until just wilted (~90 seconds).
-              </li>
-              <li>
-                <span class="sn">4</span>Season with light soy and sea salt. Top
-                with sesame seeds and halved eggs.
-              </li>
-            </ol>
-          </div>
-        </div>
-
-        <div id="r1" class="rec-feat" style="display: none">
-          <div class="rec-img">
-            <div
-              class="emoji"
-              style="background: linear-gradient(135deg, #6a1a0a, #c04020)"
-            >
-              🍅
-            </div>
-          </div>
-          <div class="rec-body">
-            <div class="veg-pill">
-              <span class="veg-pip" style="background: #e06040"></span
-              ><span class="veg-lbl">Star: Cherry Tomatoes</span>
-            </div>
-            <h2>Roasted Cherry Tomato Pasta with Burrata</h2>
-            <p>
-              Slow-roasting concentrates the natural sugars into a jammy,
-              fragrant sauce. Served over pasta with creamy burrata.
-            </p>
-            <div class="rec-meta">
-              <div class="rm">
-                <div class="val">35</div>
-                <div class="key">Minutes</div>
-              </div>
-              <div class="rm">
-                <div class="val">3</div>
-                <div class="key">Servings</div>
-              </div>
-              <div class="rm">
-                <div class="val">Easy</div>
-                <div class="key">Level</div>
-              </div>
-            </div>
-            <ol class="rec-steps">
-              <li>
-                <span class="sn">1</span>Preheat oven to 200°C. Toss 350g cherry
-                tomatoes with olive oil, garlic, salt.
-              </li>
-              <li>
-                <span class="sn">2</span>Roast 25–30 minutes until blistered and
-                jammy. Add fresh basil last 2 minutes.
-              </li>
-              <li>
-                <span class="sn">3</span>Cook 250g pasta al dente. Reserve ½ cup
-                pasta water before draining.
-              </li>
-              <li>
-                <span class="sn">4</span>Toss pasta with roasted tomatoes and
-                water. Top with torn burrata.
-              </li>
-            </ol>
-          </div>
-        </div>
-
-        <div id="r2" class="rec-feat" style="display: none">
-          <div class="rec-img">
-            <div
-              class="emoji"
-              style="background: linear-gradient(135deg, #3a0a5a, #7a3aa0)"
-            >
-              🍆
-            </div>
-          </div>
-          <div class="rec-body">
-            <div class="veg-pill">
-              <span class="veg-pip" style="background: #9060c0"></span
-              ><span class="veg-lbl">Star: Purple Eggplant</span>
-            </div>
-            <h2>Nyonya-Style Sambal Eggplant</h2>
-            <p>
-              A Malaysian classic — smoky sambal clings to silky eggplant. Bold,
-              fragrant, served with steamed white rice.
-            </p>
-            <div class="rec-meta">
-              <div class="rm">
-                <div class="val">25</div>
-                <div class="key">Minutes</div>
-              </div>
-              <div class="rm">
-                <div class="val">4</div>
-                <div class="key">Servings</div>
-              </div>
-              <div class="rm">
-                <div class="val">Medium</div>
-                <div class="key">Level</div>
-              </div>
-            </div>
-            <ol class="rec-steps">
-              <li>
-                <span class="sn">1</span>Cut 3 eggplants into wedges, salt
-                lightly, rest 10 minutes.
-              </li>
-              <li>
-                <span class="sn">2</span>Pan-fry in hot oil until golden on all
-                sides. Set aside.
-              </li>
-              <li>
-                <span class="sn">3</span>Fry sambal paste with sliced shallots
-                until oil splits.
-              </li>
-              <li>
-                <span class="sn">4</span>Return eggplant, toss in sambal. Finish
-                with lime. Serve with rice.
-              </li>
-            </ol>
-          </div>
-        </div>
-
-        <div id="r3" class="rec-feat">
-          <div class="rec-img">
-            <img
-              src="https://commons.wikimedia.org/wiki/Special:FilePath/Nasi%20lemak%2001a.jpg"
-              alt="Nasi lemak served with sambal, egg and cucumber"
-              loading="lazy"
-            />
-          </div>
-          <div class="rec-body">
-            <div class="veg-pill">
-              <span class="veg-pip" style="background: #e4d07e"></span
-              ><span class="veg-lbl"
-                >Featured: Pandan, Lemongrass, Eggs, Cucumber</span
-              >
-            </div>
-            <h2>Farm-Fresh Nasi Lemak</h2>
-            <p>
-              Creamy coconut rice infused with pandan and lemongrass, plated
-              with sambal, boiled eggs, crunchy peanuts, and fresh cucumber.
-            </p>
-            <p class="nl-source">
-              <strong>Recipe Source:</strong> Inspired by
-              <a
-                href="https://www.nyonyacooking.com/recipes/nasi-lemak-recipe~BynkuvoPf9-X"
-                target="_blank"
-                rel="noopener"
-                >Nyonya Cooking's Nasi Lemak recipe</a
-              >
-              and adapted in our own wording/style.
-              <br />
-              <strong>Photo Credit:</strong>
-              <a
-                href="https://commons.wikimedia.org/wiki/File:Nasi_lemak_01a.jpg"
-                target="_blank"
-                rel="noopener"
-                >Wikimedia Commons (Takeaway, CC BY-SA 3.0)</a
-              >.
-            </p>
-            <div class="rec-meta">
-              <div class="rm">
-                <div class="val">45</div>
-                <div class="key">Minutes</div>
-              </div>
-              <div class="rm">
-                <div class="val">4</div>
-                <div class="key">Servings</div>
-              </div>
-              <div class="rm">
-                <div class="val">Medium</div>
-                <div class="key">Level</div>
-              </div>
-            </div>
-
-            <div class="ing-picks">
-              <button class="ing-chip on" onclick="filterNL('all', this)">
-                Show All
-              </button>
-              <button class="ing-chip" onclick="filterNL('pandan', this)">
-                Pandan
-              </button>
-              <button class="ing-chip" onclick="filterNL('lemongrass', this)">
-                Lemongrass
-              </button>
-              <button class="ing-chip" onclick="filterNL('eggs', this)">
-                Eggs
-              </button>
-              <button class="ing-chip" onclick="filterNL('cucumber', this)">
-                Cucumber
-              </button>
-            </div>
-
-            <ul class="ing-list" id="nlIngList">
-              <li class="hit" data-keys="pandan">
-                2 pandan leaves, knotted <span class="sell-tag">We Sell</span>
-              </li>
-              <li class="hit" data-keys="lemongrass">
-                1 stalk lemongrass, lightly bruised
-                <span class="sell-tag">We Sell</span>
-              </li>
-              <li class="hit" data-keys="eggs">
-                4 eggs, boiled <span class="sell-tag">We Sell</span>
-              </li>
-              <li class="hit" data-keys="cucumber">
-                1 cucumber, sliced <span class="sell-tag">We Sell</span>
-              </li>
-              <li class="hit" data-keys="other">2 cups rice, rinsed</li>
-              <li class="hit" data-keys="other">
-                1 cup coconut milk + 1 cup water
-              </li>
-              <li class="hit" data-keys="other">
-                Sambal (homemade or ready-made)
-              </li>
-              <li class="hit" data-keys="other">
-                Toasted peanuts + crispy anchovies
-              </li>
-            </ul>
-
-            <ol class="rec-steps">
-              <li>
-                <span class="sn">1</span>Cook rice with coconut milk, water,
-                pandan, lemongrass, and salt until fluffy.
-              </li>
-              <li>
-                <span class="sn">2</span>Boil eggs to your preferred doneness,
-                then peel and halve.
-              </li>
-              <li>
-                <span class="sn">3</span>Warm sambal and prep cucumber slices.
-              </li>
-              <li>
-                <span class="sn">4</span>Plate coconut rice with sambal, eggs,
-                peanuts, anchovies, and cucumber.
-              </li>
-              <li>
-                <span class="sn">5</span>Finish with extra cucumber and sambal
-                on the side for a fresher farm-style serving.
-              </li>
-            </ol>
-          </div>
+        <div class="prod-cta">
+          <p>Find our fresh produce at 67 store locations.</p>
+          <a href="#stores" class="btn-gold">Find a Store</a>
         </div>
       </div>
     </section>
@@ -2620,11 +2195,12 @@
                   id="sSearch"
                   class="s-search"
                   type="search"
+                  aria-label="Search stores by name, brand, or area"
                   placeholder="Search store / area..."
                   oninput="window.searchS(this.value)"
                 />
               </div>
-              <div class="s-meta" id="sMeta"></div>
+              <div class="s-meta" id="sMeta" role="status"></div>
               <div class="s-filters" id="sFilters"></div>
             </div>
             <div class="s-list" id="sList"></div>
@@ -2632,6 +2208,7 @@
           <div class="map-wrap">
             <iframe
               id="mapF"
+              title="Store location map"
               src="https://maps.google.com/maps?q=Kuala+Lumpur&t=&z=12&ie=UTF8&iwloc=&output=embed"
               allowfullscreen
               loading="lazy"
@@ -2662,27 +2239,25 @@
           <ul>
             <li><a href="#story">Our Farm</a></li>
             <li><a href="#products">Produce</a></li>
-            <li><a href="#recipes">Recipes</a></li>
             <li><a href="#stores">Find Us</a></li>
-          </ul>
-        </div>
-        <div class="foot-col">
-          <h4>Info</h4>
-          <ul>
-            <li><a href="#">Certification</a></li>
-            <li><a href="#">Farm Visits</a></li>
-            <li><a href="#">Wholesale</a></li>
-            <li><a href="#">Press</a></li>
           </ul>
         </div>
         <div class="foot-col">
           <h4>Contact</h4>
           <ul>
-            <li><a href="#">hello@suanmokkh.my</a></li>
-            <li><a href="#">+60 3-XXXX XXXX</a></li>
-            <li><a href="#">Instagram</a></li>
-            <li><a href="#">Facebook</a></li>
+            <li>
+              <a
+                id="contactEmail"
+                href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=suanmokkhgarden%40gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Email suanmokkhgarden@gmail.com in Gmail (opens in a new tab)"
+                >suanmokkhgarden@gmail.com</a
+              >
+            </li>
+            <li><button class="copy-email" id="copyEmail" type="button">Copy email address</button></li>
           </ul>
+          <p class="copy-status" id="copyEmailStatus" role="status"></p>
         </div>
       </div>
       <div class="foot-bottom">
@@ -2692,51 +2267,114 @@
     </footer>
 
     <script>
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
       /* NAV */
-      window.addEventListener("scroll", () =>
-        document
-          .getElementById("nav")
-          .classList.toggle("scrolled", scrollY > 50),
-      );
-
-      /* HERO ROTATOR */
       (function () {
-        const imgs = [
-          "home_photo/home1.jpg",
-          "home_photo/home2.jpg",
-          "home_photo/home3.jpg",
-        ];
-        const a = document.getElementById("heroImgA");
-        const b = document.getElementById("heroImgB");
-        if (!a || !b || imgs.length < 2) return;
+        const nav = document.getElementById("nav");
+        const links = document.getElementById("navLinks");
+        const toggle = nav.querySelector(".nav-hamburger");
+        function setOpen(open) {
+          links.classList.toggle("open", open);
+          toggle.setAttribute("aria-expanded", String(open));
+          toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+        }
+        function updateScroll() {
+          nav.classList.toggle("scrolled", window.scrollY > 50);
+        }
+        toggle.addEventListener("click", () => setOpen(!links.classList.contains("open")));
+        links.addEventListener("click", (event) => {
+          if (event.target.closest("a")) setOpen(false);
+        });
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && links.classList.contains("open")) {
+            setOpen(false);
+            toggle.focus();
+          }
+        });
+        document.addEventListener("click", (event) => {
+          if (!nav.contains(event.target)) setOpen(false);
+        });
+        window.matchMedia("(max-width: 600px)").addEventListener("change", () => setOpen(false));
+        window.addEventListener("scroll", updateScroll, { passive: true });
+        updateScroll();
+      })();
 
+      /* Hover/focus hold the current slide; only explicit pause stops its video. */
+      function createSlideshow(container, button, advance, duration, onStateChange) {
+        let active = false;
+        let paused = reducedMotion.matches;
+        let focusPaused = false;
+        let hovering = false;
+        let running = false;
+        let timer = null;
+
+        function refresh() {
+          clearInterval(timer);
+          const playbackAllowed = active && !paused && !document.hidden;
+          running = playbackAllowed && !focusPaused && !hovering;
+          button.textContent = paused || focusPaused ? "Resume slideshow" : "Pause slideshow";
+          if (running) timer = setInterval(advance, duration);
+          if (onStateChange) onStateChange(running, playbackAllowed);
+        }
+        button.addEventListener("click", () => {
+          paused = !(paused || focusPaused);
+          focusPaused = false;
+          refresh();
+        });
+        container.addEventListener("focusin", (event) => {
+          if (event.target !== button) {
+            focusPaused = true;
+            refresh();
+          }
+        });
+        container.addEventListener("mouseenter", () => {
+          hovering = window.matchMedia("(hover: hover)").matches;
+          refresh();
+        });
+        container.addEventListener("mouseleave", () => {
+          hovering = false;
+          refresh();
+        });
+        document.addEventListener("visibilitychange", refresh);
+        reducedMotion.addEventListener("change", () => {
+          if (reducedMotion.matches) paused = true;
+          refresh();
+        });
+        return {
+          refresh,
+          isRunning: () => running,
+          activate() { active = true; refresh(); },
+          deactivate() { active = false; refresh(); },
+        };
+      }
+
+      /* HERO SLIDESHOW */
+      (function () {
+        const imgs = ["home_photo/home1.jpg", "home_photo/home2.jpg", "home_photo/home3.jpg"];
+        const slots = [document.getElementById("heroImgA"), document.getElementById("heroImgB")];
         let active = 0;
         let idx = 0;
-        const slots = [a, b];
-        const DUR = 5200;
-
-        setInterval(() => {
-          idx = (idx + 1) % imgs.length;
-          const nextSlot = slots[1 - active];
-          const activeSlot = slots[active];
-          const nextSrc = imgs[idx];
-
-          if (nextSlot.src.endsWith(nextSrc)) {
-            nextSlot.classList.add("on");
-            activeSlot.classList.remove("on");
-            active = 1 - active;
-            return;
-          }
-
-          const pre = new Image();
-          pre.onload = () => {
-            nextSlot.src = nextSrc;
-            nextSlot.classList.add("on");
-            activeSlot.classList.remove("on");
-            active = 1 - active;
-          };
-          pre.src = nextSrc;
-        }, DUR);
+        let request = 0;
+        const rotation = createSlideshow(
+          document.getElementById("hero"), document.getElementById("heroPause"),
+          () => {
+            const nextIdx = (idx + 1) % imgs.length;
+            const nextSlot = slots[1 - active];
+            const currentRequest = ++request;
+            const pre = new Image();
+            pre.onload = () => {
+              if (!rotation.isRunning() || currentRequest !== request) return;
+              nextSlot.src = imgs[nextIdx];
+              nextSlot.classList.add("on");
+              slots[active].classList.remove("on");
+              active = 1 - active;
+              idx = nextIdx;
+            };
+            pre.src = imgs[nextIdx];
+          }, 5200,
+        );
+        rotation.activate();
       })();
 
       /* COUNTERS */
@@ -2752,6 +2390,10 @@
             el.querySelectorAll("[data-target]").forEach((n) => {
               const t = +n.dataset.target,
                 step = t / 40;
+              if (reducedMotion.matches) {
+                n.textContent = t;
+                return;
+              }
               let c = 0;
               const iv = setInterval(() => {
                 c += step;
@@ -2767,213 +2409,201 @@
         run();
       })();
 
-      /* STORY ROTATOR */
+      /* FARM STORIES: only the media rotates; story selection stays manual. */
       (function () {
-        const panels = Array.from(
-          document.querySelectorAll("[data-story-panel]"),
-        );
+        const panels = Array.from(document.querySelectorAll("[data-story-panel]"));
         const panelNav = document.getElementById("storyPanelNav");
-        if (!panels.length || !panelNav) return;
-
+        const names = ["Farm Roots", "Symbiosis"];
         const MEDIA_DUR = 4800;
-        let panelIdx = 0;
-        let panelTimer = null;
-        const panelDurations = panels.map((panel) => {
-          const shotCount = panel.querySelectorAll(".story-shot").length;
-          return Math.max(1, shotCount) * MEDIA_DUR;
-        });
 
         function setOrientation(shot, width, height) {
-          const isPortrait = height > width * 1.02;
-          shot.classList.toggle("is-portrait", isPortrait);
-          shot.classList.toggle("is-landscape", !isPortrait);
+          const portrait = height > width * 1.02;
+          shot.classList.toggle("is-portrait", portrait);
+          shot.classList.toggle("is-landscape", !portrait);
         }
 
-        const carousels = panels.map((panel) => {
+        const carousels = panels.map((panel, panelIndex) => {
           const media = panel.querySelector("[data-story-media]");
           const shots = Array.from(panel.querySelectorAll(".story-shot"));
           const dotsWrap = panel.querySelector(".story-media-dots");
           const progress = panel.querySelector(".story-media-progress");
-          const arrows = panel.querySelectorAll("[data-media-move]");
+          const pause = document.createElement("button");
+          pause.type = "button";
+          pause.className = "slideshow-toggle";
+          media.prepend(pause);
+          media.setAttribute("role", "region");
+          media.setAttribute("aria-roledescription", "carousel");
+          media.setAttribute("aria-label", names[panelIndex] + " photos and videos");
+          progress.setAttribute("aria-hidden", "true");
           let idx = 0;
-          let timer = null;
-          let active = false;
-
-          if (!media || !shots.length || !dotsWrap || !progress) return null;
+          let progressFrame = null;
+          let rotation;
 
           shots.forEach((shot, i) => {
+            shot.setAttribute("role", "group");
+            shot.setAttribute("aria-roledescription", "slide");
+            shot.setAttribute("aria-label", (i + 1) + " of " + shots.length);
             const dot = document.createElement("button");
-            dot.className = "story-media-dot" + (i === 0 ? " on" : "");
+            dot.className = "story-media-dot";
             dot.type = "button";
-            dot.setAttribute("aria-label", "Media " + (i + 1));
-            dot.addEventListener("click", () => go(i, true));
+            dot.setAttribute("aria-label", "Show slide " + (i + 1));
+            dot.addEventListener("click", () => go(i));
             dotsWrap.appendChild(dot);
-
             const img = shot.querySelector("img");
             if (img) {
-              if (img.complete && img.naturalWidth) {
-                setOrientation(shot, img.naturalWidth, img.naturalHeight);
-              } else {
-                img.addEventListener("load", () =>
-                  setOrientation(shot, img.naturalWidth, img.naturalHeight),
-                );
-              }
+              const applyImageSize = () => setOrientation(shot, img.naturalWidth, img.naturalHeight);
+              if (img.complete && img.naturalWidth) applyImageSize();
+              else img.addEventListener("load", applyImageSize);
             }
-
             const video = shot.querySelector("video");
             if (video) {
-              const applyVideoSize = () =>
-                setOrientation(
-                  shot,
-                  video.videoWidth || 16,
-                  video.videoHeight || 9,
-                );
+              const applyVideoSize = () => setOrientation(shot, video.videoWidth || 16, video.videoHeight || 9);
               if (video.readyState >= 1) applyVideoSize();
               video.addEventListener("loadedmetadata", applyVideoSize);
+              video.addEventListener("error", () => shot.classList.add("video-fallback-on"));
             }
           });
 
-          function animateProgress() {
+          function syncPlayback(running, playbackAllowed) {
+            cancelAnimationFrame(progressFrame);
             progress.style.transition = "none";
             progress.style.width = "0%";
-            requestAnimationFrame(() =>
-              requestAnimationFrame(() => {
+            if (running) {
+              // Commit the reset before starting the next progress animation.
+              progress.getBoundingClientRect();
+              progressFrame = requestAnimationFrame(() => {
                 progress.style.transition = "width " + MEDIA_DUR + "ms linear";
                 progress.style.width = "100%";
-              }),
-            );
-          }
-
-          function syncPlayback() {
-            shots.forEach((shot, j) => {
+              });
+            }
+            shots.forEach((shot, i) => {
               const video = shot.querySelector("video");
               if (!video) return;
-              if (active && j === idx) {
-                video.play().catch(() => {});
-              } else {
+              if (playbackAllowed && i === idx) video.play().catch(() => {});
+              else {
                 video.pause();
-                video.currentTime = 0;
+                if (i !== idx) video.currentTime = 0;
               }
             });
           }
 
-          function go(next, isManual) {
+          function renderSlide() {
+            shots.forEach((shot, i) => {
+              shot.classList.toggle("on", i === idx);
+              shot.setAttribute("aria-hidden", String(i !== idx));
+            });
+            dotsWrap.querySelectorAll("button").forEach((dot, i) => {
+              dot.classList.toggle("on", i === idx);
+              dot.setAttribute("aria-pressed", String(i === idx));
+            });
+          }
+          function go(next) {
             idx = (next + shots.length) % shots.length;
-            shots.forEach((shot, j) => shot.classList.toggle("on", j === idx));
-            dotsWrap
-              .querySelectorAll(".story-media-dot")
-              .forEach((dot, j) => dot.classList.toggle("on", j === idx));
-            animateProgress();
-            syncPlayback();
-            if (isManual) restartPanelTimer();
+            renderSlide();
+            rotation.refresh();
           }
-
-          function start() {
-            clearInterval(timer);
-            timer = setInterval(() => go(idx + 1, false), MEDIA_DUR);
-            animateProgress();
-            syncPlayback();
-          }
-
-          function stop() {
-            clearInterval(timer);
-            progress.style.transition = "none";
-            progress.style.width = "0%";
-            shots.forEach((shot) => {
-              const video = shot.querySelector("video");
-              if (video) video.pause();
-            });
-          }
-
-          arrows.forEach((arrow) => {
-            arrow.addEventListener("click", () => {
-              const delta = Number(arrow.dataset.mediaMove || 0);
-              go(idx + delta, true);
-            });
+          media.querySelectorAll("[data-media-move]").forEach((arrow) => {
+            arrow.addEventListener("click", () => go(idx + Number(arrow.dataset.mediaMove)));
           });
-
-          media.addEventListener("mouseenter", () => {
-            if (!window.matchMedia("(hover: hover)").matches) return;
-            clearInterval(timer);
-            progress.style.transition = "none";
-          });
-          media.addEventListener("mouseleave", () => {
-            if (!active || !window.matchMedia("(hover: hover)").matches) return;
-            start();
-          });
-
-          return {
-            activate() {
-              active = true;
-              go(idx, false);
-              start();
-            },
-            deactivate() {
-              active = false;
-              stop();
-            },
-          };
+          rotation = createSlideshow(media, pause, () => go(idx + 1), MEDIA_DUR, syncPlayback);
+          renderSlide();
+          return rotation;
         });
 
-        panels.forEach((_, i) => {
+        panels.forEach((panel, i) => {
+          panel.id = "farmStory" + i;
           const btn = document.createElement("button");
           btn.type = "button";
-          btn.className = "story-panel-btn" + (i === 0 ? " on" : "");
-          btn.textContent = i === 0 ? "Farm Roots" : "Symbiosis";
-          btn.setAttribute("aria-label", "Show story " + (i + 1));
-          btn.addEventListener("click", () => showPanel(i, true));
+          btn.id = "farmStoryButton" + i;
+          btn.className = "story-panel-btn";
+          btn.textContent = names[i];
+          btn.setAttribute("aria-controls", panel.id);
+          panel.setAttribute("aria-labelledby", btn.id);
+          btn.addEventListener("click", () => showPanel(i));
           panelNav.appendChild(btn);
         });
-
-        function showPanel(i, isManual) {
-          panelIdx = (i + panels.length) % panels.length;
-          panels.forEach((panel, j) =>
-            panel.classList.toggle("on", j === panelIdx),
-          );
-          panelNav
-            .querySelectorAll(".story-panel-btn")
-            .forEach((btn, j) => btn.classList.toggle("on", j === panelIdx));
-          carousels.forEach((carousel, j) => {
-            if (!carousel) return;
-            if (j === panelIdx) carousel.activate();
-            else carousel.deactivate();
+        function showPanel(index) {
+          panels.forEach((panel, i) => {
+            panel.classList.toggle("on", i === index);
+            panel.hidden = i !== index;
+            if (i === index) carousels[i].activate();
+            else carousels[i].deactivate();
           });
-          if (isManual) restartPanelTimer();
+          panelNav.querySelectorAll("button").forEach((btn, i) => {
+            btn.classList.toggle("on", i === index);
+            btn.setAttribute("aria-pressed", String(i === index));
+          });
         }
-
-        function restartPanelTimer() {
-          clearInterval(panelTimer);
-          const dur = panelDurations[panelIdx] || 12000;
-          panelTimer = setInterval(() => showPanel(panelIdx + 1, false), dur);
-        }
-
-        showPanel(0, false);
-        restartPanelTimer();
+        showPanel(0);
       })();
 
-      /* RECIPES */
-      window.showRec = function (i, btn) {
-        ["r3", "r0", "r1", "r2"].forEach((id, j) => {
-          const el = document.getElementById(id);
-          if (el) el.style.display = j === i ? "grid" : "none";
+      /* Organic information cards, including keyboard and mobile states. */
+      (function () {
+        const stacked = window.matchMedia("(max-width: 900px)");
+        document.querySelectorAll(".flip-wrap").forEach((card, index) => {
+          const front = card.querySelector(".flip-front");
+          const back = card.querySelector(".flip-back");
+          back.id = "organicDetails" + index;
+          const title = front.querySelector("h3").textContent;
+          function sync() {
+            const open = card.classList.contains("flipped");
+            if (stacked.matches) {
+              card.removeAttribute("role");
+              card.removeAttribute("tabindex");
+              card.removeAttribute("aria-expanded");
+              card.removeAttribute("aria-label");
+              card.removeAttribute("aria-describedby");
+            } else {
+              card.setAttribute("role", "button");
+              card.tabIndex = 0;
+              card.setAttribute("aria-label", title);
+              card.setAttribute("aria-expanded", String(open));
+              if (open) card.setAttribute("aria-describedby", back.id);
+              else card.removeAttribute("aria-describedby");
+            }
+            front.setAttribute("aria-hidden", String(!stacked.matches && open));
+            back.setAttribute("aria-hidden", String(!stacked.matches && !open));
+          }
+          function toggle() {
+            if (stacked.matches) return;
+            card.classList.toggle("flipped");
+            sync();
+          }
+          card.addEventListener("click", toggle);
+          card.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              toggle();
+            }
+          });
+          stacked.addEventListener("change", sync);
+          sync();
         });
-        document
-          .querySelectorAll(".rec-tab")
-          .forEach((t) => t.classList.remove("on"));
-        btn.classList.add("on");
-      };
-      window.filterNL = function (key, btn) {
-        document
-          .querySelectorAll("#r3 .ing-chip")
-          .forEach((b) => b.classList.remove("on"));
-        btn.classList.add("on");
-        document.querySelectorAll("#nlIngList li").forEach((li) => {
-          const keys = (li.dataset.keys || "").split(",");
-          const hit = key === "all" || keys.includes(key);
-          li.classList.toggle("hit", hit);
-          li.style.opacity = hit ? "1" : "0.42";
+      })();
+
+      /* CONTACT */
+      (function () {
+        const button = document.getElementById("copyEmail");
+        const email = document.getElementById("contactEmail");
+        const status = document.getElementById("copyEmailStatus");
+        button.addEventListener("click", async () => {
+          button.disabled = true;
+          status.textContent = "";
+          try {
+            await navigator.clipboard.writeText(email.textContent.trim());
+            status.textContent = "Email address copied.";
+          } catch {
+            const selection = window.getSelection();
+            const range = document.createRange();
+            range.selectNodeContents(email);
+            selection.removeAllRanges();
+            selection.addRange(range);
+            status.textContent = "Email selected — use your device’s Copy command.";
+          } finally {
+            button.disabled = false;
+          }
         });
-      };
+      })();
 
       /* STORES */
       (function () {
@@ -3314,8 +2944,13 @@
         function selectStore(id) {
           const s = BY_ID[id];
           if (!s) return;
+          const hadFocus = document.activeElement?.matches(".s-item");
           active = id;
           render();
+          if (hadFocus) {
+            document.querySelector('[data-store-id="' + id + '"]').focus({ preventScroll: true });
+          }
+          document.getElementById("mapF").title = "Map showing " + s.n;
           document.getElementById("mapF").src =
             "https://maps.google.com/maps?q=" +
             s.q +
@@ -3341,21 +2976,21 @@
 
         function storeItem(s) {
           return (
-            '<div class="s-item' +
+            '<button type="button" class="s-item' +
             (active === s.id ? " on" : "") +
-            '" onclick="window._selS(' +
+            '" aria-pressed="' + (active === s.id) + '" data-store-id="' +
             s.id +
-            ')">' +
-            '<div class="s-ico" style="background:' +
+            '">' +
+            '<span class="s-ico" aria-hidden="true" style="background:' +
             s.c +
             '18;">' +
             s.i +
-            "</div>" +
-            '<div class="s-txt"><h4>' +
+            "</span>" +
+            '<span class="s-txt"><span class="s-name">' +
             esc(s.n) +
-            "</h4><p>" +
+            '</span><span class="s-area">' +
             esc(s.a) +
-            "</p></div>" +
+            "</span></span>" +
             '<span class="s-tag" style="background:' +
             s.c +
             "18;color:" +
@@ -3363,7 +2998,7 @@
             ';">' +
             esc(s.b) +
             "</span>" +
-            "</div>"
+            "</button>"
           );
         }
 
@@ -3388,6 +3023,8 @@
           function addFilter(label, brand, count) {
             const b = document.createElement("button");
             b.className = "s-f" + (filter === brand ? " on" : "");
+            b.type = "button";
+            b.setAttribute("aria-pressed", String(filter === brand));
             b.textContent = label + " (" + count + ")";
             b.onclick = function () {
               window.filterS(brand, b);
@@ -3447,14 +3084,19 @@
             .join("");
         }
 
-        window._selS = selectStore;
+        document.getElementById("sList").addEventListener("click", (event) => {
+          const button = event.target.closest("[data-store-id]");
+          if (button) selectStore(Number(button.dataset.storeId));
+        });
         window.filterS = function (brand, btn) {
           filter = brand;
           active = null;
           document
             .querySelectorAll(".s-f")
-            .forEach((b) => b.classList.remove("on"));
-          if (btn) btn.classList.add("on");
+            .forEach((b) => {
+              b.classList.toggle("on", b === btn);
+              b.setAttribute("aria-pressed", String(b === btn));
+            });
           render();
           const listEl = document.getElementById("sList");
           if (listEl) listEl.scrollTop = 0;
